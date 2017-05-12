@@ -1,0 +1,18 @@
+providers:
+    beam:
+        base: 'https://beam.pro/'
+        api: 'https://beam.pro/api/v1/'
+    twitch:
+        base: 'https://twitch.tv/'
+        clientId: ''
+    smashcast:
+        base: 'https://www.smashcast.tv/'
+api:
+    exozone:
+        base: 'https://api.exozone.net/beepbot/v2/'
+    lastfm:
+        base: 'https://ws.audioscrobbler.com/2.0/'
+        key: ''
+    weather:
+        base: 'http://api.openweathermap.org/data/2.5/weather'
+        key: ''

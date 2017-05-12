@@ -1,0 +1,11 @@
+language: node_js
+node_js:
+  - "6.9.2"
+script:
+  - "npm run test"
+after_success:
+  - "./node_modules/.bin/nyc report --reporter=text-lcov | ./node_modules/.bin/coveralls"
+notifications:
+  email: false
+  slack:
+    secure: "oe45xKfpkv3rC6LIvyRVcyqxaW3+xzZNmkV51foHbmCvfUfV6FB//QsbWPWrn6FTh36CgWMPDJ0KH1AN25ObssmwnrYOrAUzrsU6TSuO8EjUuQNiSbx2W13JtJJsIp9YWixo4cQbtOGVBQmBk91ZNMdukosPJQ44TJ6xMvUrgSh+wf3VI1LN3D9pqu5zbcKS7TY+v/BKh0aQKQIwUo+SR2b5xZhbTcXWh/0oWhi18QlCgijUUmYfwGMpKNY/AHovgKPTu7ywVWN5kzWVCEFlZQOcJykq3GeiaaRQxMmyrg+iDxTJhEJdsQD2n4QYLT6TM5nVxX+yfT99xjtEt10NLrqvEDKS2NXAbv3eK2+thp1CD/rWX0YXC3xQ6NQpqhbMSfEwld4fMoh2rNteO2HGd4OqgQUr5KVjOqAszYlQ9rvYllfJc31kvl5wFHEvKtZafX81V/3wdkfeddpZ4qhpkAb3U972ApyRXMp8BHpemmeQr+i2IsqVj8W2sEIysBLm2OtvRGW61TxrdamyPEyFpZ44MfwLZj+9V3Rh5UoPqjpW6pzB6eIEbbR0C2WR1Y60xj2gs/pzg2RC1aARTFCrrNXiudkoTHRAqyYsXk6sKcCDrfRxdx3yLHvxmrDZh/q0jTAT+Ih8JdguJMAF+NElptD6B5AuVUKcsKgZzmZ01Iw="
