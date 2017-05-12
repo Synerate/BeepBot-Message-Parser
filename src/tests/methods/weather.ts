@@ -3,18 +3,14 @@ import { test } from 'ava';
 import { getDirection, weather } from '../../methods/weather';
 import { mockMessage, mockSettings } from '../../mock';
 
-let okResponse = '';
+const regex = /(\w+) is expecting ([\w ]+), with wind speeds of ([\d\.]+)mph./ig;
 
 test('get the direction of wind', t => {
     t.is(getDirection(120), 'ESE');
 });
 
-test.before('get result', async t => {
-    okResponse = await weather(mockMessage, mockSettings, 'London');
-});
-
 test('parse the weather', async t => {
-    t.is(await weather(mockMessage, mockSettings, 'London'), okResponse);
+    t.regex(await weather(mockMessage, mockSettings, 'London'), regex);
 });
 
 test('parse with an API error.', async t => {
