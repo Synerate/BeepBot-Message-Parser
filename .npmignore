@@ -1,0 +1,10 @@
+.idea
+.nyc_output
+coverage
+src
+.editorconfig
+.gitignore
+.npmignore
+.travis.yml
+tsconfig.json
+tslint.json

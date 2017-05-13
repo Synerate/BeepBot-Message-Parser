@@ -1,7 +1,7 @@
 import { test } from 'ava';
 
-import { stream, streamer } from '../../methods/channel';
-import { mockMessage } from '../../mock';
+import { stream, streamer } from '../../src/methods/channel';
+import { mockMessage } from '../../src/mock';
 
 test('parse the streamer name', t => {
     const parsed = streamer(mockMessage);

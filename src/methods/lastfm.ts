@@ -2,6 +2,7 @@ import * as config from 'config';
 import { stringify } from 'querystring';
 
 import { IMessage } from '../interface/message';
+import { ISetting } from '../interface/settings';
 import { request } from '../lib/helpers';
 
 export interface IRecentTracks {
@@ -52,7 +53,7 @@ export function getTrack(tracks: ITrack[], when: string): ITrack {
  *
  * Default: Returns the song name and artist.
  */
-export async function lastfm(message: IMessage, settings: any, username: string, type: SongType = null, when: string = '0') {
+export async function lastfm(message: IMessage, settings: ISetting, username: string, type: SongType = null, when: string = '0') {
     const opts = {
         api_key: config.get<string>('api.lastfm.key'),
         format: 'json',

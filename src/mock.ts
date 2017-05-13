@@ -1,4 +1,5 @@
 import { IMessage } from './interface/message';
+import { ISetting } from './interface/settings';
 
 export const mockMessage: IMessage = {
     channel: {
@@ -20,8 +21,9 @@ export const mockMessage: IMessage = {
     },
 };
 
-export const mockSettings = {
+export const mockSettings: ISetting = {
     channel: {
-        locale: 'Europe/London',
+        locale: 'en_US',
+        timezone: 'Europe/London',
     },
 };

@@ -1,7 +1,7 @@
 import { test } from 'ava';
 
-import { query, randomnum } from '../../methods/string';
-import { mockMessage, mockSettings } from '../../mock';
+import { query, randomnum } from '../../src/methods/string';
+import { mockMessage, mockSettings } from '../../src/mock';
 
 test('parse query', t => {
     t.is(query(mockMessage), 'the parser!');

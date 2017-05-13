@@ -1,7 +1,7 @@
 import { test } from 'ava';
 
-import { touser, user } from '../../methods/users';
-import { mockMessage } from '../../mock';
+import { touser, user } from '../../src/methods/users';
+import { mockMessage } from '../../src/mock';
 
 test('parse user', t => {
     t.is(user(mockMessage), 'TestUser');

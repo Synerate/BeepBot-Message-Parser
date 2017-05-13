@@ -1,8 +1,8 @@
 import { test } from 'ava';
 
-import { IAst, parser } from '../compiler/parser';
-import { ITokens } from '../compiler/tokenizer';
-import { traverser } from '../compiler/traverser';
+import { IAst, parser } from '../src/compiler/parser';
+import { ITokens } from '../src/compiler/tokenizer';
+import { traverser } from '../src/compiler/traverser';
 
 const ast: IAst = {
     body: [{

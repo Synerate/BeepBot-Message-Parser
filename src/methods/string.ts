@@ -1,12 +1,13 @@
 import { random } from 'lodash';
 
 import { IMessage } from '../interface/message';
+import { ISetting } from '../interface/settings';
 
 export function query(message: IMessage) {
     return message.message.args.slice(1).join(' ');
 }
 
-export function randomnum(message: IMessage, settings: any, min: string, max: string) {
+export function randomnum(message: IMessage, settings: ISetting, min: string, max: string) {
     if (isNaN(Number(min)) || isNaN(Number(max))) {
         return '[Min or Max needs to be a number]';
     }

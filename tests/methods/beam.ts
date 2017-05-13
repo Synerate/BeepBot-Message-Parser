@@ -1,7 +1,7 @@
 import { test } from 'ava';
 
-import { beam } from '../../methods/beam';
-import { mockMessage, mockSettings } from '../../mock';
+import { beam } from '../../src/methods/beam';
+import { mockMessage, mockSettings } from '../../src/mock';
 
 const message = mockMessage;
 

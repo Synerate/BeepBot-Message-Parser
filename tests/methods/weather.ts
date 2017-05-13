@@ -1,7 +1,7 @@
 import { test } from 'ava';
 
-import { getDirection, weather } from '../../methods/weather';
-import { mockMessage, mockSettings } from '../../mock';
+import { getDirection, weather } from '../../src/methods/weather';
+import { mockMessage, mockSettings } from '../../src/mock';
 
 const regex = /(\w+) is expecting ([\w ]+), with wind speeds of ([\d\.]+)mph./ig;
 

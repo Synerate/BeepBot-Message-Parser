@@ -6,16 +6,17 @@ import { parser } from './compiler/parser';
 import { tokenizer } from './compiler/tokenizer';
 import { IExpression, transformer } from './compiler/transformer';
 import { IMessage } from './interface/message';
+import { ISetting } from './interface/settings';
 import { methods } from './methods';
 
 /**
  * Handle an expression and return the generated value to be replaced.
  */
-async function handle(message: IMessage, settings: any, text: string, args: string[] = []): Promise<string> {
+async function handle(message: IMessage, settings: ISetting, text: string, args: string[] = []): Promise<string> {
     return await methods[text.toLowerCase()](message, settings, ...args);
 }
 
-async function run(message: IMessage, settings: any, expr: IExpression) {
+async function run(message: IMessage, settings: ISetting, expr: IExpression) {
     if (expr.type === 'String') {
         return expr.value;
     }
@@ -33,7 +34,7 @@ async function run(message: IMessage, settings: any, expr: IExpression) {
  * This takes data from the message arg (ChannelMessage) from backend. To create
  * some data otherwise the parsers hits various APIs to get the data needed.
  */
-export async function parse(message: IMessage, settings: any, text: string) {
+export async function parse(message: IMessage, settings: ISetting, text: string) {
     const token = tokenizer(text);
     const parsed = parser(token);
     const transform = transformer(parsed);

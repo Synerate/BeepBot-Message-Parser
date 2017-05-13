@@ -1,7 +1,7 @@
 import { test } from 'ava';
 
-import { exoapi, getChannel, getQuote } from '../../methods/exoapi';
-import { mockMessage, mockSettings } from '../../mock';
+import { exoapi, getChannel, getQuote } from '../../src/methods/exoapi';
+import { mockMessage, mockSettings } from '../../src/mock';
 
 const chanId = '2a437679-aeb5-4c86-a3a5-4d0b7689890f';
 

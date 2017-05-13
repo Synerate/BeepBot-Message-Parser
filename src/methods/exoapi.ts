@@ -2,6 +2,7 @@ import * as config from 'config';
 import * as _ from 'lodash';
 
 import { IMessage } from '../interface/message';
+import { ISetting } from '../interface/settings';
 import { request } from '../lib/helpers';
 
 /**
@@ -43,7 +44,7 @@ export async function getQuote(channel: string, value: string = '') {
     return `${quote.message}, ${quote.userName}`;
 }
 
-export async function exoapi(message: IMessage, settings: any, method: string, channel: string, value: string = '') {
+export async function exoapi(message: IMessage, settings: ISetting, method: string, channel: string, value: string = '') {
     switch (method) {
         case 'channel':
             return getChannel(channel, value);

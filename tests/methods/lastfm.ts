@@ -1,7 +1,7 @@
 import { test } from 'ava';
 
-import { getTrack, ITrack, lastfm } from '../../methods/lastfm';
-import { mockMessage, mockSettings } from '../../mock';
+import { getTrack, ITrack, lastfm } from '../../src/methods/lastfm';
+import { mockMessage, mockSettings } from '../../src/mock';
 
 const tracks: ITrack[] = [
     {

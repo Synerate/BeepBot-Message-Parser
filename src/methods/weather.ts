@@ -2,6 +2,7 @@ import * as config from 'config';
 import { stringify } from 'querystring';
 
 import { IMessage } from '../interface/message';
+import { ISetting } from '../interface/settings';
 import { request } from '../lib/helpers';
 
 interface IWeather {
@@ -31,7 +32,7 @@ export function getDirection(deg: number) {
     return directions[(value % 16)];
 }
 
-export async function weather(message: IMessage, settings: any, region: string) {
+export async function weather(message: IMessage, settings: ISetting, region: string) {
     const opts = {
         appid: config.get<string>('api.weather.key'),
         q: region,
