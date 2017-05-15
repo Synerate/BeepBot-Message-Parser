@@ -4,9 +4,11 @@ providers:
         api: 'https://beam.pro/api/v1/'
     twitch:
         base: 'https://twitch.tv/'
+        api: 'https://api.twitch.tv/kraken/'
         clientId: ''
     smashcast:
         base: 'https://www.smashcast.tv/'
+        api: 'https://api.smashcast.tv/'
 api:
     exozone:
         base: 'https://api.exozone.net/beepbot/v2/'

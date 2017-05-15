@@ -7,7 +7,7 @@ import { mockMessage, mockSettings } from '../src/mock';
 const messages: { input: string; message?: IMessage; output: string; }[] = [
     {
         input: 'Beam {beam token}',
-        message: Object.assign({}, mockMessage, { channel: { id: 587 } }),
+        message: Object.assign({}, mockMessage, { channel: { id: 587 }, provider: { type: 'beam' } }),
         output: 'Beam artdude543',
     },
     {
@@ -20,6 +20,7 @@ const messages: { input: string; message?: IMessage; output: string; }[] = [
     },
     {
         input: 'Beam Token! {beam token {user}}',
+        message: Object.assign({}, mockMessage, { provider: { type: 'beam' } }),
         output: 'Beam Token! TestUser',
     },
 ];
