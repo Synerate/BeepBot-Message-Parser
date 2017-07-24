@@ -1,7 +1,18 @@
-import fetch from 'node-fetch';
+import * as fetch from 'isomorphic-fetch';
 
-export async function request(uri: string, headers: { [header: string]: string; } = {}) {
-    const req = await fetch(uri, { compress: true, timeout: 30000, headers });
+/**
+ * Make a http(s) request to a json api.
+ *
+ * Rejects when a network error occured.
+ * 4xx and 5xx response codes are not network errors, and will resolve the promise.
+ *
+ * @param uri The uri to request the data from.
+ * @param headers Headers to attach to the request.
+ * @return The body of the response, parsed as json.
+ * It returns with `null` when the api does not respond with `200 OK`.
+ */
+export async function request(uri: string, headers: { [header: string]: string } = {}) {
+    const req = await fetch(uri, { headers });
     if (req.status !== 200) {
         return null;
     }
