@@ -4,6 +4,7 @@ import * as fetch from 'isomorphic-fetch';
  * Make a http(s) request to a json api.
  *
  * Rejects when a network error occured.
+ * 4xx and 5xx response codes are not network errors, and will resolve the promise.
  *
  * @param uri The uri to request the data from.
  * @param headers Headers to attach to the request.
