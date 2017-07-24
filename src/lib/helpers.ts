@@ -11,10 +11,7 @@ import * as fetch from 'isomorphic-fetch';
  * @return The body of the response, parsed as json.
  * It returns with `null` when the api does not respond with `200 OK`.
  */
-export async function request(
-    uri: string,
-    headers: { [header: string]: string } = {},
-) {
+export async function request(uri: string, headers: { [header: string]: string } = {}) {
     const req = await fetch(uri, { headers });
     if (req.status !== 200) {
         return null;
