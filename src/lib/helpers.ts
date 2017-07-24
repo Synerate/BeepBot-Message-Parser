@@ -3,7 +3,7 @@ import * as fetch from 'isomorphic-fetch';
 /**
  * Make a http(s) request to a json api.
  *
- * Throws an error when a network error occured.
+ * Rejects when a network error occured.
  *
  * @param uri The uri to request the data from.
  * @param headers Headers to attach to the request.
