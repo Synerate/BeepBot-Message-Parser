@@ -7,19 +7,19 @@
   "typings": "js/index.d.ts",
   "dependencies": {
     "config": "^1.26.1",
+    "isomorphic-fetch": "^2.2.1",
     "js-yaml": "^3.8.4",
     "lodash": "^4.17.4",
     "magic-string": "^0.19.1",
     "moment": "^2.18.1",
-    "moment-timezone": "^0.5.13",
-    "node-fetch": "^1.6.3"
+    "moment-timezone": "^0.5.13"
   },
   "devDependencies": {
     "@types/config": "0.0.32",
+    "@types/isomorphic-fetch": "0.0.34",
     "@types/lodash": "^4.14.64",
     "@types/moment-timezone": "^0.2.34",
     "@types/node": "^7.0.18",
-    "@types/node-fetch": "^1.6.7",
     "ava": "^0.19.1",
     "coveralls": "^2.13.1",
     "nyc": "^10.3.2",
