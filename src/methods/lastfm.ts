@@ -3,7 +3,7 @@ import { stringify } from 'querystring';
 
 import { IMessage } from '../interface/message';
 import { ISetting } from '../interface/settings';
-import { request } from '../lib/helpers';
+import { httpRequest } from '../lib/helpers';
 
 export interface IRecentTracks {
     error: number;
@@ -34,7 +34,7 @@ export interface ITrack {
     url: string;
 }
 
-type SongType = 'song' | 'title' | 'artist' | 'link' | string;
+type SongType = 'song' | 'artist' | 'link' | string;
 
 /**
  * Check that the track requested is valid on the response then returns it.
@@ -53,15 +53,17 @@ export function getTrack(tracks: ITrack[], when: string): ITrack {
  *
  * Default: Returns the song name and artist.
  */
-export async function lastfm(message: IMessage, settings: ISetting, username: string, type: SongType = null, when: string = '0') {
+// tslint:disable-next-line:max-line-length
+export async function lastfm(message: IMessage, settings: ISetting, request: typeof fetch, user: string, type: SongType = null, when: string = '0') {
     const opts = {
         api_key: config.get<string>('api.lastfm.key'),
         format: 'json',
         limit: 10,
         method: 'user.getrecenttracks',
-        user: username,
+        user,
     };
-    const { recenttracks, error }: IRecentTracks = await request(`${config.get<string>('api.lastfm.base')}?${stringify(opts)}`);
+    // tslint:disable-next-line:max-line-length
+    const { recenttracks, error }: IRecentTracks = await httpRequest(request, `${config.get<string>('api.lastfm.base')}?${stringify(opts)}`);
     if (error != null) {
         return '[Invalid User]';
     }

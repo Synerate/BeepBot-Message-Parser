@@ -1,26 +1,33 @@
-import * as fetch from 'isomorphic-fetch';
+import { isArray, isObject } from 'lodash';
 
-/**
- * Make a http(s) request to a json api.
- *
- * Rejects when a network error occured.
- * 4xx and 5xx response codes are not network errors, and will resolve the promise.
- *
- * @param uri The uri to request the data from.
- * @param headers Headers to attach to the request.
- * @return The body of the response, parsed as json.
- * It returns with `null` when the api does not respond with `200 OK`.
- */
-export async function request(uri: string, headers: { [header: string]: string } = {}) {
-    const req = await fetch(uri, { headers });
+ /**
+  * @return The body of the response, parsed as json.
+  * It returns with `null` when the api does not respond with `200 OK`.
+  * @param headers Headers to attach to the request.
+  * @param uri The uri to request the data from.
+  *
+  * 4xx and 5xx response codes are not network errors, and will resolve the promise.
+  *
+  * Rejects when a network error occurred.
+  * Make a http(s) request to a json api.
+  */
+export async function httpRequest(request: typeof fetch, uri: string, headers: { [header: string]: string; } = {}) {
+    const req = await request(uri, { headers });
     if (req.status !== 200) {
         return null;
     }
-    return await req.json();
+    return await req.clone().json();
 }
 
+/**
+ * Mapping for provider "channel" API responses.
+ *
+ * This allows us to offer simple words for awkward types. So the end user
+ * does not need to understand how to read an API or learn to use a provider
+ * API to get the response in the first place.
+ */
 const providerMapping = {
-    beam: {
+    mixer: {
         game: 'type.name',
         name: 'token',
         title: 'name',
@@ -43,7 +50,7 @@ const providerMapping = {
  * This way the users don't have to remember or look at the APIs to get the correct naming.
  *
  * I.E.
- *  Beam: title -> name
+ *  Mixer: title -> name
  *        game -> type.name
  */
 export function getFromSimple(provider: string, toPick: string): string {
@@ -54,4 +61,16 @@ export function getFromSimple(provider: string, toPick: string): string {
         return toPick;
     }
     return providerMapping[provider.toLowerCase()][toPick.toLowerCase()];
+}
+
+/**
+ * Checks that the value given is valid.
+ *
+ * Basically only allows single values to be returned. I.E. Number,String,Boolean
+ */
+export function isValueValid(value: any): boolean {
+    if (isArray(value) || isObject(value) || value == null) {
+        return false;
+    }
+    return true;
 }

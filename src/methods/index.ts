@@ -2,14 +2,18 @@ import * as stream from './channel';
 import * as str from './string';
 import * as users from './users';
 
-import { beam } from './beam';
 import { exoapi } from './exoapi';
 import { lastfm } from './lastfm';
+import { mixer } from './mixer';
+import { smashcast } from './smashcast';
+import { twitch } from './twitch';
 
 export const methods = {
-    beam,
     exoapi,
     lastfm,
+    mixer,
+    smashcast,
+    twitch,
     ...stream,
     ...str,
     ...users,

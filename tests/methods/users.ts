@@ -1,6 +1,6 @@
 import { test } from 'ava';
 
-import { touser, user } from '../../src/methods/users';
+import { touser, user, userid } from '../../src/methods/users';
 import { mockMessage } from '../../src/mock';
 
 test('parse user', t => {
@@ -17,4 +17,10 @@ test('parse touser', t => {
     message.message.args = ['!command'];
     t.is(touser(message), 'TestUser');
     t.not(touser(message), 'artdude543');
+});
+
+test('parse the userId', t => {
+    mockMessage.user.id = 587;
+    t.is(userid(mockMessage), 587);
+    t.not(user(mockMessage), 'artdude543');
 });

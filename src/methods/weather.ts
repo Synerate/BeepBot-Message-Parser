@@ -3,7 +3,7 @@ import { stringify } from 'querystring';
 
 import { IMessage } from '../interface/message';
 import { ISetting } from '../interface/settings';
-import { request } from '../lib/helpers';
+import { httpRequest } from '../lib/helpers';
 
 interface IWeather {
     coord: { lon: number; lat: number; };
@@ -32,13 +32,13 @@ export function getDirection(deg: number) {
     return directions[(value % 16)];
 }
 
-export async function weather(message: IMessage, settings: ISetting, region: string) {
+export async function weather(message: IMessage, settings: ISetting, request: typeof fetch, region: string) {
     const opts = {
         appid: config.get<string>('api.weather.key'),
         q: region,
         units: 'metric',
     };
-    const req: IWeather = await request(`${config.get<string>('api.weather.base')}?${stringify(opts)}`);
+    const req: IWeather = await httpRequest(request, `${config.get<string>('api.weather.base')}?${stringify(opts)}`);
     if (req == null) {
         return '[API Error]';
     }

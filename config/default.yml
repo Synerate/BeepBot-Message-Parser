@@ -1,7 +1,8 @@
+# Provider Configs.
 providers:
-    beam:
-        base: 'https://beam.pro/'
-        api: 'https://beam.pro/api/v1/'
+    mixer:
+        base: 'https://mixer.com/'
+        api: 'https://mixer.com/api/v1/'
     twitch:
         base: 'https://twitch.tv/'
         api: 'https://api.twitch.tv/kraken/'
@@ -9,9 +10,11 @@ providers:
     smashcast:
         base: 'https://www.smashcast.tv/'
         api: 'https://api.smashcast.tv/'
+
+# API Configs.
 api:
     exozone:
-        base: 'https://api.exozone.net/beepbot/v2/'
+        base: 'https://api.exozone.net/'
     lastfm:
         base: 'https://ws.audioscrobbler.com/2.0/'
         key: ''

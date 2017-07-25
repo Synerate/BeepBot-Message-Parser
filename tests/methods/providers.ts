@@ -1,9 +1,11 @@
 import { test } from 'ava';
+import { memoize } from 'decko';
+import * as fetch from 'isomorphic-fetch';
 
 import { IMessage } from '../../src/interface/message';
 import { mockMessage, mockSettings } from '../../src/mock';
 
-import { beam } from '../../src/methods/beam';
+import { mixer } from '../../src/methods/mixer';
 import { smashcast } from '../../src/methods/smashcast';
 import { twitch } from '../../src/methods/twitch';
 
@@ -25,7 +27,7 @@ const providers: ITest[] = [
          provider: 'twitch',
          tests: [
              {
-                 result: '[Invalid Type]',
+                 result: '[Type Not Found]',
                  type: 'invalid',
              },
              {
@@ -41,15 +43,19 @@ const providers: ITest[] = [
                  result: 'https://www.twitch.tv/artdude543',
                  type: 'url',
              },
+             {
+                 result: '[Return Value Invalid]',
+                 type: 'profile_banner_background_color',
+             },
          ],
      },
      {
-         message: Object.assign({}, mockMessage, { channel: { id: 587 }, provider: { type: 'beam' }, user: { id: 693 } }),
-         method: beam,
-         provider: 'beam',
+         message: Object.assign({}, mockMessage, { channel: { id: 587 }, provider: { type: 'mixer' }, user: { id: 693 } }),
+         method: mixer,
+         provider: 'mixer',
          tests: [
              {
-                result: '[Invalid Type]',
+                result: '[Type Not Found]',
                 type: 'invalid',
              },
              {
@@ -65,6 +71,10 @@ const providers: ITest[] = [
                 result: 'artdude543',
                 type: 'user.username',
              },
+             {
+                 result: '[Return Value Invalid]',
+                 type: 'type',
+             },
          ],
      },
      {
@@ -73,7 +83,7 @@ const providers: ITest[] = [
          provider: 'smashcast',
          tests: [
              {
-                result: '[Invalid Type]',
+                result: '[Type Not Found]',
                 type: 'invalid',
              },
              {
@@ -89,9 +99,17 @@ const providers: ITest[] = [
                 result: '415692',
                 type: 'livestream.0.channel.user_id',
              },
+             {
+                 result: '[Return Value Invalid]',
+                 type: 'request',
+             },
          ],
      },
 ];
+
+test.beforeEach(t => {
+    t.context = { request: (<any> memoize)(fetch) };
+});
 
 test('provider tests', async t => {
     await Promise.all(providers.map(provider => {
@@ -100,7 +118,7 @@ test('provider tests', async t => {
             if (test.channel) {
                 message.channel.id = test.channel;
             }
-            const req = await provider.method(message, mockSettings, test.type, test.channel);
+            const req = await provider.method(message, mockSettings, t.context.request, test.type, test.channel);
             t.is(req, test.result, `Provider: ${provider.provider} Expected: ${test.result} Got: ${req} Type: ${test.type}`);
         }));
     }));
