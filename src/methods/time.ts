@@ -4,8 +4,9 @@ import 'moment-timezone';
 import { IMessage } from '../interface/message';
 import { ISetting } from '../interface/settings';
 
-export function time(message: IMessage, settings: ISetting, timezone: string = settings.channel.timezone, ...args: string[]) {
-    const formatParts: string[] = Array.prototype.slice.call(arguments, 3);
+// tslint:disable-next-line:max-line-length
+export function time(message: IMessage, settings: ISetting, request: typeof fetch, timezone: string = settings.channel.timezone, ...args: string[]) {
+    const formatParts: string[] = Array.prototype.slice.call(arguments, 4);
     if (moment.tz.zone(timezone) == null) {
         return '[Invalid Timezone]';
     }

@@ -3,13 +3,13 @@ import * as _ from 'lodash';
 
 import { IMessage } from '../interface/message';
 import { ISetting } from '../interface/settings';
-import { request } from '../lib/helpers';
+import { httpRequest } from '../lib/helpers';
 
 /**
  * Get channel information for a channel.
  */
-export async function getChannel(channel: string, value: string = '') {
-    const req = await request(`${config.get<string>('api.exozone.base')}channels/${channel}`);
+export async function getChannel(request: typeof fetch, channel: string, value: string = '') {
+    const req = await httpRequest(request, `${config.get<string>('api.exozone.base')}beepbot/v2/channels/${channel}`);
     if (req == null) {
         return '[API Error]';
     }
@@ -24,8 +24,8 @@ export async function getChannel(channel: string, value: string = '') {
 /**
  * Get a quote or a random quote for a channel.
  */
-export async function getQuote(channel: string, value: string = '') {
-    const req: any[] = await request(`${config.get<string>('api.exozone.base')}channels/${channel}/quotes`);
+export async function getQuote(request: typeof fetch, channel: string, value: string = '') {
+    const req: any[] = await httpRequest(request, `${config.get<string>('api.exozone.base')}beepbot/v2/channels/${channel}/quotes`);
     if (req == null || req.length === 0) {
         return '[API Error]';
     }
@@ -44,12 +44,13 @@ export async function getQuote(channel: string, value: string = '') {
     return `${quote.message}, ${quote.userName}`;
 }
 
-export async function exoapi(message: IMessage, settings: ISetting, method: string, channel: string, value: string = '') {
+// tslint:disable-next-line:max-line-length
+export async function exoapi(message: IMessage, settings: ISetting, request: typeof fetch, method: string, channel: string, value: string = '') {
     switch (method) {
         case 'channel':
-            return getChannel(channel, value);
+            return getChannel(request, channel, value);
         case 'quote':
-            return getQuote(channel, value);
+            return getQuote(request, channel, value);
         default:
             return '[Invalid Method]';
     }

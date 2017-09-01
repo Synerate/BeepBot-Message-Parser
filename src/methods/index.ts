@@ -1,16 +1,26 @@
-import * as stream from './channel';
+import * as channel from './channel';
 import * as str from './string';
 import * as users from './users';
 
-import { beam } from './beam';
 import { exoapi } from './exoapi';
 import { lastfm } from './lastfm';
+import { mixer } from './mixer';
+import { pretzel } from './pretzel';
+import { smashcast } from './smashcast';
+import { time } from './time';
+import { twitch } from './twitch';
+import { weather } from './weather';
 
 export const methods = {
-    beam,
     exoapi,
     lastfm,
-    ...stream,
+    mixer,
+    pretzel,
+    smashcast,
+    time,
+    twitch,
+    weather,
+    ...channel,
     ...str,
     ...users,
 };

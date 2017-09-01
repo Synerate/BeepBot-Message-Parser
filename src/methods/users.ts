@@ -1,12 +1,16 @@
 import { IMessage } from '../interface/message';
 
-export function user(msg: IMessage) {
-    return msg.user.name;
+export function user(message: IMessage) {
+    return message.user.name;
 }
 
-export function touser(msg: IMessage) {
-    if (msg.message.args[1] != null) {
-        return msg.message.args[1];
+export function touser(message: IMessage) {
+    if (message.message.args[1] != null) {
+        return message.message.args[1];
     }
-    return msg.user.name;
+    return message.user.name;
+}
+
+export function userid(message: IMessage) {
+    return message.user.id;
 }
