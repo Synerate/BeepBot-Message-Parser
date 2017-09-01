@@ -16,7 +16,12 @@ export async function httpRequest(request: typeof fetch, uri: string, headers: {
     if (req.status !== 200) {
         return null;
     }
-    return await req.clone().json();
+
+    try {
+        return await req.clone().json();
+    } catch (err) {
+        return await req.clone().text();
+    }
 }
 
 /**
