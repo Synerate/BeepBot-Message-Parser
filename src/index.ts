@@ -51,7 +51,7 @@ export async function parse(message: IMessage, settings: ISetting, text: string)
     // tslint:disable-next-line:prefer-const
     for (let i = 0, length = transform.body.length; i < length; i++) {
         const part = transform.body[i];
-        if (part.type !== 'ExpressionStatement' || methods[part.expression.callee.name] == null) {
+        if (part.type !== 'ExpressionStatement' || methods[part.expression.callee.name.toLowerCase()] == null) {
             continue;
         }
 
