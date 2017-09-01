@@ -24,6 +24,7 @@ export function parser(tokens: ITokens[]) {
 
         if (token.type === 'string') {
             current++;
+
             return {
                 type: 'String',
                 value: token.value,
@@ -48,6 +49,7 @@ export function parser(tokens: ITokens[]) {
             }
             node.end = token.position + 1;
             current++;
+
             return node;
         }
 

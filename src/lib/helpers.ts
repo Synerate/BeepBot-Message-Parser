@@ -65,6 +65,7 @@ export function getFromSimple(provider: string, toPick: string): string {
     if (providerMapping[provider.toLowerCase()][toPick.toLowerCase()] == null) {
         return toPick;
     }
+
     return providerMapping[provider.toLowerCase()][toPick.toLowerCase()];
 }
 
@@ -77,5 +78,6 @@ export function isValueValid(value: any): boolean {
     if (isArray(value) || isObject(value) || value == null) {
         return false;
     }
+
     return true;
 }

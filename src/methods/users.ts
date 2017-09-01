@@ -8,6 +8,7 @@ export function touser(message: IMessage) {
     if (message.message.args[1] != null) {
         return message.message.args[1];
     }
+
     return message.user.name;
 }
 

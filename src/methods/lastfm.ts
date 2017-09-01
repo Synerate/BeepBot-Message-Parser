@@ -45,6 +45,7 @@ export function getTrack(tracks: ITrack[], when: string): ITrack {
     if (isNaN(Number(when)) || Number(when) < 0 || Number(when) > 10 || tracks[Number(when)] == null) {
         return tracks[0];
     }
+
     return tracks[when];
 }
 

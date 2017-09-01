@@ -33,6 +33,7 @@ export async function getQuote(request: typeof fetch, channel: string, value: st
     switch (value) {
         case 'random':
             quote = _(req).shuffle().sample();
+
             return `${quote.message}, ${quote.userName}`;
         default:
             if (req.filter(res => res.quoteId === Number(value)).length === 1) {
@@ -41,6 +42,7 @@ export async function getQuote(request: typeof fetch, channel: string, value: st
                 quote = _(req).shuffle().sample();
             }
     }
+
     return `${quote.message}, ${quote.userName}`;
 }
 

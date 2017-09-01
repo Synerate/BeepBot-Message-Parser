@@ -19,5 +19,6 @@ export async function twitch(message: IMessage, settings: ISetting, request: typ
     if (!isValueValid(value)) {
         return '[Return Value Invalid]';
     }
+
     return value;
 }

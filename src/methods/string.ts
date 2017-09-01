@@ -17,5 +17,6 @@ export function randomnum(message: IMessage, settings: ISetting, request: typeof
     if (Number(min) > Number(max)) {
         return '[Min should not be more than the Max]';
     }
+
     return random(Number(min), Number(max)).toString();
 }

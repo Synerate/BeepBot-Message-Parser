@@ -29,6 +29,7 @@ const directions = ['N', 'NNE', 'NE', 'ENE', 'E', 'ESE', 'SE', 'SSE', 'S', 'SSW'
 
 export function getDirection(deg: number) {
     const value = Math.floor(0.5 + (deg / 22.5));
+
     return directions[(value % 16)];
 }
 
@@ -42,6 +43,7 @@ export async function weather(message: IMessage, settings: ISetting, request: ty
     if (req == null) {
         return '[API Error]';
     }
+
     // TODO: Re-Add the directions.
     return `${req.name} is expecting ${req.weather[0].description}, with wind speeds of ${req.wind.speed}mph.`;
 }

@@ -14,5 +14,6 @@ export async function smashcast(message: IMessage, settings: ISetting, request: 
     if (!isValueValid(value)) {
         return '[Return Value Invalid]';
     }
+
     return value;
 }

@@ -14,5 +14,6 @@ export async function mixer(message: IMessage, settings: ISetting, request: type
     if (!isValueValid(value)) {
         return '[Return Value Invalid]';
     }
+
     return value;
 }

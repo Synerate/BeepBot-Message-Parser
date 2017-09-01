@@ -8,8 +8,8 @@ import { twitch } from './twitch';
 
 const providers = {
     mixer,
-    twitch,
     smashcast,
+    twitch,
 };
 
 export function streamer(message: IMessage) {
@@ -17,10 +17,10 @@ export function streamer(message: IMessage) {
 }
 
 export function stream(message: IMessage) {
-    const provider = config.has(`providers.${message.provider.type.toLowerCase()}.base`);
-    if (provider === false) {
+    if (config.has(`providers.${message.provider.type.toLowerCase()}.base`) === false) {
         return '[Invalid Provider]';
     }
+
     return `${config.get<string>(`providers.${message.provider.type.toLowerCase()}.base`)}${message.channel.name}`;
 }
 
@@ -31,6 +31,7 @@ export function title(message: IMessage, settings: ISetting, cache: typeof fetch
     if (providers[message.provider.type.toLowerCase()] == null) {
         return '[Invalid Provider]';
     }
+
     return providers[message.provider.type.toLowerCase()](message, settings, cache, 'title', message.channel.id);
 }
 
@@ -41,6 +42,7 @@ export function game(message: IMessage, settings: ISetting, cache: typeof fetch)
     if (providers[message.provider.type.toLowerCase()] == null) {
         return '[Invalid Provider]';
     }
+
     return providers[message.provider.type.toLowerCase()](message, settings, cache, 'game', message.channel.id);
 }
 

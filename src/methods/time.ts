@@ -1,4 +1,5 @@
 import * as moment from 'moment';
+// tslint:disable-next-line:no-import-side-effect
 import 'moment-timezone';
 
 import { IMessage } from '../interface/message';
@@ -14,5 +15,6 @@ export function time(message: IMessage, settings: ISetting, request: typeof fetc
     if (formatParts.length > 0) {
         format = formatParts.join(' ');
     }
+
     return moment.tz(new Date(), timezone).format(format);
 }

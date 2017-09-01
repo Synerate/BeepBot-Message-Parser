@@ -41,12 +41,12 @@ export function tokenizer(input: string) {
             continue;
         }
 
-        let value = '';
+        let text = '';
         while (REGEX.test(char) && char != null) {
-            value += char;
+            text += char;
             char = input[++current];
         }
-        tokens.push({ type: 'string', value, position: current });
+        tokens.push({ type: 'string', value: text, position: current });
     }
 
     return tokens;

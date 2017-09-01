@@ -1,3 +1,4 @@
+// tslint:disable-next-line:no-import-side-effect
 import 'source-map-support/register';
 
 import { memoize } from 'decko';
@@ -32,6 +33,7 @@ async function run(cache: typeof fetch, message: IMessage, settings: ISetting, e
     }
 
     const args = await Promise.all(expr.arguments.map(arg => run(cache, message, settings, arg)));
+
     return await handle(cache, message, settings, expr.callee.name, args);
 }
 
@@ -45,7 +47,7 @@ export async function parse(message: IMessage, settings: ISetting, text: string)
     const token = tokenizer(text);
     const parsed = parser(token);
     const transform = transformer(parsed);
-    const original = new MagicString(text);
+    const original = new (<any> MagicString)(text);
     let request = (<any> memoize)(fetch);
 
     // tslint:disable-next-line:prefer-const

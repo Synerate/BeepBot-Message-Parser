@@ -1,5 +1,6 @@
 import * as config from 'config';
 import * as moment from 'moment';
+// tslint:disable-next-line:no-import-side-effect
 import 'moment-countdown';
 
 import { IMessage } from '../interface/message';
@@ -15,6 +16,7 @@ const providers = {
         if (req == null) {
             return '[Channel Offline]';
         }
+
         return moment(req.startedAt).countdown(new Date()).toString();
     },
     /**
@@ -25,6 +27,7 @@ const providers = {
         if (req == null || req.error === true) {
             return '[Channel Offline]';
         }
+
         return moment(req.livestream[0].media_live_since).countdown(new Date()).toString();
     },
     /**
@@ -39,6 +42,7 @@ const providers = {
         if (req == null || req.stream == null) {
             return '[Channel Offline]';
         }
+
         return moment(req.stream.created_at).countdown(new Date()).toString();
     },
 };
@@ -52,5 +56,6 @@ export function uptime(message: IMessage, settings: ISetting, request: typeof fe
     if (providers[message.provider.type.toLowerCase()] == null) {
         return '[Invalid Provider]';
     }
+
     return providers[message.provider.type.toLowerCase()](request, channelId);
 }
