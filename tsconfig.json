@@ -6,6 +6,7 @@
     "removeComments": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
+    "declaration": true,
     "outDir": "js",
     "sourceMap": true,
     "pretty": true,
