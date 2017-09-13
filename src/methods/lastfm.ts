@@ -34,7 +34,7 @@ export interface ITrack {
     url: string;
 }
 
-type SongType = 'song' | 'artist' | 'link' | string;
+export type SongType = 'song' | 'artist' | 'link' | string;
 
 /**
  * Check that the track requested is valid on the response then returns it.

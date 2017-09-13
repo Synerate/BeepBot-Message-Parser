@@ -1,3 +1,6 @@
+import { IMessage } from '../interface/message';
+import { ISetting } from '../interface/settings';
+
 import * as channel from './channel';
 import * as str from './string';
 import * as users from './users';

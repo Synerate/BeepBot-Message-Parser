@@ -10,7 +10,7 @@ export async function smashcast(message: IMessage, settings: ISetting, request: 
     if (req == null) {
         return '[API Error]';
     }
-    const value = get(req, getFromSimple(message.provider.type, type), '[Type Not Found]');
+    const value = get(req, getFromSimple('smashcast', type), '[Type Not Found]');
     if (!isValueValid(value)) {
         return '[Return Value Invalid]';
     }

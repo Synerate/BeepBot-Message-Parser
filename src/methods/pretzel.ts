@@ -3,10 +3,9 @@ import * as config from 'config';
 import { IMessage } from '../interface/message';
 import { ISetting } from '../interface/settings';
 import { httpRequest } from '../lib/helpers';
+import { SongType } from './lastfm';
 
 const nowPlaying = /Now Playing: (.*) by (.*) -> (.*)/i;
-
-type SongType = 'song' | 'artist' | 'link' | string;
 
 export async function pretzel(
     message: IMessage,

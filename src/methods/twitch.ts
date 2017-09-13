@@ -15,7 +15,7 @@ export async function twitch(message: IMessage, settings: ISetting, request: typ
     if (req == null) {
         return '[API Error]';
     }
-    const value = get(req, getFromSimple(message.provider.type, type), '[Type Not Found]');
+    const value = get(req, getFromSimple('twitch', type), '[Type Not Found]');
     if (!isValueValid(value)) {
         return '[Return Value Invalid]';
     }

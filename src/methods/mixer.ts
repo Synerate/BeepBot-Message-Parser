@@ -10,7 +10,7 @@ export async function mixer(message: IMessage, settings: ISetting, request: type
     if (req == null) {
         return '[API Error]';
     }
-    const value = get(req, getFromSimple(message.provider.type, type), '[Type Not Found]');
+    const value = get(req, getFromSimple('mixer', type), '[Type Not Found]');
     if (!isValueValid(value)) {
         return '[Return Value Invalid]';
     }
