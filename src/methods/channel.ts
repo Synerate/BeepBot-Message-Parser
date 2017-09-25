@@ -16,12 +16,12 @@ export function streamer(message: IMessage) {
     return message.channel.name;
 }
 
-export function stream(message: IMessage) {
+export function stream(message: IMessage, settings: ISetting, cache: typeof fetch, channel: string = message.channel.name) {
     if (config.has(`providers.${message.provider.type.toLowerCase()}.base`) === false) {
         return '[Invalid Provider]';
     }
 
-    return `${config.get<string>(`providers.${message.provider.type.toLowerCase()}.base`)}${message.channel.name}`;
+    return `${config.get<string>(`providers.${message.provider.type.toLowerCase()}.base`)}${channel}`;
 }
 
 /**

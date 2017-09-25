@@ -19,22 +19,27 @@ test('parse the streamer name', t => {
 test('parse the streamers link', t => {
     const message = t.context.message;
     message.provider.type = 'mixer';
-    t.is(stream(message), 'https://mixer.com/artdude543');
-    t.not(stream(message), 'https://twitch.tv/artdude543');
+    t.is(stream(message, mockSettings, t.context.request), 'https://mixer.com/artdude543');
+    t.not(stream(message, mockSettings, t.context.request), 'https://twitch.tv/artdude543');
 
     message.provider.type = 'twitch';
-    t.is(stream(message), 'https://twitch.tv/artdude543');
-    t.not(stream(message), 'https://mixer.com/artdude543');
+    t.is(stream(message, mockSettings, t.context.request), 'https://twitch.tv/artdude543');
+    t.not(stream(message, mockSettings, t.context.request), 'https://mixer.com/artdude543');
 
     message.provider.type = 'smashcast';
-    t.is(stream(message), 'https://www.smashcast.tv/artdude543');
-    t.not(stream(message), 'https://twitch.tv/artdude5433');
+    t.is(stream(message, mockSettings, t.context.request), 'https://www.smashcast.tv/artdude543');
+    t.not(stream(message, mockSettings, t.context.request), 'https://twitch.tv/artdude5433');
+
+    message.provider.type = 'mixer';
+    t.is(stream(message, mockSettings, t.context.request, 'tlovetech'), 'https://mixer.com/tlovetech');
+    t.is(stream(message, mockSettings, t.context.request), 'https://mixer.com/artdude543');
+    t.not(stream(message, mockSettings, t.context.request), 'https://twitch.tv/artdude543');
 });
 
 test('parse the streamers link with an invalid provider', t => {
     const message = t.context.message;
     message.provider.type = 'youtube';
-    const parsed = stream(message);
+    const parsed = stream(message, mockSettings, t.context.request);
     t.is(parsed, '[Invalid Provider]');
 });
 
