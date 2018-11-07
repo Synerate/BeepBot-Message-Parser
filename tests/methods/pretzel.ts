@@ -10,7 +10,7 @@ const regexTest = /Now Playing: (.*) by (.*) -> (.*)/i;
 
 test.beforeEach(t => {
     const message = cloneDeep(mockMessage);
-    message.provider.type = 'mixer';
+    message.provider = 'mixer';
     t.context = { request: (<any> memoize)(fetch), message };
 });
 

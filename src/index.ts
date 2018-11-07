@@ -8,15 +8,14 @@ import * as MagicString from 'magic-string';
 import { parser } from './compiler/parser';
 import { tokenizer } from './compiler/tokenizer';
 import { IExpression, transformer } from './compiler/transformer';
-import { IMessage } from './interface/message';
-import { ISetting } from './interface/settings';
+import { IMessage, ISetting } from './interface';
 import { methods } from './methods';
 
 /**
  * Handle an expression and return the generated value to be replaced.
  */
 async function handle(cache: typeof fetch, message: IMessage, settings: ISetting, text: string, args: string[] = []): Promise<string> {
-    return await methods[text.toLowerCase()](message, settings, cache, ...args);
+    return methods[text.toLowerCase()](message, settings, cache, ...args);
 }
 
 /**
@@ -29,12 +28,12 @@ async function run(cache: typeof fetch, message: IMessage, settings: ISetting, e
         return expr.value;
     }
     if (expr.arguments.length === 0) {
-        return await handle(cache, message, settings, expr.callee.name);
+        return handle(cache, message, settings, expr.callee.name);
     }
 
     const args = await Promise.all(expr.arguments.map(arg => run(cache, message, settings, arg)));
 
-    return await handle(cache, message, settings, expr.callee.name, args);
+    return handle(cache, message, settings, expr.callee.name, args);
 }
 
 /**

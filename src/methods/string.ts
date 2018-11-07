@@ -1,7 +1,6 @@
 import { random } from 'lodash';
 
-import { IMessage } from '../interface/message';
-import { ISetting } from '../interface/settings';
+import { IMessage, ISetting } from '../interface';
 
 export function query(message: IMessage) {
     return message.message.args.slice(1).join(' ');

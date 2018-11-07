@@ -1,8 +1,7 @@
 import * as config from 'config';
 import { stringify } from 'querystring';
 
-import { IMessage } from '../interface/message';
-import { ISetting } from '../interface/settings';
+import { IMessage, ISetting } from '../interface';
 import { httpRequest } from '../lib/helpers';
 
 export interface IRecentTracks {

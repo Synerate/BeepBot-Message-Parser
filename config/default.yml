@@ -3,6 +3,7 @@ providers:
     mixer:
         base: 'https://mixer.com/'
         api: 'https://mixer.com/api/v1/'
+        clientId: ''
     twitch:
         base: 'https://twitch.tv/'
         api: 'https://api.twitch.tv/kraken/'

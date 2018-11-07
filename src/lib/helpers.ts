@@ -11,7 +11,7 @@ import { isArray, isObject } from 'lodash';
   * Rejects when a network error occurred.
   * Make a http(s) request to a json api.
   */
-export async function httpRequest(request: typeof fetch, uri: string, headers: { [header: string]: string; } = {}) {
+export async function httpRequest(request: typeof fetch, uri: string, headers: { [header: string]: string } = {}) {
     const req = await request(uri, { headers });
     if (req.status !== 200) {
         return null;
@@ -20,7 +20,7 @@ export async function httpRequest(request: typeof fetch, uri: string, headers: {
     try {
         return await req.clone().json();
     } catch (err) {
-        return await req.clone().text();
+        return req.clone().text();
     }
 }
 
@@ -80,4 +80,11 @@ export function isValueValid(value: any): boolean {
     }
 
     return true;
+}
+
+/**
+ * Remove common tags from a user/channel name.
+ */
+export function removeTag(user: string) {
+    return user.replace('#', '').replace('@', '');
 }

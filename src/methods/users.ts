@@ -1,4 +1,4 @@
-import { IMessage } from '../interface/message';
+import { IMessage } from '../interface';
 
 export function user(message: IMessage) {
     return message.user.name;

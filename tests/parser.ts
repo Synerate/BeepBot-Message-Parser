@@ -1,7 +1,7 @@
 import { test } from 'ava';
 
 import { parse } from '../src/';
-import { IMessage } from '../src/interface/message';
+import { IMessage } from '../src/interface';
 import { mockMessage, mockSettings } from '../src/mock';
 
 const messages: { input: string; message?: IMessage; output: string; }[] = [

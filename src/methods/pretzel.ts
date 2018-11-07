@@ -1,7 +1,6 @@
 import * as config from 'config';
 
-import { IMessage } from '../interface/message';
-import { ISetting } from '../interface/settings';
+import { IMessage, ISetting } from '../interface';
 import { httpRequest } from '../lib/helpers';
 import { SongType } from './lastfm';
 
@@ -13,7 +12,7 @@ export async function pretzel(
     request: typeof fetch,
     type: SongType = 'all',
     channel: string = message.channel.name,
-    provider: string = message.provider.type) {
+    provider: string = message.provider) {
         const req: string = await httpRequest(request, `${config.get<string>('api.pretzel.base')}playing/${provider}/${channel}`);
         if (req == null) {
             return '[No Song Playing or Channel Not Found]';

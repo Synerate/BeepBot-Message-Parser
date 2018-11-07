@@ -3,8 +3,7 @@ import * as moment from 'moment';
 // tslint:disable-next-line:no-import-side-effect
 import 'moment-countdown';
 
-import { IMessage } from '../interface/message';
-import { ISetting } from '../interface/settings';
+import { IMessage, ISetting } from '../interface';
 import { httpRequest } from '../lib/helpers';
 
 const providers = {
@@ -53,9 +52,9 @@ const providers = {
  * @Optional: Accepts a channel Id to check. Needs to match the ID for the provider which the command is ran from.
  */
 export function uptime(message: IMessage, settings: ISetting, request: typeof fetch, channelId: string | number = message.channel.id) {
-    if (providers[message.provider.type.toLowerCase()] == null) {
+    if (providers[message.provider.toLowerCase()] == null) {
         return '[Invalid Provider]';
     }
 
-    return providers[message.provider.type.toLowerCase()](request, channelId);
+    return providers[message.provider.toLowerCase()](request, channelId);
 }

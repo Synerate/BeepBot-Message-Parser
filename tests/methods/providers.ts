@@ -2,7 +2,7 @@ import { test } from 'ava';
 import { memoize } from 'decko';
 import * as fetch from 'isomorphic-fetch';
 
-import { IMessage } from '../../src/interface/message';
+import { IMessage } from '../../src/interface';
 import { mockMessage, mockSettings } from '../../src/mock';
 
 import { mixer } from '../../src/methods/mixer';
@@ -113,13 +113,13 @@ test.beforeEach(t => {
 
 test('provider tests', async t => {
     await Promise.all(providers.map(provider => {
-        return Promise.all(provider.tests.map(async test => {
+        return Promise.all(provider.tests.map(async toTest => {
             const message = JSON.parse(JSON.stringify(provider.message));
-            if (test.channel) {
-                message.channel.id = test.channel;
+            if (toTest.channel) {
+                message.channel.id = toTest.channel;
             }
-            const req = await provider.method(message, mockSettings, t.context.request, test.type, test.channel);
-            t.is(req, test.result, `Provider: ${provider.provider} Expected: ${test.result} Got: ${req} Type: ${test.type}`);
+            const req = await provider.method(message, mockSettings, t.context.request, toTest.type, toTest.channel);
+            t.is(req, toTest.result, `Provider: ${provider.provider} Expected: ${toTest.result} Got: ${req} Type: ${toTest.type}`);
         }));
     }));
 });

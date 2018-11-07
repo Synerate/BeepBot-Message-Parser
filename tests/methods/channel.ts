@@ -18,27 +18,31 @@ test('parse the streamer name', t => {
 
 test('parse the streamers link', t => {
     const message = t.context.message;
-    message.provider.type = 'mixer';
+    message.provider = 'mixer';
     t.is(stream(message, mockSettings, t.context.request), 'https://mixer.com/artdude543');
     t.not(stream(message, mockSettings, t.context.request), 'https://twitch.tv/artdude543');
 
-    message.provider.type = 'twitch';
+    message.provider = 'twitch';
     t.is(stream(message, mockSettings, t.context.request), 'https://twitch.tv/artdude543');
     t.not(stream(message, mockSettings, t.context.request), 'https://mixer.com/artdude543');
 
-    message.provider.type = 'smashcast';
+    message.provider = 'smashcast';
     t.is(stream(message, mockSettings, t.context.request), 'https://www.smashcast.tv/artdude543');
     t.not(stream(message, mockSettings, t.context.request), 'https://twitch.tv/artdude5433');
 
-    message.provider.type = 'mixer';
+    message.provider = 'mixer';
     t.is(stream(message, mockSettings, t.context.request, 'tlovetech'), 'https://mixer.com/tlovetech');
     t.is(stream(message, mockSettings, t.context.request), 'https://mixer.com/artdude543');
     t.not(stream(message, mockSettings, t.context.request), 'https://twitch.tv/artdude543');
+
+    // Check the tags are removed from the message.
+    t.is(stream(message, mockSettings, t.context.request, '@artdude543'), 'https://mixer.com/artdude543');
+    t.is(stream(message, mockSettings, t.context.request, '#artdude543'), 'https://mixer.com/artdude543');
 });
 
 test('parse the streamers link with an invalid provider', t => {
     const message = t.context.message;
-    message.provider.type = 'youtube';
+    message.provider = 'youtube';
     const parsed = stream(message, mockSettings, t.context.request);
     t.is(parsed, '[Invalid Provider]');
 });
@@ -46,29 +50,29 @@ test('parse the streamers link with an invalid provider', t => {
 test('parse the title of the stream', async t => {
     const message = t.context.message;
     message.channel.id = 15757;
-    message.provider.type = 'mixer';
+    message.provider = 'mixer';
     t.is(await title(message, mockSettings, t.context.request), 'TestUser\'s Channel');
 
-    message.provider.type = 'invalid';
+    message.provider = 'invalid';
     t.is(await title(message, mockSettings, t.context.request), '[Invalid Provider]');
 });
 
 test('parse the game of the stream', async t => {
     const message = t.context.message;
     message.channel.id = 15757;
-    message.provider.type = 'mixer';
+    message.provider = 'mixer';
     t.is(await game(message, mockSettings, t.context.request), 'Minecraft');
 
-    message.provider.type = 'invalid';
+    message.provider = 'invalid';
     t.is(await game(message, mockSettings, t.context.request), '[Invalid Provider]');
 });
 
 test('parse the current provider', t => {
     const message = t.context.message;
-    message.provider.type = 'mixer';
+    message.provider = 'mixer';
     t.is(provider(message), 'mixer');
 
-    message.provider.type = 'twitch';
+    message.provider = 'twitch';
     t.is(provider(message), 'twitch');
 
     t.not(provider(message), 'beam');

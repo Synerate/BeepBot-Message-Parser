@@ -1,8 +1,7 @@
 import * as config from 'config';
 import { get } from 'lodash';
 
-import { IMessage } from '../interface/message';
-import { ISetting } from '../interface/settings';
+import { IMessage, ISetting } from '../interface';
 import { getFromSimple, httpRequest, isValueValid } from '../lib/helpers';
 
 export async function twitch(message: IMessage, settings: ISetting, request: typeof fetch, type: string, channel = message.channel.id) {
