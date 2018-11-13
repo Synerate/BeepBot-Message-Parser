@@ -1,10 +1,10 @@
 {
   "name": "beepbot-message-parser",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "author": "ExoZone Development",
   "description": "Message parser for BeepBot.",
-  "main": "js/src/index.js",
-  "typings": "js/src/index.d.ts",
+  "main": "js/index.js",
+  "typings": "js/index.d.ts",
   "dependencies": {
     "config": "^2.0.1",
     "decko": "^1.2.0",
