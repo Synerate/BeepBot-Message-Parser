@@ -1,6 +1,6 @@
 {
   "name": "beepbot-message-parser",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "author": "ExoZone Development",
   "description": "Message parser for BeepBot.",
   "main": "js/src/index.js",
