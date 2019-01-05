@@ -4,6 +4,8 @@
     "node_modules/tslint-microsoft-contrib"
   ],
   "rules": {
+    "no-implicit-dependencies": false,
+    "no-null-keyword": false,
     // Basic
     "import-blacklist": [
         true,

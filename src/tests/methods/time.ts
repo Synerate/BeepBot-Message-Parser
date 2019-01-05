@@ -2,8 +2,8 @@ import { test } from 'ava';
 import { memoize } from 'decko';
 import * as fetch from 'isomorphic-fetch';
 
-import { time } from '../../src/methods/time';
-import { mockMessage, mockSettings } from '../../src/mock';
+import { time } from '../../methods/time';
+import { mockMessage, mockSettings } from '../../mock';
 
 test.beforeEach(t => {
     t.context = { request: (<any> memoize)(fetch) };

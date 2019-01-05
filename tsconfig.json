@@ -23,6 +23,7 @@
     ]
   },
   "exclude": [
+    "tests",
     "js",
     "node_modules"
   ]

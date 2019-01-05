@@ -16,7 +16,7 @@ export function streamer(message: IMessage) {
     return message.channel.name;
 }
 
-export function stream(message: IMessage, settings: ISetting, cache: typeof fetch, channel: string = message.channel.name) {
+export function stream(message: IMessage, _settings: ISetting, _cache: typeof fetch, channel: string = message.channel.name) {
     if (config.has(`providers.${message.provider.toLowerCase()}.base`) === false) {
         return '[Invalid Provider]';
     }
@@ -28,7 +28,7 @@ export function stream(message: IMessage, settings: ISetting, cache: typeof fetc
  * Get the current title of the stream.
  */
 export function title(message: IMessage, settings: ISetting, cache: typeof fetch) {
-    if (providers[message.provider.toLowerCase()] == null) {
+    if (providers[message.provider.toLowerCase()] === undefined) {
         return '[Invalid Provider]';
     }
 
@@ -39,7 +39,7 @@ export function title(message: IMessage, settings: ISetting, cache: typeof fetch
  * Get the current game/category being streamed.
  */
 export function game(message: IMessage, settings: ISetting, cache: typeof fetch) {
-    if (providers[message.provider.toLowerCase()] == null) {
+    if (providers[message.provider.toLowerCase()] === undefined) {
         return '[Invalid Provider]';
     }
 

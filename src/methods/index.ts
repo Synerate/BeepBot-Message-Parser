@@ -10,6 +10,7 @@ import { pretzel } from './pretzel';
 import { smashcast } from './smashcast';
 import { time } from './time';
 import { twitch } from './twitch';
+import { variable } from './variable';
 import { weather } from './weather';
 
 export const methods = {
@@ -23,4 +24,5 @@ export const methods = {
     ...channel,
     ...str,
     ...users,
+    variable,
 };

@@ -2,7 +2,6 @@ import { IMessage, ISetting } from './interface';
 
 export const mockMessage: IMessage = {
     channel: {
-        coreId: '',
         id: null,
         name: 'artdude543',
     },

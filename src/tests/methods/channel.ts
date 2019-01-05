@@ -3,8 +3,8 @@ import { memoize } from 'decko';
 import * as fetch from 'isomorphic-fetch';
 import { cloneDeep } from 'lodash';
 
-import { game, provider, stream, streamer, title } from '../../src/methods/channel';
-import { mockMessage, mockSettings } from '../../src/mock';
+import { game, provider, stream, streamer, title } from '../../methods/channel';
+import { mockMessage, mockSettings } from '../../mock';
 
 test.beforeEach('create a new mockMessage', t => {
     t.context = { message: cloneDeep(mockMessage), request: (<any> memoize)(fetch) };

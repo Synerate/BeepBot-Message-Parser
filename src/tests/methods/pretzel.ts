@@ -3,8 +3,8 @@ import { memoize } from 'decko';
 import * as fetch from 'isomorphic-fetch';
 import { cloneDeep } from 'lodash';
 
-import { pretzel } from '../../src/methods/pretzel';
-import { mockMessage, mockSettings } from '../../src/mock';
+import { pretzel } from '../../methods/pretzel';
+import { mockMessage, mockSettings } from '../../mock';
 
 const regexTest = /Now Playing: (.*) by (.*) -> (.*)/i;
 

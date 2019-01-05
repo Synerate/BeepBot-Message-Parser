@@ -3,8 +3,9 @@ export interface IMessage {
         id: string | number;
         name: string;
         /**
-         * This Id is used for ExoZone Development for usage with this module and BeepBot. This is only required when using the
-         * {exoapi} parser otherwise it can be safely ignored.
+         * Core Id used as a unique name for backend processing.
+         *
+         * I.E. So we know what channel a var belongs too w/o having to convert the provider Id to the backend Id.
          */
         coreId?: string;
     };

@@ -1,11 +1,11 @@
 import { test } from 'ava';
 import * as fetch from 'isomorphic-fetch';
 
-import { getFromSimple, httpRequest } from '../../src/lib/helpers';
+import { getFromSimple, httpRequest } from '../../lib/helpers';
 
 test('invalid request should be null', async t => {
     const req = await httpRequest(fetch, 'https://mixer.com/api/v1/channels/^^%');
-    t.is(req, null);
+    t.is(req, undefined);
 });
 
 test('get the correct types from simple', t => {

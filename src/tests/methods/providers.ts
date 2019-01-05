@@ -2,12 +2,12 @@ import { test } from 'ava';
 import { memoize } from 'decko';
 import * as fetch from 'isomorphic-fetch';
 
-import { IMessage } from '../../src/interface';
-import { mockMessage, mockSettings } from '../../src/mock';
+import { IMessage } from '../../interface';
+import { mockMessage, mockSettings } from '../../mock';
 
-import { mixer } from '../../src/methods/mixer';
-import { smashcast } from '../../src/methods/smashcast';
-import { twitch } from '../../src/methods/twitch';
+import { mixer } from '../../methods/mixer';
+import { smashcast } from '../../methods/smashcast';
+import { twitch } from '../../methods/twitch';
 
 interface ITest {
     provider: string;
@@ -22,7 +22,7 @@ interface ITest {
 
 const providers: ITest[] = [
      {
-         message: Object.assign({}, mockMessage, { channel: { id: 36297622 }, provider: { type: 'twitch' } }),
+         message: { ...mockMessage,  channel: { id: 36297622, name: '' }, provider: 'twitch' },
          method: twitch,
          provider: 'twitch',
          tests: [
@@ -50,7 +50,7 @@ const providers: ITest[] = [
          ],
      },
      {
-         message: Object.assign({}, mockMessage, { channel: { id: 587 }, provider: { type: 'mixer' }, user: { id: 693 } }),
+         message: {...mockMessage,  channel: { id: 587, name: '' }, provider: 'mixer', user: { id: 693, name: '' }},
          method: mixer,
          provider: 'mixer',
          tests: [
@@ -78,7 +78,7 @@ const providers: ITest[] = [
          ],
      },
      {
-         message: Object.assign({}, mockMessage, { channel: { id: 'artdude543' }, provider: { type: 'smashcast' }, user: { id: 415692 } }),
+         message: {...mockMessage,  channel: { id: 'artdude543', name: '' }, provider: 'smashcast', user: { id: 415692, name: '' }},
          method: smashcast,
          provider: 'smashcast',
          tests: [

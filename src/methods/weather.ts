@@ -33,14 +33,14 @@ export function getDirection(deg: number) {
     return directions[(value % 16)];
 }
 
-export async function weather(message: IMessage, settings: ISetting, request: typeof fetch, region: string) {
+export async function weather(_message: IMessage, _settings: ISetting, request: typeof fetch, region: string) {
     const opts = {
         appid: config.get<string>('api.weather.key'),
         q: region,
         units: 'metric',
     };
     const req: IWeather = await httpRequest(request, `${config.get<string>('api.weather.base')}?${stringify(opts)}`);
-    if (req == null) {
+    if (req === undefined) {
         return '[API Error]';
     }
 

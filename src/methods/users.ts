@@ -5,7 +5,7 @@ export function user(message: IMessage) {
 }
 
 export function touser(message: IMessage) {
-    if (message.message.args[1] != null) {
+    if (message.message.args[1] !== undefined) {
         return message.message.args[1];
     }
 

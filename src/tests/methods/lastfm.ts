@@ -2,37 +2,37 @@ import { test } from 'ava';
 import { memoize } from 'decko';
 import * as fetch from 'isomorphic-fetch';
 
-import { getTrack, ITrack, lastfm } from '../../src/methods/lastfm';
-import { mockMessage, mockSettings } from '../../src/mock';
+import { getTrack, ITrack, lastfm } from '../../methods/lastfm';
+import { mockMessage, mockSettings } from '../../mock';
 
 const tracks: ITrack[] = [
     {
         album: {
             '#text': 'Why Luca',
-            mbid: null,
+            mbid: undefined,
         },
         artist: {
             '#text': 'JamyDev',
-            mbid: null,
+            mbid: undefined,
         },
-        mbid: null,
+        mbid: undefined,
         name: 'The Dishwasher Life',
         streamable: '1',
-        url: null,
+        url: undefined,
     },
     {
         album: {
             '#text': 'Greatest Hits',
-            mbid: null,
+            mbid: undefined,
         },
         artist: {
             '#text': 'JamyDev',
-            mbid: null,
+            mbid: undefined,
         },
-        mbid: null,
+        mbid: undefined,
         name: 'Dog & Me',
         streamable: '1',
-        url: null,
+        url: undefined,
     },
 ];
 

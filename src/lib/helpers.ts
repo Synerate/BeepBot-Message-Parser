@@ -14,13 +14,15 @@ import { isArray, isObject } from 'lodash';
 export async function httpRequest(request: typeof fetch, uri: string, headers: { [header: string]: string } = {}) {
     const req = await request(uri, { headers });
     if (req.status !== 200) {
-        return null;
+        return undefined;
     }
 
     try {
-        return await req.clone().json();
+        return await req.clone()
+            .json();
     } catch (err) {
-        return req.clone().text();
+        return req.clone()
+            .text();
     }
 }
 
@@ -59,10 +61,10 @@ const providerMapping = {
  *        game -> type.name
  */
 export function getFromSimple(provider: string, toPick: string): string {
-    if (providerMapping[provider.toLowerCase()] == null) {
+    if (providerMapping[provider.toLowerCase()] === undefined) {
         throw TypeError('Invalid Provider.');
     }
-    if (providerMapping[provider.toLowerCase()][toPick.toLowerCase()] == null) {
+    if (providerMapping[provider.toLowerCase()][toPick.toLowerCase()] === undefined) {
         return toPick;
     }
 
@@ -75,7 +77,7 @@ export function getFromSimple(provider: string, toPick: string): string {
  * Basically only allows single values to be returned. I.E. Number,String,Boolean
  */
 export function isValueValid(value: any): boolean {
-    if (isArray(value) || isObject(value) || value == null) {
+    if (isArray(value) || isObject(value) || value === null) {
         return false;
     }
 
@@ -86,5 +88,6 @@ export function isValueValid(value: any): boolean {
  * Remove common tags from a user/channel name.
  */
 export function removeTag(user: string) {
-    return user.replace('#', '').replace('@', '');
+    return user.replace('#', '')
+        .replace('@', '');
 }

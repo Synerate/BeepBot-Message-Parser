@@ -2,8 +2,8 @@ import { test } from 'ava';
 import { memoize } from 'decko';
 import * as fetch from 'isomorphic-fetch';
 
-import { getDirection, weather } from '../../src/methods/weather';
-import { mockMessage, mockSettings } from '../../src/mock';
+import { getDirection, weather } from '../../methods/weather';
+import { mockMessage, mockSettings } from '../../mock';
 
 const regex = /(\w+) is expecting ([\w ]+), with wind speeds of ([\d\.]+)mph./ig;
 

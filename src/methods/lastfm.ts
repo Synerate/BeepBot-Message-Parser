@@ -41,7 +41,7 @@ export type SongType = 'song' | 'artist' | 'link' | string;
  * Also checks if the "when" param is valid.
  */
 export function getTrack(tracks: ITrack[], when: string): ITrack {
-    if (isNaN(Number(when)) || Number(when) < 0 || Number(when) > 10 || tracks[Number(when)] == null) {
+    if (isNaN(Number(when)) || Number(when) < 0 || Number(when) > 10 || tracks[Number(when)] === undefined) {
         return tracks[0];
     }
 
@@ -54,7 +54,7 @@ export function getTrack(tracks: ITrack[], when: string): ITrack {
  * Default: Returns the song name and artist.
  */
 // tslint:disable-next-line:max-line-length
-export async function lastfm(message: IMessage, settings: ISetting, request: typeof fetch, user: string, type: SongType = null, when: string = '0') {
+export async function lastfm(_message: IMessage, _settings: ISetting, request: typeof fetch, user: string, type?: SongType, when: string = '0') {
     const opts = {
         api_key: config.get<string>('api.lastfm.key'),
         format: 'json',
@@ -64,7 +64,7 @@ export async function lastfm(message: IMessage, settings: ISetting, request: typ
     };
     // tslint:disable-next-line:max-line-length
     const { recenttracks, error }: IRecentTracks = await httpRequest(request, `${config.get<string>('api.lastfm.base')}?${stringify(opts)}`);
-    if (error != null) {
+    if (error !== undefined) {
         return '[Invalid User]';
     }
 

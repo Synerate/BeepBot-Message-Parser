@@ -8,13 +8,13 @@ const nowPlaying = /Now Playing: (.*) by (.*) -> (.*)/i;
 
 export async function pretzel(
     message: IMessage,
-    settings: ISetting,
+    _settings: ISetting,
     request: typeof fetch,
     type: SongType = 'all',
     channel: string = message.channel.name,
     provider: string = message.provider) {
         const req: string = await httpRequest(request, `${config.get<string>('api.pretzel.base')}playing/${provider}/${channel}`);
-        if (req == null) {
+        if (req === undefined) {
             return '[No Song Playing or Channel Not Found]';
         }
 

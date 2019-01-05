@@ -3,10 +3,11 @@ import { random } from 'lodash';
 import { IMessage, ISetting } from '../interface';
 
 export function query(message: IMessage) {
-    return message.message.args.slice(1).join(' ');
+    return message.message.args.slice(1)
+        .join(' ');
 }
 
-export function randomnum(message: IMessage, settings: ISetting, request: typeof fetch, min: string, max: string) {
+export function randomnum(_message: IMessage, _settings: ISetting, _request: typeof fetch, min: string, max: string) {
     if (isNaN(Number(min)) || isNaN(Number(max))) {
         return '[Min or Max needs to be a number]';
     }
@@ -17,5 +18,6 @@ export function randomnum(message: IMessage, settings: ISetting, request: typeof
         return '[Min should not be more than the Max]';
     }
 
-    return random(Number(min), Number(max)).toString();
+    return random(Number(min), Number(max))
+        .toString();
 }

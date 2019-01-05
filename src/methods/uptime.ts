@@ -12,22 +12,26 @@ const providers = {
      */
     mixer: async (request: typeof fetch, channelId: string | number) => {
         const req = await httpRequest(request, `${config.get<string>('providers.mixer.api')}channels/${channelId}/manifest.light2`);
-        if (req == null) {
+        if (req === undefined) {
             return '[Channel Offline]';
         }
 
-        return moment(req.startedAt).countdown(new Date()).toString();
+        return moment(req.startedAt)
+            .countdown(new Date())
+            .toString();
     },
     /**
      * Get the uptime for a Smashcash channel.
      */
     smashcash: async (request: typeof fetch, channelId: string | number) => {
         const req = await httpRequest(request, `${config.get<string>('providers.smashcast.api')}media/live/${channelId}`);
-        if (req == null || req.error === true) {
+        if (req === undefined || req.error === true) {
             return '[Channel Offline]';
         }
 
-        return moment(req.livestream[0].media_live_since).countdown(new Date()).toString();
+        return moment(req.livestream[0].media_live_since)
+            .countdown(new Date())
+            .toString();
     },
     /**
      * Get the uptime for a Twitch channel.
@@ -38,11 +42,13 @@ const providers = {
             'Client-ID': config.get<string>('providers.twitch.clientId'),
         };
         const req = await httpRequest(request, `${config.get<string>('providers.twitch.api')}streams/${channelId}`, headers);
-        if (req == null || req.stream == null) {
+        if (req === undefined || req.stream === undefined) {
             return '[Channel Offline]';
         }
 
-        return moment(req.stream.created_at).countdown(new Date()).toString();
+        return moment(req.stream.created_at)
+            .countdown(new Date())
+            .toString();
     },
 };
 
@@ -51,8 +57,8 @@ const providers = {
  *
  * @Optional: Accepts a channel Id to check. Needs to match the ID for the provider which the command is ran from.
  */
-export function uptime(message: IMessage, settings: ISetting, request: typeof fetch, channelId: string | number = message.channel.id) {
-    if (providers[message.provider.toLowerCase()] == null) {
+export function uptime(message: IMessage, _settings: ISetting, request: typeof fetch, channelId: string | number = message.channel.id) {
+    if (providers[message.provider.toLowerCase()] === undefined) {
         return '[Invalid Provider]';
     }
 
