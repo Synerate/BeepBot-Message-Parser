@@ -14,10 +14,31 @@ This is BMP or "BeepBot Message Parser" it allows you to give an input string wh
 
 # Usage
 ```typescript
-import  { parser } from 'beepbot-message-parser';
+import  { Parser } from 'beepbot-message-parser';
+
+const testVars: { [name: string]: number } = {
+    cheese: 1,
+    test: 2,
+};
+const parser = new Parser({
+    varCallback: async (coreId: string, varName: string, type: VarType) => {
+        const val = testVars[varName.toLowerCase()];
+        if (testVars[varName.toLowerCase()] === undefined) {
+            return 1;
+        }
+        switch (type) {
+            case 'incr':
+                return val + 1;
+            case 'decr':
+                return val - 1;
+            default:
+                return val;
+        }
+    },
+})
 
 async function run(channelMessage: IMessage, channelSettings: any, input: string) {
-    return await parser(channelMessage: IMessage, channelSettings: any, input: string);
+    return await parser.parse(channelMessage: IMessage, channelSettings: any, input: string);
 }
 
 run(channelMessage, channelSettings, input)
@@ -40,10 +61,3 @@ let input = 'Now Playing: {lastfm artdude543}' // Now Playing: Hunter by Galanti
 # Supported Methods
 
 TODO.
-
-# Limitations
-
-Currently, if you wish to use this in your own applications. You need to follow the spec for the `channelMessage` and `channelSetting` inputs.
-In time we will update it to allow injecting our own input methods to make it more universal.
-
-But both inputs have full [Typings](https://github.com/ExoZoneDev/beepbot-message-parser/tree/master/src/interface), so you can mock them if you wish.
