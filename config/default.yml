@@ -6,7 +6,7 @@ providers:
         clientId: ''
     twitch:
         base: 'https://twitch.tv/'
-        api: 'https://api.twitch.tv/kraken/'
+        api: 'https://api.twitch.tv/'
         clientId: ''
     smashcast:
         base: 'https://www.smashcast.tv/'

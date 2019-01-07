@@ -21,11 +21,14 @@ const providers = {
             .toString();
     },
     /**
-     * Get the uptime for a Smashcash channel.
+     * Get the uptime for a Smashcast channel.
      */
-    smashcash: async (request: typeof fetch, channelId: string | number) => {
+    smashcast: async (request: typeof fetch, channelId: string | number) => {
         const req = await httpRequest(request, `${config.get<string>('providers.smashcast.api')}media/live/${channelId}`);
         if (req === undefined || req.error === true) {
+            return '[Channel Offline]';
+        }
+        if (req.livestream[0].media_live_since == null) {
             return '[Channel Offline]';
         }
 
@@ -38,15 +41,14 @@ const providers = {
      */
     twitch: async (request: typeof fetch, channelId: string | number) => {
         const headers = {
-            Accept: config.get<string>('providers.twitch.version'),
             'Client-ID': config.get<string>('providers.twitch.clientId'),
         };
-        const req = await httpRequest(request, `${config.get<string>('providers.twitch.api')}streams/${channelId}`, headers);
-        if (req === undefined || req.stream === undefined) {
+        const req = await httpRequest(request, `${config.get<string>('providers.twitch.api')}helix/streams?user_id=${channelId}`, headers);
+        if (req === undefined || req.data.length === 0) {
             return '[Channel Offline]';
         }
 
-        return moment(req.stream.created_at)
+        return moment(req.data[0].started_at)
             .countdown(new Date())
             .toString();
     },
