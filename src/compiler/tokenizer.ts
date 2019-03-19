@@ -26,7 +26,7 @@ export function tokenizer(input: string) {
             let value = '';
             char = input[++current];
 
-            while (char !== '"') {
+            while (char !== '"' && char != null) {
                 value += char;
                 char = input[++current];
             }

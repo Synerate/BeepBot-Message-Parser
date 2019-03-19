@@ -63,12 +63,12 @@ export async function lastfm(_message: IMessage, _settings: ISetting, request: t
         user,
     };
     // tslint:disable-next-line:max-line-length
-    const { recenttracks, error }: IRecentTracks = await httpRequest(request, `${config.get<string>('api.lastfm.base')}?${stringify(opts)}`);
-    if (error !== undefined) {
+    const res: IRecentTracks = await httpRequest(request, `${config.get<string>('api.lastfm.base')}?${stringify(opts)}`);
+    if (res == null || res.error != null) {
         return '[Invalid User]';
     }
 
-    const { name, artist, url } = getTrack(recenttracks.track, when);
+    const { name, artist, url } = getTrack(res.recenttracks.track, when);
     switch (type) {
         case 'song':
             return name;

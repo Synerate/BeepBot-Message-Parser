@@ -1,6 +1,6 @@
 import { test } from 'ava';
 
-import { Parser } from '../index';
+import { Parser } from '..';
 import { IMessage } from '../interface';
 import { VarType } from '../methods/variable';
 import { mockMessage, mockSettings } from '../mock';
@@ -61,12 +61,16 @@ const messages: { input: string; message?: IMessage; output: string }[] = [
         input: 'Var Testing! {variable cheese} {variable test}',
         output: 'Var Testing! 1 2',
     },
+    {
+        input: 'Should not cause memory leaks! "',
+        output: 'Should not cause memory leaks! "',
+    },
 ];
 
 test('parse the messages', async t => {
     await Promise.all(messages.map(async msg => {
         let message = mockMessage;
-        if (msg.message) {
+        if (msg.message != null) {
             message = msg.message;
         }
         t.is(await parser.parse(message, mockSettings, msg.input), msg.output);
