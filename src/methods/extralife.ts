@@ -26,7 +26,7 @@ export async function extralife(_message: IMessage, _settings: any, request: typ
         case 'goal':
             return parseNum(req.sumDonations);
         case 'total':
-            return `${parseNum(req.fundraisingGoal)} (${totalPercentage(req.fundraisingGoal, req.sumDonations)}%)`;
+            return `${parseNum(req.sumDonations)} (${totalPercentage(req.fundraisingGoal, req.sumDonations)}%)`;
         case 'all':
         default:
             // tslint:disable-next-line: max-line-length
