@@ -2,7 +2,7 @@ import { test } from 'ava';
 import { memoize } from 'decko';
 import * as fetch from 'isomorphic-fetch';
 
-import { Parser } from '../../index';
+import { Parser } from '../..';
 import { variable, VarType } from '../../methods/variable';
 import { mockMessage, mockSettings } from '../../mock';
 
