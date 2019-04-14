@@ -6,7 +6,7 @@ import { mixer } from './mixer';
 import { smashcast } from './smashcast';
 import { twitch } from './twitch';
 
-const providers = {
+const providers: { [provider: string]: (...args: any[]) => Promise<string> } = {
     mixer,
     smashcast,
     twitch,

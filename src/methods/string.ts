@@ -21,3 +21,11 @@ export function randomnum(_message: IMessage, _settings: ISetting, _request: typ
     return random(Number(min), Number(max))
         .toString();
 }
+
+export function incr(_message: IMessage, _settings: ISetting, _request: typeof fetch, base: string, val: string) {
+    if (isNaN(Number(base)) || isNaN(Number(val))) {
+        return '[Base or Val needs to be a number]';
+    }
+
+    return `${Number(base) + Number(val)}`;
+}

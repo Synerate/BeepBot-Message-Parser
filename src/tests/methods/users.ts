@@ -19,6 +19,14 @@ test('parse touser', t => {
     t.not(touser(message), 'artdude543');
 });
 
+test('parse touser with tagging', t => {
+    const message = mockMessage;
+
+    message.message.args = ['!command', '@BeepBot'];
+    t.is(touser(message), 'BeepBot');
+    t.not(touser(message), '@BeepBot');
+});
+
 test('parse the userId', t => {
     mockMessage.user.id = 587;
     t.is(userid(mockMessage), 587);

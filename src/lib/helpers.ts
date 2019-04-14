@@ -11,7 +11,7 @@ import { isArray, isObject } from 'lodash';
   * Rejects when a network error occurred.
   * Make a http(s) request to a json api.
   */
-export async function httpRequest(request: typeof fetch, uri: string, headers: { [header: string]: string } = {}) {
+export async function httpRequest(request: typeof fetch, uri: string, headers: { [header: string]: string } = {}): Promise<string | any> {
     const req = await request(uri, { headers });
     if (req.status !== 200) {
         return undefined;
