@@ -1,23 +1,24 @@
 {
   "name": "beepbot-message-parser",
-  "version": "2.0.5",
+  "version": "2.0.6",
   "author": "ExoZone Development",
   "description": "Message parser for BeepBot.",
   "main": "js/index.js",
   "typings": "js/index.d.ts",
   "dependencies": {
     "config": "^3.0.1",
+    "countdown": "^2.6.0",
     "decko": "^1.2.0",
     "isomorphic-fetch": "^2.2.1",
     "js-yaml": "^3.12.1",
     "lodash": "^4.17.11",
     "magic-string": "^0.25.1",
     "moment": "^2.23.0",
-    "moment-countdown": "^0.0.3",
     "moment-timezone": "^0.5.23"
   },
   "devDependencies": {
     "@types/config": "0.0.34",
+    "@types/countdown": "^0.0.7",
     "@types/isomorphic-fetch": "0.0.34",
     "@types/lodash": "^4.14.119",
     "@types/moment-timezone": "^0.5.10",
