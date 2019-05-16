@@ -1,13 +1,12 @@
 import * as config from 'config';
+import * as countdown from 'countdown';
 import * as moment from 'moment';
-// tslint:disable-next-line:no-import-side-effect
-import 'moment-countdown';
 
-import { IMessage } from '../interface/index';
+import { IMessage } from '../interface';
 import { httpRequest } from '../lib/helpers';
 
 export const methods = {
-    mixer: async (request: typeof fetch, channelId: number, userId: number) => {
+    mixer: async (request: typeof fetch, channelId: number, userId: number): Promise<any> => {
         const req = await httpRequest(request,
                                       `${config.get<string>('providers.mixer.api')}channels/${channelId}/relationship?user=${userId}`,
                                       { 'Client-ID': config.get<string>('providers.mixer.clientId') });
@@ -15,9 +14,7 @@ export const methods = {
             return 'User does not follow the channel.';
         }
 
-        return moment(req.status.follows.createdAt)
-            .countdown(new Date())
-            .toString();
+        return countdown(new Date(), moment(req.status.follows.createdAt).toDate());
     },
 };
 

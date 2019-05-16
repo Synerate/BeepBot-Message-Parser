@@ -21,12 +21,12 @@ export async function pretzel(
         const playing = nowPlaying.exec(req);
         switch (type) {
             case 'song':
-                return playing[0];
-            case 'artist':
                 return playing[1];
+            case 'artist':
+                return playing[2];
             case 'link':
                 return playing[3];
             default:
-                return `${playing[0]} by ${playing[1]}`;
+                return `${playing[1]} by ${playing[2]}`;
         }
     }

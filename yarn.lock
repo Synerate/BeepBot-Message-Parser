@@ -152,6 +152,11 @@
   resolved "https://registry.npmjs.org/@types/config/-/config-0.0.34.tgz#123f91bdb5afdd702294b9de9ca04d9ea11137b0"
   integrity sha512-jWi9DXx77hnzN4kHCNEvP/kab+nchRLTg9yjXYxjTcMBkuc5iBb3QuwJ4sPrb+nzy1GQjrfyfMqZOdR4i7opRQ==
 
+"@types/countdown@^0.0.7":
+  version "0.0.7"
+  resolved "https://npm.artdude.uk:443/@types%2fcountdown/-/countdown-0.0.7.tgz#8120fe35739943a19457a877e0f49ecb29147054"
+  integrity sha512-Rsd5+gjrW5qRvpHFRrYKXwGTXGGxFaza96LU4uf5D7L5De9Hk3Ykj9lstxmExFuAPiueKCVFwidO3dO2zha0Sw==
+
 "@types/isomorphic-fetch@0.0.34":
   version "0.0.34"
   resolved "https://registry.npmjs.org/@types/isomorphic-fetch/-/isomorphic-fetch-0.0.34.tgz#3c3483e606c041378438e951464f00e4e60706d6"
@@ -1256,9 +1261,9 @@ core-util-is@1.0.2, core-util-is@~1.0.0:
   resolved "https://registry.npmjs.org/core-util-is/-/core-util-is-1.0.2.tgz#b5fd54220aa2bc5ab57aab7140c940754503c1a7"
   integrity sha1-tf1UIgqivFq1eqtxQMlAdUUDwac=
 
-"countdown@>= 2.3.0":
+countdown@^2.6.0:
   version "2.6.0"
-  resolved "https://registry.npmjs.org/countdown/-/countdown-2.6.0.tgz#677fb8e3a9d4cc4e76415901ba253b518af34177"
+  resolved "https://npm.artdude.uk:443/countdown/-/countdown-2.6.0.tgz#677fb8e3a9d4cc4e76415901ba253b518af34177"
   integrity sha1-Z3+446nUzE52QVkBuiU7UYrzQXc=
 
 coveralls@^3.0.2:
@@ -2928,14 +2933,6 @@ mkdirp@^0.5.0, mkdirp@^0.5.1:
   dependencies:
     minimist "0.0.8"
 
-moment-countdown@^0.0.3:
-  version "0.0.3"
-  resolved "https://registry.npmjs.org/moment-countdown/-/moment-countdown-0.0.3.tgz#93100c92aa6fd884b84a83814ebdcd6b87f3388d"
-  integrity sha1-kxAMkqpv2IS4SoOBTr3Na4fzOI0=
-  dependencies:
-    countdown ">= 2.3.0"
-    moment ">= 2.0.0"
-
 moment-timezone@^0.5.23:
   version "0.5.23"
   resolved "https://registry.npmjs.org/moment-timezone/-/moment-timezone-0.5.23.tgz#7cbb00db2c14c71b19303cb47b0fb0a6d8651463"
@@ -2943,7 +2940,7 @@ moment-timezone@^0.5.23:
   dependencies:
     moment ">= 2.9.0"
 
-"moment@>= 2.0.0", "moment@>= 2.9.0", moment@>=2.14.0, moment@^2.23.0:
+"moment@>= 2.9.0", moment@>=2.14.0, moment@^2.23.0:
   version "2.23.0"
   resolved "https://registry.npmjs.org/moment/-/moment-2.23.0.tgz#759ea491ac97d54bac5ad776996e2a58cc1bc225"
   integrity sha512-3IE39bHVqFbWWaPOMHZF98Q9c3LDKGTmypMiTM2QygGXXElkFWIH7GxfmlwmY2vwa+wmNsoYZmG2iusf1ZjJoA==

@@ -1,7 +1,6 @@
 import * as config from 'config';
+import * as countdown from 'countdown';
 import * as moment from 'moment';
-// tslint:disable-next-line:no-import-side-effect
-import 'moment-countdown';
 
 import { IMessage, ISetting } from '../interface';
 import { httpRequest } from '../lib/helpers';
@@ -10,20 +9,18 @@ const providers = {
     /**
      * Get the uptime for a Mixer channel.
      */
-    mixer: async (request: typeof fetch, channelId: string | number) => {
+    mixer: async (request: typeof fetch, channelId: string | number): Promise<any> => {
         const req = await httpRequest(request, `${config.get<string>('providers.mixer.api')}channels/${channelId}/manifest.light2`);
         if (req === undefined) {
             return '[Channel Offline]';
         }
 
-        return moment(req.startedAt)
-            .countdown(new Date())
-            .toString();
+        return countdown(new Date(), moment(req.startedAt).toDate());
     },
     /**
      * Get the uptime for a Smashcast channel.
      */
-    smashcast: async (request: typeof fetch, channelId: string | number) => {
+    smashcast: async (request: typeof fetch, channelId: string | number): Promise<any> => {
         const req = await httpRequest(request, `${config.get<string>('providers.smashcast.api')}media/live/${channelId}`);
         if (req === undefined || req.error === true) {
             return '[Channel Offline]';
@@ -32,14 +29,12 @@ const providers = {
             return '[Channel Offline]';
         }
 
-        return moment(req.livestream[0].media_live_since)
-            .countdown(new Date())
-            .toString();
+        return countdown(new Date(), moment(req.livestream[0].media_live_since).toDate());
     },
     /**
      * Get the uptime for a Twitch channel.
      */
-    twitch: async (request: typeof fetch, channelId: string | number) => {
+    twitch: async (request: typeof fetch, channelId: string | number): Promise<any> => {
         const headers = {
             'Client-ID': config.get<string>('providers.twitch.clientId'),
         };
@@ -48,9 +43,7 @@ const providers = {
             return '[Channel Offline]';
         }
 
-        return moment(req.data[0].started_at)
-            .countdown(new Date())
-            .toString();
+        return countdown(new Date(), moment(req.data[0].started_at).toDate());
     },
 };
 
