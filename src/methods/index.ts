@@ -1,4 +1,5 @@
 import * as channel from './channel';
+import { costream } from './costream';
 import { extralife } from './extralife';
 import { followage } from './followage';
 import { lastfm } from './lastfm';
@@ -15,6 +16,7 @@ import { weather } from './weather';
 
 export const methods = {
     ...channel,
+    costream,
     extralife,
     followage,
     lastfm,
