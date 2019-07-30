@@ -5,6 +5,14 @@ import { httpRequest } from '../lib/helpers';
 
 const supportedProviders = ['mixer', 'twitch'];
 
+interface ICoStream {
+    channels: {
+        id: number;
+        token: string;
+        userId: number;
+    }[];
+}
+
 export async function costream(message: IMessage, _settings: any, request: typeof fetch, withLinks: string = 'true') {
     if (!supportedProviders.includes(message.provider.toLowerCase())) {
         return '[Non-Supported Provider]';
@@ -43,12 +51,13 @@ async function getData(request: typeof fetch, provider: string, channelId: strin
             if (mchan.costreamId == null) {
                 return '[Channel not Co-Streaming]';
             }
-            const mcost = await httpRequest(request, `${config.get<string>('providers.mixer.api')}costreams/${mchan.costreamId}`, headers);
+            // tslint:disable-next-line: max-line-length
+            const mcost: ICoStream = await httpRequest(request, `${config.get<string>('providers.mixer.api')}costreams/${mchan.costreamId}`, headers);
             if (mcost === undefined) {
                 return '[API Error]';
             }
 
-            return mcost.channels.map((channel: any) => {
+            return mcost.channels.filter(channel => channel.id.toString() !== channelId).map(channel => {
                 if (showLinks) {
                     return `${channel.token} (${config.get<string>('providers.mixer.base')}${channel.token})`;
                 }
