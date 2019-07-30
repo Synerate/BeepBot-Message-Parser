@@ -1,4 +1,4 @@
-import { test } from 'ava';
+import test from 'ava';
 import { memoize } from 'decko';
 import * as fetch from 'isomorphic-fetch';
 import { cloneDeep } from 'lodash';
@@ -6,18 +6,18 @@ import { cloneDeep } from 'lodash';
 import { uptime } from '../../methods/uptime';
 import { mockMessage } from '../../mock';
 
-test.beforeEach('create a new mockMessage', t => {
+test.beforeEach('create a new mockMessage', (t: any) => {
     t.context = { message: cloneDeep(mockMessage), request: (<any> memoize)(fetch) };
 });
 
-test('handles a bad-provider', t => {
+test('handles a bad-provider', (t: any) => {
     const message = t.context.message;
     message.provider = 'cheese';
 
     t.is(uptime(message, undefined, t.context.request), '[Invalid Provider]');
 });
 
-test('handles twitch', async t => {
+test('handles twitch', async (t: any) => {
     const message = t.context.message;
     message.channel.id = '269478385';
     message.provider = 'twitch';
@@ -28,7 +28,7 @@ test('handles twitch', async t => {
     t.is(await uptime(message, undefined, t.context.request), '[Channel Offline]');
 });
 
-test('handles mixer', async t => {
+test('handles mixer', async (t: any) => {
     const message = t.context.message;
     message.channel.id = 160788;
     message.provider = 'mixer';
@@ -39,7 +39,7 @@ test('handles mixer', async t => {
     t.is(await uptime(message, undefined, t.context.request), '[Channel Offline]');
 });
 
-test('handles smashcast', async t => {
+test('handles smashcast', async (t: any) => {
     const message = t.context.message;
     message.channel.id = '508632';
     message.provider = 'smashcast';

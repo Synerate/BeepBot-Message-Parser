@@ -1,4 +1,4 @@
-import { test } from 'ava';
+import test from 'ava';
 import { memoize } from 'decko';
 import * as fetch from 'isomorphic-fetch';
 
@@ -28,11 +28,11 @@ const parser = new Parser({
     },
 });
 
-test.beforeEach(t => {
+test.beforeEach((t: any) => {
     t.context = { request: (<any> memoize)(fetch) };
 });
 
-test('parse variable', async t => {
+test('parse variable', async (t: any) => {
     t.is(await variable.call(parser, mockMessage, mockSettings, t.context.request, 'cheese'), 1);
     t.is(await variable.call(parser, mockMessage, mockSettings, t.context.request, 'cheese', 'incr'), 2);
     t.is(await variable.call(parser, mockMessage, mockSettings, t.context.request, 'test', 'decr'), 1);

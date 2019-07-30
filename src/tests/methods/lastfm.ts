@@ -1,4 +1,4 @@
-import { test } from 'ava';
+import test from 'ava';
 import { memoize } from 'decko';
 import * as fetch from 'isomorphic-fetch';
 
@@ -36,58 +36,58 @@ const tracks: ITrack[] = [
     },
 ];
 
-test.beforeEach(t => {
+test.beforeEach((t: any) => {
     t.context = { request: (<any> memoize)(fetch) };
 });
 
-test('get tracks right', t => {
+test('get tracks right', (t: any) => {
     t.is(getTrack(tracks, '0'), tracks[0]);
     t.is(getTrack(tracks, '1'), tracks[1]);
 
     t.is(getTrack(tracks, '99'), tracks[0]);
 });
 
-test('parse song', async t => {
+test('parse song', async (t: any) => {
     const parsed = await lastfm(mockMessage, mockSettings, t.context.request, 'TestUser', 'song');
     t.is(parsed, 'Deadman\'s Gun');
 });
 
-test('parse artist', async t => {
+test('parse artist', async (t: any) => {
     const parsed = await lastfm(mockMessage, mockSettings, t.context.request, 'TestUser', 'artist');
     t.is(parsed, 'Ashtar Command');
 });
 
-test('parse link', async t => {
+test('parse link', async (t: any) => {
     const parsed = await lastfm(mockMessage, mockSettings, t.context.request, 'TestUser', 'link');
     t.is(parsed, 'https://www.last.fm/music/Ashtar+Command/_/Deadman%27s+Gun');
 });
 
-test('parse invalid user', async t => {
+test('parse invalid user', async (t: any) => {
     const parsed = await lastfm(mockMessage, mockSettings, t.context.request, 'aaddfwfsf');
     t.is(parsed, '[Invalid User]');
 });
 
-test('parse default', async t => {
+test('parse default', async (t: any) => {
     const parsed = await lastfm(mockMessage, mockSettings, t.context.request, 'TestUser');
     t.is(parsed, 'Deadman\'s Gun by Ashtar Command');
 });
 
-test('parse with when under set', async t => {
+test('parse with when under set', async (t: any) => {
     const parsed = await lastfm(mockMessage, mockSettings, t.context.request, 'TestUser', 'default', '-1');
     t.is(parsed, 'Deadman\'s Gun by Ashtar Command');
 });
 
-test('parse with when over set', async t => {
+test('parse with when over set', async (t: any) => {
     const parsed = await lastfm(mockMessage, mockSettings, t.context.request, 'TestUser', 'default', '15');
     t.is(parsed, 'Deadman\'s Gun by Ashtar Command');
 });
 
-test('parse with when over returned values', async t => {
+test('parse with when over returned values', async (t: any) => {
     const parsed = await lastfm(mockMessage, mockSettings, t.context.request, 'TestUser', 'default', '15');
     t.is(parsed, 'Deadman\'s Gun by Ashtar Command');
 });
 
-test('parse with when invalid', async t => {
+test('parse with when invalid', async (t: any) => {
     const parsed = await lastfm(mockMessage, mockSettings, t.context.request, 'TestUser', 'default', 'invalid');
     t.is(parsed, 'Deadman\'s Gun by Ashtar Command');
 });

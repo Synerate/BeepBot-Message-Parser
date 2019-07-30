@@ -1,13 +1,13 @@
-import { test } from 'ava';
+import test from 'ava';
 
 import { touser, user, userid } from '../../methods/users';
 import { mockMessage } from '../../mock';
 
-test('parse user', t => {
+test('parse user', (t: any) => {
     t.is(user(mockMessage), 'TestUser');
 });
 
-test('parse touser', t => {
+test('parse touser', (t: any) => {
     const message = mockMessage;
     message.message.args = ['!command', 'BeepBot'];
     t.is(touser(message), 'BeepBot');
@@ -19,7 +19,7 @@ test('parse touser', t => {
     t.not(touser(message), 'artdude543');
 });
 
-test('parse touser with tagging', t => {
+test('parse touser with tagging', (t: any) => {
     const message = mockMessage;
 
     message.message.args = ['!command', '@BeepBot'];
@@ -27,7 +27,7 @@ test('parse touser with tagging', t => {
     t.not(touser(message), '@BeepBot');
 });
 
-test('parse the userId', t => {
+test('parse the userId', (t: any) => {
     mockMessage.user.id = 587;
     t.is(userid(mockMessage), 587);
     t.not(user(mockMessage), 'artdude543');

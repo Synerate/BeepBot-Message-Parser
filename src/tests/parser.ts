@@ -1,4 +1,4 @@
-import { test } from 'ava';
+import test from 'ava';
 
 import { Parser } from '..';
 import { IMessage } from '../interface';
@@ -67,7 +67,7 @@ const messages: { input: string; message?: IMessage; output: string }[] = [
     },
 ];
 
-test('parse the messages', async t => {
+test('parse the messages', async (t: any) => {
     await Promise.all(messages.map(async msg => {
         let message = mockMessage;
         if (msg.message != null) {

@@ -1,4 +1,4 @@
-import { test } from 'ava';
+import test from 'ava';
 
 import { IAst, parser } from '../compiler/parser';
 import { ITokens } from '../compiler/tokenizer';
@@ -12,11 +12,11 @@ const ast: IAst = {
     type: 'Program',
 };
 
-test('traverser throws an invalid type', t => {
+test('traverser throws an invalid type', (t: any) => {
     t.throws(() => traverser(ast, {}), TypeError);
 });
 
-test('parser throws an invalid type', t => {
+test('parser throws an invalid type', (t: any) => {
     const tokens: ITokens[] = [
         {
             position: 1,

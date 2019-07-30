@@ -4,6 +4,8 @@
     "node_modules/tslint-microsoft-contrib"
   ],
   "rules": {
+    "completed-docs": false,
+    "no-void-expression": false,
     "no-implicit-dependencies": false,
     "no-null-keyword": false,
     // Basic

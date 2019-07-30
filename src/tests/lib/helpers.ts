@@ -1,14 +1,14 @@
-import { test } from 'ava';
+import test from 'ava';
 import * as fetch from 'isomorphic-fetch';
 
 import { getFromSimple, httpRequest } from '../../lib/helpers';
 
-test('invalid request should be null', async t => {
+test('invalid request should be null', async (t: any) => {
     const req = await httpRequest(fetch, 'https://mixer.com/api/v1/channels/^^%');
     t.is(req, undefined);
 });
 
-test('get the correct types from simple', t => {
+test('get the correct types from simple', (t: any) => {
     // Convert to the complex API values.
     t.is(getFromSimple('mixer', 'game'), 'type.name');
     t.is(getFromSimple('mixer', 'name'), 'token');
