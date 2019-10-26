@@ -35,6 +35,8 @@
     "no-parameter-properties": false,
     "no-unsafe-any": false,
     "newline-per-chained-call": false,
+    "no-console": false,
+    "max-line-length": false,
 
     // Basic w/ types
     "no-for-in-array": false, // These are disables as `--type-check` causes a crash with the angular compiler.

@@ -22,15 +22,22 @@ export async function extralife(_message: IMessage, _settings: any, request: typ
         return '[API Error]';
     }
 
-    switch (type) {
-        case 'goal':
-            return parseNum(req.sumDonations);
-        case 'total':
-            return `${parseNum(req.sumDonations)} (${totalPercentage(req.fundraisingGoal, req.sumDonations)}%)`;
-        case 'all':
-        default:
-            // tslint:disable-next-line: max-line-length
-            return `Raised: ${parseNum(req.sumDonations)} Goal: ${parseNum(req.fundraisingGoal)} (${totalPercentage(req.fundraisingGoal, req.sumDonations)}%)`;
+    try {
+        switch (type.toLowerCase()) {
+            case 'goal':
+                return parseNum(req.fundraisingGoal);
+            case 'raised':
+                return parseNum(req.sumDonations);
+            case 'total':
+                return `${parseNum(req.sumDonations)} (${totalPercentage(req.fundraisingGoal, req.sumDonations)}%)`;
+            case 'all':
+            default:
+                return `Raised: ${parseNum(req.sumDonations)} Goal: ${parseNum(req.fundraisingGoal)} (${totalPercentage(req.fundraisingGoal, req.sumDonations)}%)`;
+        }
+    } catch (err) {
+        console.error(err);
+
+        return '[Internal Error]';
     }
 }
 
