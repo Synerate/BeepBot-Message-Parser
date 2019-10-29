@@ -8,5 +8,10 @@ export type VarType = 'add' | 'incr' | '++' | 'rem' | 'remove' | 'decr' | '--' |
  */
 // tslint:disable-next-line: max-line-length
 export async function variable(this: Parser, message: IMessage, _settings: never, _request: never, varName: string, type: VarType, val: string = null) {
-    return this.opts.varCallback(message.channel.coreId, varName, type, val);
+    let shouldReset: boolean = false;
+    if (message.message.raw != null && message.message.raw.toLowerCase().includes('--reset')) {
+        shouldReset = true;
+    }
+
+    return this.opts.varCallback(message.channel.coreId, varName, type, val, shouldReset);
 }

@@ -13,7 +13,7 @@ import { methods } from './methods';
 import { VarType } from './methods/variable';
 
 export interface IOpts {
-    varCallback(coreId: string, varName: string, type: VarType, val: string): Promise<number>;
+    varCallback(coreId: string, varName: string, type: VarType, val: string, reset: boolean): Promise<number>;
 }
 export { VarType } from './methods/variable';
 
