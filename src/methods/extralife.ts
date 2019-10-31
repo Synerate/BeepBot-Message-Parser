@@ -56,5 +56,5 @@ export function parseNum(num: number, thou = ',', dec = '.', sym = '$') {
 
 function totalPercentage(total: number, current: number) {
     // tslint:disable-next-line: binary-expression-operand-order
-    return ((100 * current) / total);
+    return Math.trunc(((100 * current) / total));
 }
