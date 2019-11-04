@@ -35,8 +35,6 @@ export async function extralife(_message: IMessage, _settings: any, request: typ
                 return `Raised: ${parseNum(req.sumDonations)} Goal: ${parseNum(req.fundraisingGoal)} (${totalPercentage(req.fundraisingGoal, req.sumDonations)}%)`;
         }
     } catch (err) {
-        console.error(err);
-
         return '[Internal Error]';
     }
 }

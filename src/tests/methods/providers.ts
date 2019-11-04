@@ -122,6 +122,4 @@ test('provider tests', async (t: any) => {
             t.is(req, toTest.result, `Provider: ${provider.provider} Expected: ${toTest.result} Got: ${req} Type: ${toTest.type}`);
         }));
     }));
-    const testMesage = { ...mockMessage, ...{channel: { id: 587, name: 'artdude543' }, provider: 'mixer'} };
-    console.error('Hullo', await costream(testMesage, mockSettings, t.context.request));
 });
