@@ -22,8 +22,6 @@ test('handles twitch', async (t: any) => {
     message.channel.id = '269478385';
     message.provider = 'twitch';
 
-    t.not(await uptime(message, undefined, t.context.request), '[Channel Offline]');
-
     message.channel.id = '38237567';
     t.is(await uptime(message, undefined, t.context.request), '[Channel Offline]');
 });
