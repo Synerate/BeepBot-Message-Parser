@@ -6,31 +6,31 @@
   "main": "js/index.js",
   "typings": "js/index.d.ts",
   "dependencies": {
-    "config": "^3.0.1",
+    "config": "^3.2.4",
     "countdown": "^2.6.0",
     "decko": "^1.2.0",
     "isomorphic-fetch": "^2.2.1",
     "js-yaml": "^3.13.1",
     "lodash": "^4.17.15",
-    "magic-string": "^0.25.3",
+    "magic-string": "^0.25.4",
     "moment": "^2.24.0",
-    "moment-timezone": "^0.5.26"
+    "moment-timezone": "^0.5.27"
   },
   "devDependencies": {
-    "@types/config": "0.0.34",
+    "@types/config": "0.0.35",
     "@types/countdown": "^0.0.7",
     "@types/isomorphic-fetch": "0.0.35",
-    "@types/lodash": "^4.14.136",
+    "@types/lodash": "^4.14.144",
     "@types/moment-timezone": "^0.5.12",
-    "@types/node": "^12.6.8",
+    "@types/node": "^12.12.5",
     "@types/source-map-support": "^0.5.0",
     "ava": "^2.2.0",
     "coveralls": "^3.0.5",
     "nyc": "^14.1.1",
-    "source-map-support": "^0.5.12",
+    "source-map-support": "^0.5.16",
     "tslint": "^5.18.0",
     "tslint-microsoft-contrib": "^6.2.0",
-    "typescript": "^3.5.3"
+    "typescript": "^3.6.4"
   },
   "scripts": {
     "test": "tsc && nyc ava",
@@ -55,6 +55,7 @@
   "ava": {
     "files": [
       "./js/tests/**/*.js"
-    ]
+    ],
+    "verbose": true
   }
 }
