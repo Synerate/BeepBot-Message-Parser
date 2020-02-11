@@ -29,3 +29,16 @@ export function incr(_message: IMessage, _settings: ISetting, _request: typeof f
 
     return `${Number(base) + Number(val)}`;
 }
+
+export function arg(message: IMessage, _settings: ISetting, _request: typeof fetch, index: string) {
+    if (isNaN(Number(index))) {
+        return '[Index is not a number]';
+    }
+
+    const hasArg = message.message.args[Number(index)];
+    if (hasArg == null) {
+        return '';
+    }
+
+    return hasArg;
+}

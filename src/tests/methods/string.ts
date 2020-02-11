@@ -1,6 +1,6 @@
 import test from 'ava';
 
-import { incr, query, randomnum } from '../../methods/string';
+import { arg, incr, query, randomnum } from '../../methods/string';
 import { mockMessage, mockSettings } from '../../mock';
 
 test('parse query', (t: any) => {
@@ -19,4 +19,9 @@ test('parse an incr', (t: any) => {
     t.is(incr(mockMessage, mockSettings, undefined, '10', '100'), '110');
     t.is(incr(mockMessage, mockSettings, undefined, 'test', '100'), '[Base or Val needs to be a number]');
     t.is(incr(mockMessage, mockSettings, undefined, '10', 'test'), '[Base or Val needs to be a number]');
+});
+
+test('parse an arg', (t: any) => {
+    t.is(arg(mockMessage, mockSettings, undefined, '1'), 'the');
+    t.not(arg(mockMessage, mockSettings, undefined, '0'), 'parser!');
 });
