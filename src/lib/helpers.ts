@@ -46,6 +46,7 @@ const providerMapping = {
         title: 'livestream.0.media_status',
     },
     twitch: {
+        game: 'game',
         name: 'display_name',
         title: 'status',
     },
