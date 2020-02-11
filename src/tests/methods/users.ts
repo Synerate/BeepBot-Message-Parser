@@ -19,6 +19,15 @@ test('parse touser', (t: any) => {
     t.not(touser(message), 'artdude543');
 });
 
+test('parser touser for discord', (t: any) => {
+    const message = mockMessage;
+
+    message.provider = 'discord';
+    message.user.id = '489137472362512378';
+    t.is(touser(message), '<@489137472362512378>');
+    t.not(touser(message), 'artdude543');
+});
+
 test('parse touser with tagging', (t: any) => {
     const message = mockMessage;
 

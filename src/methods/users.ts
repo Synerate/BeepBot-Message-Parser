@@ -10,6 +10,10 @@ export function touser(message: IMessage) {
         return removeTag(message.message.args[1]);
     }
 
+    if (message.provider === 'discord') {
+        return `<@${message.user.id}>`;
+    }
+
     return message.user.name;
 }
 
