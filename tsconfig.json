@@ -10,6 +10,7 @@
     "outDir": "js",
     "sourceMap": true,
     "pretty": true,
+    "skipLibCheck": true,
     "typeRoots": [
       "node_modules/@types"
     ],
