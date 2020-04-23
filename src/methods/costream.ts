@@ -57,7 +57,7 @@ async function getData(request: typeof fetch, provider: string, channelId: strin
                 return '[API Error]';
             }
 
-            return mcost.channels.filter(channel => channel.id.toString() !== channelId).map(channel => {
+            return mcost.channels.map(channel => {
                 if (showLinks) {
                     return `${channel.token} (${config.get<string>('providers.mixer.base')}${channel.token})`;
                 }
