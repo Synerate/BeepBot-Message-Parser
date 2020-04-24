@@ -72,6 +72,10 @@ export class Parser {
      * Handle an expression and return the generated value to be replaced.
      */
     private async handle(cache: typeof fetch, message: IMessage, settings: ISetting, text: string, args: string[] = []): Promise<string> {
+        if (methods[text.toLowerCase()] == null) {
+            return;
+        }
+
         return methods[text.toLowerCase()].call(this, message, settings, cache, ...args);
     }
 }
