@@ -90,6 +90,10 @@ export function isValueValid(value: any): boolean {
  * Remove common tags from a user/channel name.
  */
 export function removeTag(user: string) {
+    if (user == null) {
+        return '';
+    }
+
     return user.replace('#', '')
         .replace('@', '');
 }
