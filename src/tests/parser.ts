@@ -11,6 +11,9 @@ const testVars: { [name: string]: number } = {
 };
 
 const parser = new Parser({
+    oauth: {
+        twitch: null,
+    },
     varCallback: async (_coreId: string, varName: string, type: VarType) => {
         const val = testVars[varName.toLowerCase()];
         switch (type) {

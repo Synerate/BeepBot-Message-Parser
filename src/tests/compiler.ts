@@ -13,7 +13,7 @@ const ast: IAst = {
 };
 
 test('traverser throws an invalid type', (t: any) => {
-    t.throws(() => traverser(ast, {}), TypeError);
+    t.throws(() => traverser(ast, {}), { instanceOf: TypeError });
 });
 
 test('parser throws an invalid type', (t: any) => {
@@ -29,5 +29,5 @@ test('parser throws an invalid type', (t: any) => {
             value: 'Test',
         },
     ];
-    t.throws(() => parser(tokens), TypeError);
+    t.throws(() => parser(tokens), { instanceOf: TypeError });
 });

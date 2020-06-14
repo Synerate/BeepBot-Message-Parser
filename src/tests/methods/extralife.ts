@@ -3,8 +3,8 @@ import { memoize } from 'decko';
 import * as fetch from 'isomorphic-fetch';
 import { cloneDeep } from 'lodash';
 
-import { extralife, parseNum } from '../../methods/extralife';
-import { mockMessage } from '../../mock';
+import { extralife } from '../../methods/extralife';
+import { mockMessage, mockOpts } from '../../mock';
 
 test.beforeEach('create a new mockMessage', (t: any) => {
     t.context = { message: cloneDeep(mockMessage), request: (<any> memoize)(fetch) };
@@ -13,8 +13,8 @@ test.beforeEach('create a new mockMessage', (t: any) => {
 test('parse an extralife page', async (t: any) => {
     const message = t.context.message;
 
-    t.not(await extralife(message, null, t.context.request, '400850'), '[API Error]');
-    t.not(await extralife(message, null, t.context.request, '400850', 'goal'), '[API Error]');
-    t.not(await extralife(message, null, t.context.request, '400850', 'total'), '[API Error]');
-    t.is(await extralife(message, null, t.context.request, 'should_error', 'total'), '[API Error]');
+    t.not(await extralife(message, null, t.context.request, mockOpts, '400850'), '[API Error]');
+    t.not(await extralife(message, null, t.context.request, mockOpts, '400850', 'goal'), '[API Error]');
+    t.not(await extralife(message, null, t.context.request, mockOpts, '400850', 'total'), '[API Error]');
+    t.is(await extralife(message, null, t.context.request, mockOpts, 'should_error', 'total'), '[API Error]');
 });

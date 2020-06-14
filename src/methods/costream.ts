@@ -1,5 +1,6 @@
 import * as config from 'config';
 
+import { IOpts } from '..';
 import { IMessage } from '../interface';
 import { httpRequest } from '../lib/helpers';
 
@@ -13,7 +14,7 @@ interface ICoStream {
     }[];
 }
 
-export async function costream(message: IMessage, _settings: any, request: typeof fetch, withLinks: string = 'true') {
+export async function costream(message: IMessage, _settings: any, request: typeof fetch, opts: IOpts['oauth'], withLinks: string = 'true') {
     if (!supportedProviders.includes(message.provider.toLowerCase())) {
         return '[Non-Supported Provider]';
     }

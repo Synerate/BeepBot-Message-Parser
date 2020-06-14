@@ -1,3 +1,4 @@
+import { IOpts } from '.';
 import { IMessage, ISetting } from './interface';
 
 export const mockMessage: IMessage = {
@@ -18,4 +19,8 @@ export const mockMessage: IMessage = {
 
 export const mockSettings: ISetting = {
     timezone: 'Europe/London',
+};
+
+export const mockOpts: IOpts['oauth'] = {
+    twitch: null,
 };

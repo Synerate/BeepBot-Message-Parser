@@ -3,11 +3,9 @@ import { memoize } from 'decko';
 import * as fetch from 'isomorphic-fetch';
 
 import { IMessage } from '../../interface';
-import { costream } from '../../methods/costream';
 import { mixer } from '../../methods/mixer';
 import { smashcast } from '../../methods/smashcast';
-import { twitch } from '../../methods/twitch';
-import { mockMessage, mockSettings } from '../../mock';
+import { mockMessage, mockOpts, mockSettings } from '../../mock';
 
 interface ITest {
     provider: string;
@@ -21,34 +19,6 @@ interface ITest {
 }
 
 const providers: ITest[] = [
-     {
-         message: { ...mockMessage,  channel: { id: 36297622, name: '' }, provider: 'twitch' },
-         method: twitch,
-         provider: 'twitch',
-         tests: [
-             {
-                 result: '[Type Not Found]',
-                 type: 'invalid',
-             },
-             {
-                 channel: 'invalid_channel_test',
-                 result: '[API Error]',
-                 type: 'token',
-             },
-             {
-                 result: 'artdude543',
-                 type: 'display_name',
-             },
-             {
-                 result: 'https://www.twitch.tv/artdude543',
-                 type: 'url',
-             },
-             {
-                 result: '[Return Value Invalid]',
-                 type: 'profile_banner_background_color',
-             },
-         ],
-     },
      {
          message: {...mockMessage,  channel: { id: 587, name: '' }, provider: 'mixer', user: { id: 693, name: '' }},
          method: mixer,
@@ -118,7 +88,7 @@ test('provider tests', async (t: any) => {
             if (toTest.channel != null) {
                 message.channel.id = toTest.channel;
             }
-            const req = await provider.method(message, mockSettings, t.context.request, toTest.type, toTest.channel);
+            const req = await provider.method(message, mockSettings, t.context.request, mockOpts, toTest.type, toTest.channel);
             t.is(req, toTest.result, `Provider: ${provider.provider} Expected: ${toTest.result} Got: ${req} Type: ${toTest.type}`);
         }));
     }));

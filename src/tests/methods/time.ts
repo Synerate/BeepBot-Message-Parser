@@ -3,7 +3,7 @@ import { memoize } from 'decko';
 import * as fetch from 'isomorphic-fetch';
 
 import { time } from '../../methods/time';
-import { mockMessage, mockSettings } from '../../mock';
+import { mockMessage, mockOpts, mockSettings } from '../../mock';
 
 test.beforeEach((t: any) => {
     t.context = { request: (<any> memoize)(fetch) };
@@ -11,15 +11,15 @@ test.beforeEach((t: any) => {
 
 test('parse an invalid timezone.', (t: any) => {
     mockSettings.timezone = 'Invalid';
-    t.is(time(mockMessage, mockSettings, t.context.request), '[Invalid Timezone]');
+    t.is(time(mockMessage, mockSettings, t.context.request, mockOpts), '[Invalid Timezone]');
 });
 
 test('parse with format options', (t: any) => {
     mockSettings.timezone = 'Europe/London';
-    t.notThrows(() => time(mockMessage, mockSettings, t.context.request, 'Europe/London', 'ha z'));
+    t.notThrows(() => time(mockMessage, mockSettings, t.context.request, mockOpts, 'Europe/London', 'ha z'));
 });
 
 test('parse with out format options', (t: any) => {
     mockSettings.timezone = 'Europe/London';
-    t.notThrows(() => time(mockMessage, mockSettings, t.context.request, 'Europe/London'));
+    t.notThrows(() => time(mockMessage, mockSettings, t.context.request, mockOpts, 'Europe/London'));
 });

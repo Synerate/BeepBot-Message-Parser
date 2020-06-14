@@ -7,7 +7,7 @@
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "declaration": true,
-    "outDir": "js",
+    "outDir": "dist",
     "sourceMap": true,
     "pretty": true,
     "skipLibCheck": true,
@@ -25,7 +25,7 @@
   },
   "exclude": [
     "tests",
-    "js",
+    "dist",
     "node_modules"
   ]
 }

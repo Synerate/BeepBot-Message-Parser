@@ -2,6 +2,7 @@ import * as config from 'config';
 import * as countdown from 'countdown';
 import * as moment from 'moment';
 
+import { IOpts } from '..';
 import { IMessage, ISetting } from '../interface';
 import { httpRequest } from '../lib/helpers';
 
@@ -34,8 +35,9 @@ const providers = {
     /**
      * Get the uptime for a Twitch channel.
      */
-    twitch: async (request: typeof fetch, channelId: string | number): Promise<any> => {
+    twitch: async (request: typeof fetch, channelId: string | number, opts: IOpts['oauth']): Promise<any> => {
         const headers = {
+            Authorization: `OAuth ${opts.twitch}`,
             'Client-ID': config.get<string>('providers.twitch.clientId'),
         };
         const req = await httpRequest(request, `${config.get<string>('providers.twitch.api')}helix/streams?user_id=${channelId}`, headers);
@@ -52,10 +54,10 @@ const providers = {
  *
  * @Optional: Accepts a channel Id to check. Needs to match the ID for the provider which the command is ran from.
  */
-export function uptime(message: IMessage, _settings: ISetting, request: typeof fetch, channelId: string | number = message.channel.id) {
+export function uptime(message: IMessage, _settings: ISetting, request: typeof fetch, opts: IOpts['oauth'], channelId: string | number = message.channel.id) {
     if (providers[message.provider.toLowerCase()] === undefined) {
         return '[Invalid Provider]';
     }
 
-    return providers[message.provider.toLowerCase()](request, channelId);
+    return providers[message.provider.toLowerCase()](request, channelId, opts);
 }

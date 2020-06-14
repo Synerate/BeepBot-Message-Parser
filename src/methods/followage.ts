@@ -2,8 +2,16 @@ import * as config from 'config';
 import * as countdown from 'countdown';
 import * as moment from 'moment';
 
+import { Parser } from '..';
 import { IMessage } from '../interface';
 import { httpRequest } from '../lib/helpers';
+
+function getTwitchHeaders(token: string) {
+    return {
+        Authorization: `OAuth ${token}`,
+        'Client-ID': config.get<string>('providers.twitch.clientId'),
+    };
+}
 
 export const methods = {
     mixer: async (request: typeof fetch, channelId: number, userId: number): Promise<string> => {
@@ -19,10 +27,10 @@ export const methods = {
 
         return countdown(new Date(), moment(req.status.follows.createdAt).toDate()).toString();
     },
-    twitch: async (request: typeof fetch, channelId: string, userId: string): Promise<string> => {
+    twitch: async (request: typeof fetch, channelId: string, userId: string, parser: Parser): Promise<string> => {
         const req = await httpRequest(request,
                                       `${config.get<string>('providers.twitch.api')}helix/users/follows?from_id=${userId}&to_id=${channelId}`,
-                                      { 'Client-ID': config.get<string>('providers.twitch.clientId') });
+                                      getTwitchHeaders(parser.opts.oauth.twitch));
         if (req == null) {
             return '[API Error]';
         }
@@ -34,10 +42,10 @@ export const methods = {
     },
 };
 
-export async function followage(message: IMessage, _settings: undefined, request: typeof fetch) {
+export async function followage(this: Parser, message: IMessage, _settings: undefined, request: typeof fetch) {
     if (methods[message.provider.toLowerCase()] == null) {
         return '[API Error]';
     }
 
-    return methods[message.provider.toLowerCase()](request, message.channel.id, message.user.id);
+    return methods[message.provider.toLowerCase()](request, message.channel.id, message.user.id, this);
 }

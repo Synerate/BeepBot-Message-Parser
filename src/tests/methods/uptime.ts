@@ -4,7 +4,7 @@ import * as fetch from 'isomorphic-fetch';
 import { cloneDeep } from 'lodash';
 
 import { uptime } from '../../methods/uptime';
-import { mockMessage } from '../../mock';
+import { mockMessage, mockOpts } from '../../mock';
 
 test.beforeEach('create a new mockMessage', (t: any) => {
     t.context = { message: cloneDeep(mockMessage), request: (<any> memoize)(fetch) };
@@ -14,7 +14,7 @@ test('handles a bad-provider', (t: any) => {
     const message = t.context.message;
     message.provider = 'cheese';
 
-    t.is(uptime(message, undefined, t.context.request), '[Invalid Provider]');
+    t.is(uptime(message, undefined, t.context.request, mockOpts), '[Invalid Provider]');
 });
 
 test('handles twitch', async (t: any) => {
@@ -23,7 +23,7 @@ test('handles twitch', async (t: any) => {
     message.provider = 'twitch';
 
     message.channel.id = '38237567';
-    t.is(await uptime(message, undefined, t.context.request), '[Channel Offline]');
+    t.is(await uptime(message, undefined, t.context.request, mockOpts), '[Channel Offline]');
 });
 
 test('handles mixer', async (t: any) => {
@@ -31,21 +31,21 @@ test('handles mixer', async (t: any) => {
     message.channel.id = 160788;
     message.provider = 'mixer';
 
-    t.not(await uptime(message, undefined, t.context.request), '[Channel Offline]');
+    t.not(await uptime(message, undefined, t.context.request, mockOpts), '[Channel Offline]');
 
     message.channel.id = 2230;
-    t.is(await uptime(message, undefined, t.context.request), '[Channel Offline]');
+    t.is(await uptime(message, undefined, t.context.request, mockOpts), '[Channel Offline]');
 });
 
 test('handles smashcast', async (t: any) => {
     const message = t.context.message;
     message.channel.id = '508632';
     message.provider = 'smashcast';
-    t.not(await uptime(message, undefined, t.context.request), '[Channel Offline]');
+    t.not(await uptime(message, undefined, t.context.request, mockOpts), '[Channel Offline]');
 
     message.channel.id = 'undefinednull';
-    t.is(await uptime(message, undefined, t.context.request), '[Channel Offline]');
+    t.is(await uptime(message, undefined, t.context.request, mockOpts), '[Channel Offline]');
 
     message.channel.id = '708419';
-    t.is(await uptime(message, undefined, t.context.request), '[Channel Offline]');
+    t.is(await uptime(message, undefined, t.context.request, mockOpts), '[Channel Offline]');
 });

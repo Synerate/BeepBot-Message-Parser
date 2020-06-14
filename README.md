@@ -3,7 +3,7 @@
 A simple message parser for making complex problems so simple.
 
 [![npm version](https://badge.fury.io/js/beepbot-message-parser.svg)](https://badge.fury.io/js/beepbot-message-parser)
-[![Build Status](https://travis-ci.org/ExoZoneDev/beepbot-message-parser.svg?branch=master)](https://travis-ci.org/ExoZoneDev/beepbot-message-parser)
+[![Build Status](https://travis-ci.com/Nydardoric/Beepbot-Message-Parser.svg?branch=master)](https://travis-ci.com/Nydardoric/Beepbot-Message-Parser)
 
 # Introduction
 

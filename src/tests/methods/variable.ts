@@ -4,7 +4,7 @@ import * as fetch from 'isomorphic-fetch';
 
 import { Parser } from '../..';
 import { variable, VarType } from '../../methods/variable';
-import { mockMessage, mockSettings } from '../../mock';
+import { mockMessage, mockOpts, mockSettings } from '../../mock';
 
 const testVars: { [name: string]: number } = {
     cheese: 1,
@@ -12,6 +12,9 @@ const testVars: { [name: string]: number } = {
 };
 
 const parser = new Parser({
+    oauth: {
+        twitch: null,
+    },
     varCallback: async (_coreId: string, varName: string, type: VarType) => {
         const val = testVars[varName.toLowerCase()];
         if (testVars[varName.toLowerCase()] === undefined) {
@@ -33,8 +36,14 @@ test.beforeEach((t: any) => {
 });
 
 test('parse variable', async (t: any) => {
-    t.is(await variable.call(parser, mockMessage, mockSettings, t.context.request, 'cheese'), 1);
-    t.is(await variable.call(parser, mockMessage, mockSettings, t.context.request, 'cheese', 'incr'), 2);
-    t.is(await variable.call(parser, mockMessage, mockSettings, t.context.request, 'test', 'decr'), 1);
-    t.is(await variable.call(parser, mockMessage, mockSettings, t.context.request, 'random'), 1);
+    t.is(await variable.call(parser, mockMessage, mockSettings, t.context.request, mockOpts, 'cheese'), 1);
+    t.is(await variable.call(parser, mockMessage, mockSettings, t.context.request, mockOpts, 'cheese', 'incr'), 2);
+    t.is(await variable.call(parser, mockMessage, mockSettings, t.context.request, mockOpts, 'test', 'decr'), 1);
+    t.is(await variable.call(parser, mockMessage, mockSettings, t.context.request, mockOpts, 'random'), 1);
+});
+
+test('handle reset', async (t: any) => {
+    mockMessage.message.raw = '!var test --reset';
+
+    t.is(await variable.call(parser, mockMessage, mockSettings, t.context.request, mockOpts, 'cheese'), 1);
 });

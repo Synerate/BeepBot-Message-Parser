@@ -1,7 +1,7 @@
 import test from 'ava';
 import * as fetch from 'isomorphic-fetch';
 
-import { getFromSimple, httpRequest } from '../../lib/helpers';
+import { getFromSimple, httpRequest, removeTag } from '../../lib/helpers';
 
 test('invalid request should be null', async (t: any) => {
     const req = await httpRequest(fetch, 'https://mixer.com/api/v1/channels/^^%');
@@ -19,5 +19,10 @@ test('get the correct types from simple', (t: any) => {
     t.is(getFromSimple('twitch', 'viewers'), 'viewers');
 
     // Throw on invalid platform.
-    t.throws(() => getFromSimple('hitbox', 'game'), TypeError);
+    t.throws(() => getFromSimple('hitbox', 'game'), { instanceOf: TypeError });
+});
+
+test('remove tab', (t: any) => {
+    t.is(removeTag('#artdude543'), 'artdude543');
+    t.is(removeTag(undefined), '');
 });

@@ -1,5 +1,6 @@
 import * as config from 'config';
 
+import { IOpts } from '..';
 import { IMessage, ISetting } from '../interface';
 import { removeTag } from '../lib/helpers';
 import { mixer } from './mixer';
@@ -16,7 +17,7 @@ export function streamer(message: IMessage) {
     return message.channel.name;
 }
 
-export function stream(message: IMessage, _settings: ISetting, _cache: typeof fetch, channel: string = message.channel.name) {
+export function stream(message: IMessage, _settings: ISetting, _cache: typeof fetch, opts: IOpts['oauth'], channel: string = message.channel.name) {
     if (config.has(`providers.${message.provider.toLowerCase()}.base`) === false) {
         return '[Invalid Provider]';
     }
@@ -27,23 +28,23 @@ export function stream(message: IMessage, _settings: ISetting, _cache: typeof fe
 /**
  * Get the current title of the stream.
  */
-export function title(message: IMessage, settings: ISetting, cache: typeof fetch) {
+export function title(message: IMessage, settings: ISetting, cache: typeof fetch, opts: IOpts['oauth'], channel: string = message.channel.name) {
     if (providers[message.provider.toLowerCase()] === undefined) {
         return '[Invalid Provider]';
     }
 
-    return providers[message.provider.toLowerCase()](message, settings, cache, 'title', message.channel.id);
+    return providers[message.provider.toLowerCase()](message, settings, cache, opts, 'title', channel);
 }
 
 /**
  * Get the current game/category being streamed.
  */
-export function game(message: IMessage, settings: ISetting, cache: typeof fetch) {
+export function game(message: IMessage, settings: ISetting, cache: typeof fetch, opts: IOpts['oauth'], channel: string = message.channel.name) {
     if (providers[message.provider.toLowerCase()] === undefined) {
         return '[Invalid Provider]';
     }
 
-    return providers[message.provider.toLowerCase()](message, settings, cache, 'game', message.channel.id);
+    return providers[message.provider.toLowerCase()](message, settings, cache, opts, 'game', channel);
 }
 
 /**

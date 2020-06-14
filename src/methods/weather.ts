@@ -1,6 +1,7 @@
 import * as config from 'config';
 import { stringify } from 'querystring';
 
+import { IOpts } from '..';
 import { IMessage, ISetting } from '../interface';
 import { httpRequest } from '../lib/helpers';
 
@@ -33,13 +34,13 @@ export function getDirection(deg: number) {
     return directions[(value % 16)];
 }
 
-export async function weather(_message: IMessage, _settings: ISetting, request: typeof fetch, region: string) {
-    const opts = {
+export async function weather(_message: IMessage, _settings: ISetting, request: typeof fetch, opts: IOpts['oauth'], region: string) {
+    const reqOpts = {
         appid: config.get<string>('api.weather.key'),
         q: region,
         units: 'metric',
     };
-    const req: IWeather = await httpRequest(request, `${config.get<string>('api.weather.base')}?${stringify(opts)}`);
+    const req: IWeather = await httpRequest(request, `${config.get<string>('api.weather.base')}?${stringify(reqOpts)}`);
     if (req === undefined) {
         return '[API Error]';
     }
