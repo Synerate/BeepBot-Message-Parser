@@ -6,8 +6,13 @@ import { Parser } from '..';
 import { IMessage } from '../interface';
 
 export const methods = {
-    twitch: async (parser: Parser, channelId: string, userId: string, coreId: string): Promise<string> => {
-        const res = await parser.opts.reqCallback(`${config.get<string>('providers.twitch.api')}helix/users/follows?from_id=${userId}&to_id=${channelId}`, 'GET', coreId);
+    twitch: async (parser: Parser, channelId: string, userId: string, coreId: string, serviceId: string): Promise<string> => {
+        const res = await parser.opts.reqCallback(
+            `${config.get<string>('providers.twitch.api')}helix/users/follows?from_id=${userId}&to_id=${channelId}`, {
+                coreId,
+                method: 'GET',
+                serviceId,
+            });
         if (res == null) {
             return '[API Error]';
         }
@@ -25,5 +30,5 @@ export async function followage(this: Parser, message: IMessage) {
         return '[Not Supported]';
     }
 
-    return methods[message.provider.toLowerCase()](this, message.channel.id, message.user.id, message.channel.coreId);
+    return methods[message.provider.toLowerCase()](this, message.channel.id, message.user.id, message.channel.coreId, message.channel.serviceId);
 }

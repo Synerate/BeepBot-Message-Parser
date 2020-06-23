@@ -8,6 +8,10 @@ export interface IMessage {
          * I.E. So we know what channel a var belongs too w/o having to convert the provider Id to the backend Id.
          */
         coreId?: string;
+        /**
+         * Service Id for the provider service.
+         */
+        serviceId?: string;
     };
     /**
      * The provider when the message came from. I.E. Twitch etc...
