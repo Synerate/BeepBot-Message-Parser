@@ -35,16 +35,6 @@ export async function httpRequest<T>(request: typeof fetch, uri: string, headers
  * API to get the response in the first place.
  */
 const providerMapping = {
-    mixer: {
-        game: 'type.name',
-        name: 'token',
-        title: 'name',
-    },
-    smashcast: {
-        game: 'livestream.0.category_name',
-        name: 'livestream.0.media_display_name',
-        title: 'livestream.0.media_status',
-    },
     twitch: {
         game: 'game',
         name: 'display_name',
@@ -57,10 +47,6 @@ const providerMapping = {
  * This will then convert the "short/easy" name given to the actual name on the response.
  *
  * This way the users don't have to remember or look at the APIs to get the correct naming.
- *
- * I.E.
- *  Mixer: title -> name
- *        game -> type.name
  */
 export function getFromSimple(provider: string, toPick: string): string {
     if (providerMapping[provider.toLowerCase()] === undefined) {

@@ -1,17 +1,9 @@
 # Provider Configs.
 providers:
-    mixer:
-        base: 'https://mixer.com/'
-        api: 'https://mixer.com/api/v1/'
-        clientId: ''
     twitch:
         base: 'https://twitch.tv/'
         api: 'https://api.twitch.tv/'
         clientId: ''
-    smashcast:
-        base: 'https://www.smashcast.tv/'
-        api: 'https://api.smashcast.tv/'
-
 # API Configs.
 api:
     exozone:

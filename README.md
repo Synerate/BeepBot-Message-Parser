@@ -51,9 +51,6 @@ run(channelMessage, channelSettings, input)
 // Get the current user.
 let input = 'I am {user}' // I am TestUser
 
-// Get the current title from Mixer.
-let input = 'Streaming: {mixer name}' // Streaming: Overwatch Derping
-
 // Get the current song that a user is scrobbling.
 let input = 'Now Playing: {lastfm artdude543}' // Now Playing: Hunter by Galantis
 ```

@@ -3,9 +3,7 @@ import { costream } from './costream';
 import { extralife } from './extralife';
 import { followage } from './followage';
 import { lastfm } from './lastfm';
-import { mixer } from './mixer';
 import { pretzel } from './pretzel';
-import { smashcast } from './smashcast';
 import * as str from './string';
 import { time } from './time';
 import { twitch } from './twitch';
@@ -20,9 +18,7 @@ export const methods = {
     extralife,
     followage,
     lastfm,
-    mixer,
     pretzel,
-    smashcast,
     ...str,
     time,
     twitch,

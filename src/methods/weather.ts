@@ -1,7 +1,6 @@
 import * as config from 'config';
 import { stringify } from 'querystring';
 
-import { IOpts } from '..';
 import { IMessage, ISetting } from '../interface';
 import { httpRequest } from '../lib/helpers';
 
@@ -34,7 +33,7 @@ export function getDirection(deg: number) {
     return directions[(value % 16)];
 }
 
-export async function weather(_message: IMessage, _settings: ISetting, request: typeof fetch, opts: IOpts['oauth'], region: string) {
+export async function weather(_message: IMessage, _settings: ISetting, request: typeof fetch, region: string) {
     const reqOpts = {
         appid: config.get<string>('api.weather.key'),
         q: region,

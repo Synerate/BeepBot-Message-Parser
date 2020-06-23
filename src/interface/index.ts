@@ -10,7 +10,7 @@ export interface IMessage {
         coreId?: string;
     };
     /**
-     * The provider when the message came from. I.E. Mixer/Twitch etc...
+     * The provider when the message came from. I.E. Twitch etc...
      */
     provider: string;
     message: {

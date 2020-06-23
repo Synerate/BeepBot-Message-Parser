@@ -1,4 +1,4 @@
-import { IOpts, Parser } from '..';
+import { Parser } from '..';
 import { IMessage } from '../interface';
 
 export type VarType = 'add' | 'incr' | '++' | 'rem' | 'remove' | 'decr' | '--' | 'set';
@@ -7,7 +7,7 @@ export type VarType = 'add' | 'incr' | '++' | 'rem' | 'remove' | 'decr' | '--' |
  * Process a variable argument in a message. This will call upon a callback (passed on constructor) to get a new value for the variable.
  */
 // tslint:disable-next-line: max-line-length
-export async function variable(this: Parser, message: IMessage, _settings: never, _request: never, opts: IOpts['oauth'], varName: string, type: VarType, val: string = null) {
+export async function variable(this: Parser, message: IMessage, _settings: never, _request: never, varName: string, type: VarType, val: string = null) {
     let shouldReset: boolean = false;
     if (message.message.raw != null && message.message.raw.toLowerCase().includes('--reset')) {
         shouldReset = true;

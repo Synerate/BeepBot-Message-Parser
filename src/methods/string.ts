@@ -1,6 +1,5 @@
 import { random } from 'lodash';
 
-import { IOpts } from '..';
 import { IMessage, ISetting } from '../interface';
 
 export function query(message: IMessage) {
@@ -8,7 +7,7 @@ export function query(message: IMessage) {
         .join(' ');
 }
 
-export function randomnum(_message: IMessage, _settings: ISetting, _request: typeof fetch, opts: IOpts['oauth'], min: string, max: string) {
+export function randomnum(_message: IMessage, _settings: ISetting, _request: typeof fetch, min: string, max: string) {
     if (isNaN(Number(min)) || isNaN(Number(max))) {
         return '[Min or Max needs to be a number]';
     }
@@ -23,7 +22,7 @@ export function randomnum(_message: IMessage, _settings: ISetting, _request: typ
         .toString();
 }
 
-export function incr(_message: IMessage, _settings: ISetting, _request: typeof fetch, opts: IOpts['oauth'], base: string, val: string) {
+export function incr(_message: IMessage, _settings: ISetting, _request: typeof fetch, base: string, val: string) {
     if (isNaN(Number(base)) || isNaN(Number(val))) {
         return '[Base or Val needs to be a number]';
     }
@@ -31,7 +30,7 @@ export function incr(_message: IMessage, _settings: ISetting, _request: typeof f
     return `${Number(base) + Number(val)}`;
 }
 
-export function arg(message: IMessage, _settings: ISetting, _request: typeof fetch, opts: IOpts['oauth'], index: string) {
+export function arg(message: IMessage, _settings: ISetting, _request: typeof fetch, index: string) {
     if (isNaN(Number(index))) {
         return '[Index is not a number]';
     }

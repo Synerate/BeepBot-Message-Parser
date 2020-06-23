@@ -1,7 +1,6 @@
 import * as config from 'config';
 import { stringify } from 'querystring';
 
-import { IOpts } from '..';
 import { IMessage, ISetting } from '../interface';
 import { httpRequest } from '../lib/helpers';
 
@@ -55,7 +54,7 @@ export function getTrack(tracks: ITrack[], when: string): ITrack {
  * Default: Returns the song name and artist.
  */
 // tslint:disable-next-line:max-line-length
-export async function lastfm(_message: IMessage, _settings: ISetting, request: typeof fetch, opts: IOpts['oauth'], user: string, type?: SongType, when: string = '0') {
+export async function lastfm(_message: IMessage, _settings: ISetting, request: typeof fetch, user: string, type?: SongType, when: string = '0') {
     const reqOpts = {
         api_key: config.get<string>('api.lastfm.key'),
         format: 'json',

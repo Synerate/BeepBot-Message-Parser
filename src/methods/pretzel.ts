@@ -1,13 +1,12 @@
 import * as config from 'config';
 
-import { IOpts } from '..';
 import { IMessage, ISetting } from '../interface';
 import { httpRequest } from '../lib/helpers';
 import { SongType } from './lastfm';
 
 const nowPlaying = /Now Playing: (.*) by (.*) -> (.*)/i;
 
-export async function pretzel(message: IMessage, _settings: ISetting, request: typeof fetch, opts: IOpts['oauth'], type: SongType = 'all', channel: string = message.channel.name, provider: string = message.provider) {
+export async function pretzel(message: IMessage, _settings: ISetting, request: typeof fetch, type: SongType = 'all', channel: string = message.channel.name, provider: string = message.provider) {
     const req: string = await httpRequest(request, `${config.get<string>('api.pretzel.base')}playing/${provider}/${channel}`);
     if (req === undefined) {
         return '[No Song Playing or Channel Not Found]';

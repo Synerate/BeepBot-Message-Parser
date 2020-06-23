@@ -14,6 +14,13 @@ import { VarType } from './methods/variable';
 
 export interface IOpts {
     /**
+     * Request callback to ask the provider to send a request and send the data back for the parser to use.
+     *
+     * @param uri The full path URI on to tell the provider on what to hit to get data needed.
+     * @returns Object/String data which is sent back from the relevant API service called. The method should then translate the data.
+     */
+    reqCallback(uri: string, method: string): Promise<any>;
+    /**
      * Variable callback to process any change(s).
      */
     varCallback(coreId: string, varName: string, type: VarType, val: string, reset: boolean): Promise<number>;
