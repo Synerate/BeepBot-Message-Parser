@@ -9,8 +9,8 @@ const providers = {
     /**
      * Get the uptime for a Twitch channel.
      */
-    twitch: async (parser: Parser, channelId: string | number): Promise<any> => {
-        const res = await parser.opts.reqCallback(`${config.get<string>('providers.twitch.api')}helix/streams?user_id=${channelId}`, 'GET');
+    twitch: async (parser: Parser, channelId: string | number, coreId: string): Promise<any> => {
+        const res = await parser.opts.reqCallback(`${config.get<string>('providers.twitch.api')}helix/streams?user_id=${channelId}`, 'GET', coreId);
         if (res == null || res.data.length === 0) {
             return '[Channel Offline]';
         }
@@ -29,5 +29,5 @@ export function uptime(this: Parser, message: IMessage, _settings: ISetting, _re
         return '[Invalid Provider]';
     }
 
-    return providers[message.provider.toLowerCase()](this, channelId);
+    return providers[message.provider.toLowerCase()](this, channelId, message.channel.coreId);
 }
