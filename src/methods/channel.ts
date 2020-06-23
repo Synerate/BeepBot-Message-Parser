@@ -24,23 +24,53 @@ export function stream(message: IMessage, _settings: ISetting, _cache: typeof fe
 /**
  * Get the current title of the stream.
  */
-export function title(this: Parser, message: IMessage, settings: ISetting, cache: typeof fetch, channel: string = message.channel.name) {
+export async function title(this: Parser, message: IMessage, settings: ISetting, cache: typeof fetch, channel = message.channel.id) {
     if (providers[message.provider.toLowerCase()] === undefined) {
         return '[Invalid Provider]';
     }
 
-    return providers[message.provider.toLowerCase()].call(this, message, settings, cache, 'title', channel);
+    let channelId: string = channel.toString();
+
+    if (isNaN(Number(channel))) {
+        const res = await this.opts.reqCallback(`https://api.twitch.tv/kraken/users?login=${channel}`, {
+            coreId: message.channel.coreId,
+            method: 'GET',
+            serviceId: message.channel.serviceId,
+        });
+        if (res == null) {
+            return '[API Error]';
+        }
+
+        channelId = res.users[0]._id;
+    }
+
+    return providers[message.provider.toLowerCase()].call(this, message, settings, cache, 'title', channelId);
 }
 
 /**
  * Get the current game/category being streamed.
  */
-export function game(this: Parser, message: IMessage, settings: ISetting, cache: typeof fetch, channel: string = message.channel.name) {
+export async function game(this: Parser, message: IMessage, settings: ISetting, cache: typeof fetch, channel = message.channel.id) {
     if (providers[message.provider.toLowerCase()] === undefined) {
         return '[Invalid Provider]';
     }
 
-    return providers[message.provider.toLowerCase()].call(this, message, settings, cache, 'game', channel);
+    let channelId: string = channel.toString();
+
+    if (isNaN(Number(channel))) {
+        const res = await this.opts.reqCallback(`https://api.twitch.tv/kraken/users?login=${channel}`, {
+            coreId: message.channel.coreId,
+            method: 'GET',
+            serviceId: message.channel.serviceId,
+        });
+        if (res == null) {
+            return '[API Error]';
+        }
+
+        channelId = res.users[0]._id;
+    }
+
+    return providers[message.provider.toLowerCase()].call(this, message, settings, cache, 'game', channelId);
 }
 
 /**
