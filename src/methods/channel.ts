@@ -1,5 +1,6 @@
 import * as config from 'config';
 
+import { Parser } from '..';
 import { IMessage, ISetting } from '../interface';
 import { removeTag } from '../lib/helpers';
 import { twitch } from './twitch';
@@ -23,23 +24,23 @@ export function stream(message: IMessage, _settings: ISetting, _cache: typeof fe
 /**
  * Get the current title of the stream.
  */
-export function title(message: IMessage, settings: ISetting, cache: typeof fetch, channel: string = message.channel.name) {
+export function title(this: Parser, message: IMessage, settings: ISetting, cache: typeof fetch, channel: string = message.channel.name) {
     if (providers[message.provider.toLowerCase()] === undefined) {
         return '[Invalid Provider]';
     }
 
-    return providers[message.provider.toLowerCase()](message, settings, cache, 'title', channel);
+    return providers[message.provider.toLowerCase()].call(this, message, settings, cache, 'title', channel);
 }
 
 /**
  * Get the current game/category being streamed.
  */
-export function game(message: IMessage, settings: ISetting, cache: typeof fetch, channel: string = message.channel.name) {
+export function game(this: Parser, message: IMessage, settings: ISetting, cache: typeof fetch, channel: string = message.channel.name) {
     if (providers[message.provider.toLowerCase()] === undefined) {
         return '[Invalid Provider]';
     }
 
-    return providers[message.provider.toLowerCase()](message, settings, cache, 'game', channel);
+    return providers[message.provider.toLowerCase()].call(this, message, settings, cache, 'game', channel);
 }
 
 /**

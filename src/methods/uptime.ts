@@ -33,5 +33,5 @@ export function uptime(this: Parser, message: IMessage, _settings: ISetting, _re
         return '[Invalid Provider]';
     }
 
-    return providers[message.provider.toLowerCase()](this, channelId, message.channel.coreId, message.channel.serviceId);
+    return providers[message.provider.toLowerCase()].call(this, channelId, message.channel.coreId, message.channel.serviceId);
 }
