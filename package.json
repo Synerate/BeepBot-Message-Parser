@@ -1,6 +1,6 @@
 {
   "name": "beepbot-message-parser",
-  "version": "2.1.3",
+  "version": "2.1.4",
   "author": "Nydardoric",
   "description": "Message parser for BeepBot.",
   "main": "dist/index.js",
