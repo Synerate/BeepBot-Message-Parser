@@ -14,20 +14,11 @@ import { VarType } from './methods/variable';
 
 export interface IOpts {
     /**
-     * OAuth Tokens which are used by API provider(s)
+     * Variable callback to process any change(s).
      */
-    oauth: {
-        twitch: string;
-    };
     varCallback(coreId: string, varName: string, type: VarType, val: string, reset: boolean): Promise<number>;
 }
 export { VarType } from './methods/variable';
-
-function getDefaultOpts(): IOpts['oauth'] {
-    return {
-        twitch: null,
-    };
-}
 
 export class Parser {
     constructor(public opts: IOpts) {}
@@ -38,7 +29,7 @@ export class Parser {
      * This takes data from the message arg (ChannelMessage) from backend. To create
      * some data otherwise the parsers hits various APIs to get the data needed.
      */
-    public async parse(message: IMessage, settings: ISetting, text: string, opts: IOpts['oauth'] = getDefaultOpts()) {
+    public async parse(message: IMessage, settings: ISetting, text: string) {
         const token = tokenizer(text);
         const parsed = parser(token);
         const transform = transformer(parsed);
@@ -52,7 +43,7 @@ export class Parser {
                 continue;
             }
 
-            const res = await this.run(request, message, settings, part.expression, opts);
+            const res = await this.run(request, message, settings, part.expression);
             original.overwrite(part.start, part.end, res.toString());
         }
 
@@ -67,27 +58,27 @@ export class Parser {
      *
      * Not all expressions need to be ran to a method so return the expression value.
      */
-    private async run(cache: typeof fetch, message: IMessage, settings: ISetting, expr: IExpression, opts: IOpts['oauth']) {
+    private async run(cache: typeof fetch, message: IMessage, settings: ISetting, expr: IExpression) {
         if (expr.type === 'String') {
             return expr.value;
         }
         if (expr.arguments.length === 0) {
-            return this.handle(cache, message, settings, expr.callee.name, [], opts);
+            return this.handle(cache, message, settings, expr.callee.name, []);
         }
 
-        const args = await Promise.all(expr.arguments.map(arg => this.run(cache, message, settings, arg, opts)));
+        const args = await Promise.all(expr.arguments.map(arg => this.run(cache, message, settings, arg)));
 
-        return this.handle(cache, message, settings, expr.callee.name, args, opts);
+        return this.handle(cache, message, settings, expr.callee.name, args);
     }
 
     /**
      * Handle an expression and return the generated value to be replaced.
      */
-    private async handle(cache: typeof fetch, message: IMessage, settings: ISetting, text: string, args: string[] = [], opts: IOpts['oauth']): Promise<string> {
+    private async handle(cache: typeof fetch, message: IMessage, settings: ISetting, text: string, args: string[] = []): Promise<string> {
         if (methods[text.toLowerCase()] == null) {
             return;
         }
 
-        return methods[text.toLowerCase()].call(this, message, settings, cache, opts, ...args);
+        return methods[text.toLowerCase()].call(this, message, settings, cache, ...args);
     }
 }

@@ -24,9 +24,6 @@
     "@types/moment-timezone": "^0.5.13",
     "@types/node": "^14.0.13",
     "@types/source-map-support": "^0.5.1",
-    "ava": "^3.8.2",
-    "coveralls": "^3.1.0",
-    "nyc": "^15.1.0",
     "source-map-support": "^0.5.19",
     "tslint": "^6.1.2",
     "tslint-microsoft-contrib": "^6.2.0",
@@ -34,8 +31,6 @@
   },
   "scripts": {
     "builld": "tsc",
-    "test": "tsc && nyc ava",
-    "report": "nyc report --reporter=html",
     "prepublish": "tsc"
   },
   "repository": {
@@ -52,11 +47,5 @@
     "chatbot"
   ],
   "homepage": "https://github.com/Nydardoric/Beepbot-Message-Parser/blob/master/README.md",
-  "license": "MIT",
-  "ava": {
-    "files": [
-      "./dist/tests/**/*.js"
-    ],
-    "verbose": true
-  }
+  "license": "MIT"
 }
