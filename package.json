@@ -47,5 +47,8 @@
     "chatbot"
   ],
   "homepage": "https://github.com/Nydardoric/Beepbot-Message-Parser/blob/master/README.md",
-  "license": "MIT"
+  "license": "MIT",
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org"
+  }
 }
