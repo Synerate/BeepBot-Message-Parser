@@ -29,9 +29,9 @@ const providers = {
  * @Optional: Accepts a channel Id to check. Needs to match the ID for the provider which the command is ran from.
  */
 export function uptime(this: Parser, message: IMessage, _settings: ISetting, _request: never, channelId: string | number = message.channel.id) {
-    if (providers[message.provider.toLowerCase()] === undefined) {
+    if (providers[message.provider.toLowerCase()] == null) {
         return '[Invalid Provider]';
     }
 
-    return providers[message.provider.toLowerCase()].call(this, channelId, message.channel.coreId, message.channel.serviceId);
+    return providers[message.provider.toLowerCase()](this, channelId, message.channel.coreId, message.channel.serviceId);
 }
