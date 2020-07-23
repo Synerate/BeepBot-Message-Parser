@@ -29,22 +29,7 @@ export async function title(this: Parser, message: IMessage, settings: ISetting,
         return '[Invalid Provider]';
     }
 
-    let channelId: string = channel.toString();
-
-    if (isNaN(Number(channel))) {
-        const res = await this.opts.reqCallback(`https://api.twitch.tv/kraken/users?login=${channel}`, {
-            coreId: message.channel.coreId,
-            method: 'GET',
-            serviceId: message.channel.serviceId,
-        });
-        if (res == null) {
-            return '[API Error]';
-        }
-
-        channelId = res.users[0]._id;
-    }
-
-    return providers[message.provider.toLowerCase()].call(this, message, settings, cache, 'title', channelId);
+    return providers[message.provider.toLowerCase()].call(this, message, settings, cache, 'title', channel);
 }
 
 /**
@@ -55,22 +40,7 @@ export async function game(this: Parser, message: IMessage, settings: ISetting, 
         return '[Invalid Provider]';
     }
 
-    let channelId: string = channel.toString();
-
-    if (isNaN(Number(channel))) {
-        const res = await this.opts.reqCallback(`https://api.twitch.tv/kraken/users?login=${channel}`, {
-            coreId: message.channel.coreId,
-            method: 'GET',
-            serviceId: message.channel.serviceId,
-        });
-        if (res == null) {
-            return '[API Error]';
-        }
-
-        channelId = res.users[0]._id;
-    }
-
-    return providers[message.provider.toLowerCase()].call(this, message, settings, cache, 'game', channelId);
+    return providers[message.provider.toLowerCase()].call(this, message, settings, cache, 'game', channel);
 }
 
 /**

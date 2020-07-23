@@ -6,17 +6,22 @@ import { IMessage, ISetting } from '../interface';
 import { getFromSimple, isValueValid } from '../lib/helpers';
 
 export async function twitch(this: Parser, message: IMessage, _settings: ISetting, _request: never, type: string, channel = message.channel.id) {
-    const resTwitchUsr = await this.opts.reqCallback(`${config.get<string>('providers.twitch.api')}kraken/users?login=${channel}`, {
-        coreId: message.channel.coreId,
-        method: 'GET',
-        serviceId: message.channel.serviceId,
-    });
-    if (resTwitchUsr == null || resTwitchUsr.users == null || resTwitchUsr.users.length === 0) {
-        return '[API Error]';
-    }
-    const twitchId = resTwitchUsr.users[0]._id;
+    let channelId: string = channel.toString();
 
-    const res = await this.opts.reqCallback(`${config.get<string>('providers.twitch.api')}kraken/channels/${twitchId}`, {
+    if (isNaN(Number(channel))) {
+        const resTwitchUsr = await this.opts.reqCallback(`https://api.twitch.tv/kraken/users?login=${channel}`, {
+            coreId: message.channel.coreId,
+            method: 'GET',
+            serviceId: message.channel.serviceId,
+        });
+        if (resTwitchUsr == null) {
+            return '[API Error]';
+        }
+
+        channelId = resTwitchUsr.users[0]._id;
+    }
+
+    const res = await this.opts.reqCallback(`${config.get<string>('providers.twitch.api')}kraken/channels/${channelId}`, {
         coreId: message.channel.coreId,
         method: 'GET',
         serviceId: message.channel.serviceId,
