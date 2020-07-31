@@ -8,6 +8,7 @@ import * as str from './string';
 import { time } from './time';
 import { twitch } from './twitch';
 import { uptime } from './uptime';
+import { urlfetch } from './urlfetch';
 import * as users from './users';
 import { variable } from './variable';
 import { weather } from './weather';
@@ -23,6 +24,7 @@ export const methods = {
     time,
     twitch,
     uptime,
+    urlfetch,
     ...users,
     variable,
     weather,

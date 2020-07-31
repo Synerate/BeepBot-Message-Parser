@@ -30,7 +30,7 @@
     "typescript": "^3.9.5"
   },
   "scripts": {
-    "builld": "tsc",
+    "build": "tsc",
     "prepublish": "tsc"
   },
   "repository": {

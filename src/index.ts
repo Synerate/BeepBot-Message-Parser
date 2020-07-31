@@ -12,13 +12,25 @@ import { IMessage, ISetting } from './interface';
 import { methods } from './methods';
 import { VarType } from './methods/variable';
 
+interface IReqOpts {
+    coreId?: string;
+    method: string;
+    serviceId?: string;
+}
+
 export interface IOpts {
     /**
      * Request callback to ask the provider to send a request and send the data back for the parser to use.
      *
      * @returns Object/String data which is sent back from the relevant API service called. The method should then translate the data.
      */
-    reqCallback(uri: string, opts: { coreId?: string; method: string; serviceId?: string }): Promise<any>;
+    reqCallback(uri: string, opts: IReqOpts): Promise<any>;
+    /**
+     * Request callback for a customapi parser. Which allows users to hit external data-suppliers to get information back.
+     *
+     * @returns Object/String data which is sent back from the relevant API service called. The method should then translate the data.
+     */
+    reqCustomAPI?(uri: string, message: IMessage, pickOpts: string): Promise<any>;
     /**
      * Variable callback to process any change(s).
      */
