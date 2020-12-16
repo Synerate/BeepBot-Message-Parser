@@ -27,6 +27,7 @@ export interface IMessage {
     user: {
         id: string | number;
         name: string;
+        roles?: string[];
     };
 }
 
