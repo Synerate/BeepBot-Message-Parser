@@ -21,10 +21,6 @@ export async function randomuser(this: Parser, message: IMessage, _settings: ISe
             const chatters: ITwitchChatters = res.chatters;
 
             for (const group of Object.keys(chatters)) {
-                if (group === 'broadcaster') {
-                    continue;
-                }
-
                 if (chatters[group].length > 0) {
                     users.push(...chatters[group]);
                 }
