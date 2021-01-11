@@ -4,6 +4,7 @@ import { extralife } from './extralife';
 import { followage } from './followage';
 import { lastfm } from './lastfm';
 import { pretzel } from './pretzel';
+import { randomuser } from './randomuser';
 import * as str from './string';
 import { time } from './time';
 import { twitch } from './twitch';
@@ -20,6 +21,7 @@ export const methods = {
     followage,
     lastfm,
     pretzel,
+    randomuser,
     ...str,
     time,
     twitch,
