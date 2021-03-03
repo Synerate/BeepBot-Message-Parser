@@ -2,6 +2,7 @@ import * as channel from './channel';
 import { costream } from './costream';
 import { extralife } from './extralife';
 import { followage } from './followage';
+import { glimesh } from './glimesh';
 import { lastfm } from './lastfm';
 import { pretzel } from './pretzel';
 import { randomuser } from './randomuser';
@@ -19,6 +20,7 @@ export const methods = {
     costream,
     extralife,
     followage,
+    glimesh,
     lastfm,
     pretzel,
     randomuser,

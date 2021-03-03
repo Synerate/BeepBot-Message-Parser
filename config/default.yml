@@ -4,6 +4,10 @@ providers:
         base: 'https://twitch.tv/'
         api: 'https://api.twitch.tv/'
         clientId: ''
+    glimesh:
+        base: 'https://glimesh.tv/'
+        api: 'https://glimesh.tv/api'
+        clientId: ''
 # API Configs.
 api:
     exozone:

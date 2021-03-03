@@ -12,8 +12,8 @@ import { isArray, isObject } from 'lodash';
   * Make a http(s) request to a json api.
   */
 // tslint:disable-next-line: max-line-length
-export async function httpRequest<T>(request: typeof fetch, uri: string, headers: { [header: string]: string } = {}): Promise<T | any> {
-    const req = await request(uri, { headers });
+export async function httpRequest<T>(request: typeof fetch, uri: string, init: RequestInit = {}): Promise<T | any> {
+    const req = await request(uri, init);
     if (req.status !== 200) {
         return undefined;
     }
@@ -35,6 +35,11 @@ export async function httpRequest<T>(request: typeof fetch, uri: string, headers
  * API to get the response in the first place.
  */
 const providerMapping = {
+    glimesh: {
+        game: 'data.channel.category.name',
+        name: 'data.channel.streamer.username',
+        title: 'data.channel.title',
+    },
     twitch: {
         game: 'game',
         name: 'display_name',
