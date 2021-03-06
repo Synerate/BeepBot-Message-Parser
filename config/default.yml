@@ -19,4 +19,4 @@ api:
         base: 'http://api.openweathermap.org/data/2.5/weather'
         key: ''
     pretzel:
-        base: 'https://www.pretzel.rocks/api/v1/'
+        base: 'https://api.pretzel.tv/playing/'
