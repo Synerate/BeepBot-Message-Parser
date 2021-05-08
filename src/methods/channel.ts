@@ -23,6 +23,10 @@ export function stream(message: IMessage, _settings: ISetting, _cache: typeof fe
     return `${config.get<string>(`providers.${message.provider.toLowerCase()}.base`)}${removeTag(channel)}`;
 }
 
+export function link(message: IMessage, _settings: ISetting, _cache: typeof fetch, channel: string = message.channel.name) {
+    return stream(message, _settings, _cache, channel);
+}
+
 /**
  * Get the current title of the stream.
  */
