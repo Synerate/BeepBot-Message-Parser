@@ -42,3 +42,7 @@ export function arg(message: IMessage, _settings: ISetting, _request: typeof fet
 
     return hasArg;
 }
+
+export function urlencode(_message: IMessage, _settings: ISetting, _request: typeof fetch, str: string) {
+    return encodeURIComponent(str);
+}
