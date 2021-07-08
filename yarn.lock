@@ -23,35 +23,35 @@
     chalk "^2.0.0"
     js-tokens "^4.0.0"
 
-"@types/config@0.0.38":
-  version "0.0.38"
-  resolved "https://registry.nydardoric.com/@types%2fconfig/-/config-0.0.38.tgz#ca30679b21b5b297299467e3a3f1c8e2e64b9170"
-  integrity sha512-z2WizAfIFgSv8SQfQ8c0LlbDAcK47D/o93XW6bxZ9t3bs4fmmfAPjk1nhAIBTG84PBBCHfSPM+8g7vhLdbFokg==
+"@types/config@0.0.39":
+  version "0.0.39"
+  resolved "https://registry.nydardoric.com/@types%2fconfig/-/config-0.0.39.tgz#aad18ceb9439329adc3d4c6b91a908a72c715612"
+  integrity sha512-EBHj9lSIyw62vwqCwkeJXjiV6C2m2o+RJZlRWLkHduGYiNBoMXcY6AhSLqjQQ+uPdrPYrOMYvVa41zjo00LbFQ==
 
-"@types/countdown@^0.0.7":
-  version "0.0.7"
-  resolved "https://registry.nydardoric.com/@types%2fcountdown/-/countdown-0.0.7.tgz#8120fe35739943a19457a877e0f49ecb29147054"
-  integrity sha512-Rsd5+gjrW5qRvpHFRrYKXwGTXGGxFaza96LU4uf5D7L5De9Hk3Ykj9lstxmExFuAPiueKCVFwidO3dO2zha0Sw==
+"@types/countdown@^0.0.8":
+  version "0.0.8"
+  resolved "https://registry.nydardoric.com/@types%2fcountdown/-/countdown-0.0.8.tgz#130f9c6654e64b8d8c361378c517bb63ecca13a2"
+  integrity sha512-kpWa+wlrYcvgymkaOIF3i40MnSMRNdv91piNVmJ22Pnd4A3QJXu21ngTzHHnLqKVtCjGWfO0FZKSXb3XiGiTdA==
 
 "@types/isomorphic-fetch@0.0.35":
   version "0.0.35"
   resolved "https://registry.nydardoric.com/@types%2fisomorphic-fetch/-/isomorphic-fetch-0.0.35.tgz#c1c0d402daac324582b6186b91f8905340ea3361"
   integrity sha512-DaZNUvLDCAnCTjgwxgiL1eQdxIKEpNLOlTNtAgnZc50bG2copGhRrFN9/PxPBuJe+tZVLCbQ7ls0xveXVRPkvw==
 
-"@types/lodash@^4.14.170":
-  version "4.14.170"
-  resolved "https://registry.nydardoric.com/@types%2flodash/-/lodash-4.14.170.tgz#0d67711d4bf7f4ca5147e9091b847479b87925d6"
-  integrity sha512-bpcvu/MKHHeYX+qeEN8GE7DIravODWdACVA1ctevD8CN24RhPZIKMn9ntfAsrvLfSX3cR5RrBKAbYm9bGs0A+Q==
+"@types/lodash@^4.14.171":
+  version "4.14.171"
+  resolved "https://registry.nydardoric.com/@types%2flodash/-/lodash-4.14.171.tgz#f01b3a5fe3499e34b622c362a46a609fdb23573b"
+  integrity sha512-7eQ2xYLLI/LsicL2nejW9Wyko3lcpN6O/z0ZLHrEQsg280zIdCv1t/0m6UtBjUHokCGBQ3gYTbHzDkZ1xOBwwg==
 
-"@types/node@^15.12.2":
-  version "15.12.2"
-  resolved "https://registry.nydardoric.com/@types%2fnode/-/node-15.12.2.tgz#1f2b42c4be7156ff4a6f914b2fb03d05fa84e38d"
-  integrity sha512-zjQ69G564OCIWIOHSXyQEEDpdpGl+G348RAKY0XXy9Z5kU9Vzv1GMNnkar/ZJ8dzXB3COzD9Mo9NtRZ4xfgUww==
+"@types/node@^16.0.1":
+  version "16.0.1"
+  resolved "https://registry.nydardoric.com/@types%2fnode/-/node-16.0.1.tgz#70cedfda26af7a2ca073fdcc9beb2fff4aa693f8"
+  integrity sha512-hBOx4SUlEPKwRi6PrXuTGw1z6lz0fjsibcWCM378YxsSu/6+C30L6CR49zIBKHiwNWCYIcOLjg4OHKZaFeLAug==
 
-"@types/source-map-support@^0.5.3":
-  version "0.5.3"
-  resolved "https://registry.nydardoric.com/@types%2fsource-map-support/-/source-map-support-0.5.3.tgz#acb6b3e499c20692552d16934c16162c84594e16"
-  integrity sha512-fvjMjVH8Rmokw2dWh1dkj90iX5R8FPjeZzjNH+6eFXReh0QnHFf1YBl3B0CF0RohIAA3SDRJsGeeUWKl6d7HqA==
+"@types/source-map-support@^0.5.4":
+  version "0.5.4"
+  resolved "https://registry.nydardoric.com/@types%2fsource-map-support/-/source-map-support-0.5.4.tgz#574ff6a8636bc0ebae78a8014136f749b3177d58"
+  integrity sha512-9zGujX1sOPg32XLyfgEB/0G9ZnrjthL/Iv1ZfuAjj8LEilHZEpQSQs1scpRXPhHzGYgWiLz9ldF1cI8JhL+yMw==
   dependencies:
     source-map "^0.6.0"
 
@@ -402,10 +402,10 @@ tsutils@^2.29.0:
   dependencies:
     tslib "^1.8.1"
 
-typescript@^4.3.2:
-  version "4.3.2"
-  resolved "https://registry.nydardoric.com/typescript/-/typescript-4.3.2.tgz#399ab18aac45802d6f2498de5054fcbbe716a805"
-  integrity sha512-zZ4hShnmnoVnAHpVHWpTcxdv7dWP60S2FsydQLV8V5PbS3FifjWFFRiHSWpDJahly88PRyV5teTSLoq4eG7mKw==
+typescript@^4.3.5:
+  version "4.3.5"
+  resolved "https://registry.nydardoric.com/typescript/-/typescript-4.3.5.tgz#4d1c37cc16e893973c45a06886b7113234f119f4"
+  integrity sha512-DqQgihaQ9cUrskJo9kIyW/+g0Vxsk8cDtZ52a3NGh0YNTfpUSArXSohyUGnvbPazEPLu398C0UxmKSOrPumUzA==
 
 whatwg-fetch@^3.4.1:
   version "3.5.0"
