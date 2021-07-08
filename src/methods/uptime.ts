@@ -32,6 +32,26 @@ const providers = {
 
         return countdown(new Date(), moment(req.data.channel.stream.startedAt).toDate()).toString();
     },
+    trovo: async (_parser: Parser, request: never, channelId: string | number, _coreId: string, _serviceId: string): Promise<any> => {
+        const reqHeaders = {
+            Accept: 'application/json',
+            'Client-ID': config.get<string>('providers.trovo.clientId'),
+        };
+
+        const reqBody = {};
+        if (isNaN(Number(channelId))) {
+            reqBody['username'] = channelId;
+        } else {
+            reqBody['channel_id'] = channelId;
+        }
+
+        const res: any = await httpRequest(request, `${config.get('providers.trovo.api')}/openplatform/channels/id`, { headers: reqHeaders, method: 'POST', body: JSON.stringify(reqBody) });
+        if (res == null || res['is_live'] === false || Number(res['started_at']) < 1) {
+            return '[Channel Offline]';
+        }
+
+        return countdown(new Date(), moment(new Date(Number(res['started_at']) * 1000)).toDate());
+    },
     twitch: async (parser: Parser, _request: never, channelId: string | number, coreId: string, serviceId: string): Promise<any> => {
         const res = await parser.opts.reqCallback(`${config.get<string>('providers.twitch.api')}helix/streams?user_id=${channelId}`, {
             coreId,

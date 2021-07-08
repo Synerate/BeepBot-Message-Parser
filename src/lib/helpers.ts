@@ -40,6 +40,11 @@ const providerMapping = {
         name: 'data.channel.streamer.username',
         title: 'data.channel.title',
     },
+    trovo: {
+        game: 'category_name',
+        name: 'username',
+        title: 'live_title',
+    },
     twitch: {
         game: 'game',
         name: 'display_name',

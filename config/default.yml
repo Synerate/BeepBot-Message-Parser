@@ -8,6 +8,10 @@ providers:
         base: 'https://glimesh.tv/'
         api: 'https://glimesh.tv/api'
         clientId: ''
+    trovo:
+        base: 'https://trovo.live/'
+        api: 'https://open-api.trovo.live'
+        clientId: ''
 # API Configs.
 api:
     exozone:

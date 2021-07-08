@@ -8,6 +8,7 @@ import { pretzel } from './pretzel';
 import { randomuser } from './randomuser';
 import * as str from './string';
 import { time } from './time';
+import { trovo } from './trovo';
 import { twitch } from './twitch';
 import { uptime } from './uptime';
 import { urlfetch } from './urlfetch';
@@ -26,6 +27,7 @@ export const methods = {
     randomuser,
     ...str,
     time,
+    trovo,
     twitch,
     uptime,
     urlfetch,
