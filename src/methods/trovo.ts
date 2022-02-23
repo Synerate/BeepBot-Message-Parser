@@ -1,7 +1,7 @@
 import * as config from 'config';
 import { get } from 'lodash';
 
-import { Parser } from '..';
+import { Parser } from '../';
 import { IMessage, ISetting } from '../interface';
 import { getFromSimple, httpRequest, isValueValid } from '../lib/helpers';
 
@@ -19,7 +19,6 @@ export async function trovo(this: Parser, message: IMessage, _settings: ISetting
     }
 
     const req: any = await httpRequest(request, `${config.get('providers.trovo.api')}/openplatform/channels/id`, { headers: reqHeaders, method: 'POST', body: JSON.stringify(reqBody) });
-    console.log(req);
     if (req == null) {
         return '[API Error]';
     }

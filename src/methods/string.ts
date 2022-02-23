@@ -1,3 +1,4 @@
+import * as _ from 'lodash';
 import { random } from 'lodash';
 
 import { IMessage, ISetting } from '../interface';
@@ -46,3 +47,17 @@ export function arg(message: IMessage, _settings: ISetting, _request: typeof fet
 export function urlencode(_message: IMessage, _settings: ISetting, _request: typeof fetch, str: string) {
     return encodeURIComponent(str);
 }
+
+export function randlist(_message: IMessage, _settings: ISetting, _request: typeof fetch, ...str: string[]) {
+    if (str == null || str.length < 1) {
+        return;
+    }
+
+    const list = str.join(' ').split(';');
+    if (list == null || list.length < 1) {
+        return '';
+    }
+
+    return _(list).shuffle().shuffle().sampleSize(1);
+}
+export const listpick = randlist;

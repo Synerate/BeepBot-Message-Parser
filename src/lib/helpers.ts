@@ -46,9 +46,9 @@ const providerMapping = {
         title: 'live_title',
     },
     twitch: {
-        game: 'game',
-        name: 'display_name',
-        title: 'status',
+        game: 'game_name',
+        name: 'broadcaster_name',
+        title: 'title',
     },
 };
 
