@@ -1,7 +1,7 @@
 {
   "name": "beepbot-message-parser",
   "version": "2.1.25",
-  "author": "Nydardoric",
+  "author": "Kieron Richardson <artdude543@hotmail.co.uk>",
   "description": "Message parser for BeepBot.",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
@@ -34,10 +34,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com:Nydardoric/Beepbot-Message-Parser.git"
+    "url": "git+https://github.com:Synerate/Beepbot-Message-Parser.git"
   },
   "bugs": {
-    "url": "https://github.com/Nydardoric/Beepbot-Message-Parser/issues"
+    "url": "https://github.com/Synerate/Beepbot-Message-Parser/issues"
   },
   "keywords": [
     "beepbot",
@@ -45,7 +45,7 @@
     "message",
     "chatbot"
   ],
-  "homepage": "https://github.com/Nydardoric/Beepbot-Message-Parser/blob/master/README.md",
+  "homepage": "https://github.com/Synerate/Beepbot-Message-Parser/blob/master/README.md",
   "license": "MIT",
   "publishConfig": {
     "registry": "https://registry.npmjs.org"
