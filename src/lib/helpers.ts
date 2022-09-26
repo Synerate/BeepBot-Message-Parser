@@ -50,6 +50,11 @@ const providerMapping = {
         name: 'broadcaster_name',
         title: 'title',
     },
+    picarto: {
+        game: 'category[0]',
+        name: 'name',
+        title: 'title',
+    },
 };
 
 /**

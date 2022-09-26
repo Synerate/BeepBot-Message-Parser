@@ -2,7 +2,7 @@ import * as config from 'config';
 import * as countdown from 'countdown';
 import * as moment from 'moment';
 
-import { Parser } from '..';
+import { Parser } from '../';
 import { IMessage, ISetting } from '../interface';
 import { httpRequest } from '../lib/helpers';
 import { IGlimeshRes } from './glimesh';
@@ -32,7 +32,7 @@ const providers = {
 
         return countdown(new Date(), moment(req.data.channel.stream.startedAt).toDate()).toString();
     },
-    trovo: async (_parser: Parser, request: never, channelId: string | number, _coreId: string, _serviceId: string): Promise<any> => {
+    trovo: async (_parser: Parser, request: typeof fetch, channelId: string | number, _coreId: string, _serviceId: string): Promise<any> => {
         const reqHeaders = {
             Accept: 'application/json',
             'Client-ID': config.get<string>('providers.trovo.clientId'),
@@ -52,7 +52,7 @@ const providers = {
 
         return countdown(new Date(), moment(new Date(Number(res['started_at']) * 1000)).toDate());
     },
-    twitch: async (parser: Parser, _request: never, channelId: string | number, coreId: string, serviceId: string): Promise<any> => {
+    twitch: async (parser: Parser, _request: typeof fetch, channelId: string | number, coreId: string, serviceId: string): Promise<any> => {
         const res = await parser.opts.reqCallback(`${config.get<string>('providers.twitch.api')}helix/streams?user_id=${channelId}`, {
             coreId,
             method: 'GET',
@@ -63,6 +63,21 @@ const providers = {
         }
 
         return countdown(new Date(), moment(res.data[0].started_at).toDate());
+    },
+    picarto: async (_parser: Parser, request: typeof fetch, channelId: string | number, coreId: string, serviceId: string): Promise<any> => {
+        let uri: string | null = null;
+        if (isNaN(Number(channelId))) {
+            uri = `https://api.picarto.tv/api/v1/channel/name/${channelId}`;
+        } else {
+            uri = `https://api.picarto.tv/api/v1/channel/id/${channelId}`;
+        }
+
+        const res: any = await httpRequest(request, uri);
+        if (res == null || res['online'] === false || res['last_live'] == null) {
+            return '[Channel Offline]';
+        }
+
+        return countdown(new Date(), moment(new Date(res['last_live'])).toDate());
     },
 };
 

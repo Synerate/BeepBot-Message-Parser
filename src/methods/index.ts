@@ -4,6 +4,7 @@ import { extralife } from './extralife';
 import { followage } from './followage';
 import { glimesh } from './glimesh';
 import { lastfm } from './lastfm';
+import { picarto } from './picarto';
 import { pretzel } from './pretzel';
 import { randomuser } from './randomuser';
 import * as str from './string';
@@ -23,6 +24,7 @@ export const methods = {
     followage,
     glimesh,
     lastfm,
+    picarto,
     pretzel,
     randomuser,
     ...str,
