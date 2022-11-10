@@ -14,7 +14,7 @@ export async function pretzel(message: IMessage, _settings: ISetting, request: t
 
     const playing = nowPlaying.exec(req);
     if (playing == null) {
-        return '[API Error]';
+        return '[Error: API Error]';
     }
 
     switch (type) {

@@ -20,15 +20,15 @@ export async function trovo(this: Parser, message: IMessage, _settings: ISetting
 
     const req: any = await httpRequest(request, `${config.get('providers.trovo.api')}/openplatform/channels/id`, { headers: reqHeaders, method: 'POST', body: JSON.stringify(reqBody) });
     if (req == null) {
-        return '[API Error]';
+        return '[Error: API Error]';
     }
     if (req?.data?.channel === null) {
-        return '[Invalid Channel]';
+        return '[Error: Invalid Channel]';
     }
 
     const value = get(req, getFromSimple('trovo', type), '[Type Not Found]');
     if (!isValueValid(value)) {
-        return '[Return Value Invalid]';
+        return '[Error: Return Value Invalid]';
     }
 
     return value;

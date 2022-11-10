@@ -87,7 +87,7 @@ export async function weather(_message: IMessage, _settings: ISetting, request: 
     };
     const req: IWeather = await httpRequest(request, `${config.get<string>('api.weather.base')}?${stringify(reqOpts)}`);
     if (req === undefined) {
-        return '[API Error]';
+        return '[Error: API Error]';
     }
 
     const { main, sys, wind } = req;

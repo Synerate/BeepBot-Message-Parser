@@ -19,7 +19,7 @@ interface IAPIData {
 export async function extralife(_message: IMessage, _settings: any, request: typeof fetch, id: string, type: ExtraLifeType = 'all') {
     const req: IAPIData = await httpRequest(request, `https://www.extra-life.org/api/participants/${id}`);
     if (req === undefined || (<any>req).length === 0) {
-        return '[API Error]';
+        return '[Error: API Error]';
     }
 
     try {
@@ -35,7 +35,7 @@ export async function extralife(_message: IMessage, _settings: any, request: typ
                 return `Raised: ${parseNum(req.sumDonations)} Goal: ${parseNum(req.fundraisingGoal)} (${totalPercentage(req.fundraisingGoal, req.sumDonations)}%)`;
         }
     } catch (err) {
-        return '[Internal Error]';
+        return '[Error: Internal Error]';
     }
 }
 

@@ -24,7 +24,7 @@ const providers = {
 
         const req: IGlimeshRes = await httpRequest(request, config.get('providers.glimesh.api'), { headers: reqHeaders, method: 'POST', body: reqBody });
         if (req == null) {
-            return '[API Error]';
+            return '[Error: API Error]';
         }
         if (req?.data?.channel?.stream === null) {
             return '[Channel Offline]';

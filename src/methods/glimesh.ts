@@ -1,7 +1,7 @@
 import * as config from 'config';
 import { get } from 'lodash';
 
-import { Parser } from '..';
+import { Parser } from '../';
 import { IMessage, ISetting } from '../interface';
 import { getFromSimple, httpRequest, isValueValid } from '../lib/helpers';
 
@@ -59,15 +59,15 @@ export async function glimesh(this: Parser, message: IMessage, _settings: ISetti
 
     const req: IGlimeshRes = await httpRequest(request, config.get('providers.glimesh.api'), { headers: reqHeaders, method: 'POST', body: reqBody });
     if (req == null) {
-        return '[API Error]';
+        return '[Error: API Error]';
     }
     if (req?.data?.channel === null) {
-        return '[Invalid Channel]';
+        return '[Error: Invalid Channel]';
     }
 
     const value = get(req, getFromSimple('glimesh', type), '[Type Not Found]');
     if (!isValueValid(value)) {
-        return '[Return Value Invalid]';
+        return '[Error: Return Value Invalid]';
     }
 
     return value;

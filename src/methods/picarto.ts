@@ -18,15 +18,15 @@ export async function picarto(this: Parser, message: IMessage, _settings: ISetti
 
     const req: any = await httpRequest(request, uri);
     if (req == null) {
-        return '[API Error]';
+        return '[Error: API Error]';
     }
     if (req?.user_id === null) {
-        return '[Invalid Channel]';
+        return '[Error: Invalid Channel]';
     }
 
     const value = get(req, getFromSimple('picarto', type), '[Type Not Found]');
     if (!isValueValid(value)) {
-        return '[Return Value Invalid]';
+        return '[Error: Return Value Invalid]';
     }
 
     return value;

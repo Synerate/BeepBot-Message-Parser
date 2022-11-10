@@ -14,10 +14,10 @@ export async function twitch(this: Parser, message: IMessage, _settings: ISettin
             serviceId: message.channel.serviceId,
         });
         if (resTwitchUsr == null) {
-            return '[API Error]';
+            return '[Error: API Error]';
         }
         if (resTwitchUsr.data == null || resTwitchUsr.data.length < 1) {
-            return '[Invalid User]';
+            return '[Error: Invalid User]';
         }
 
         channelId = resTwitchUsr.data[0].id;
@@ -29,12 +29,12 @@ export async function twitch(this: Parser, message: IMessage, _settings: ISettin
         serviceId: message.channel.serviceId,
     });
     if (res == null || res.data.length < 1) {
-        return '[API Error]';
+        return '[Error: API Error]';
     }
 
     const value = get(res.data[0], getFromSimple('twitch', type), '[Type Not Found]');
     if (!isValueValid(value)) {
-        return '[Return Value Invalid]';
+        return '[Error: Return Value Invalid]';
     }
 
     return value;

@@ -53,7 +53,6 @@ export function getTrack(tracks: ITrack[], when: string): ITrack {
  *
  * Default: Returns the song name and artist.
  */
-// tslint:disable-next-line:max-line-length
 export async function lastfm(_message: IMessage, _settings: ISetting, request: typeof fetch, user: string, type?: SongType, when: string = '0') {
     const reqOpts = {
         api_key: config.get<string>('api.lastfm.key'),
@@ -62,10 +61,10 @@ export async function lastfm(_message: IMessage, _settings: ISetting, request: t
         method: 'user.getrecenttracks',
         user,
     };
-    // tslint:disable-next-line:max-line-length
+
     const res: IRecentTracks = await httpRequest(request, `${config.get<string>('api.lastfm.base')}?${stringify(reqOpts)}`);
     if (res == null || res.error != null) {
-        return '[Invalid User]';
+        return '[Error: Invalid User]';
     }
 
     const { name, artist, url } = getTrack(res.recenttracks.track, when);
@@ -76,6 +75,8 @@ export async function lastfm(_message: IMessage, _settings: ISetting, request: t
             return artist['#text'];
         case 'link':
             return url;
+        case 'all':
+            return `${name} by ${artist['#text']} (${url})`;
         default:
             return `${name} by ${artist['#text']}`;
     }

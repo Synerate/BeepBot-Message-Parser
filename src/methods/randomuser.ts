@@ -1,5 +1,5 @@
 import * as config from 'config';
-import * as _ from 'lodash';
+import { chain } from 'lodash';
 
 import { Parser } from '../';
 import { IMessage, ISetting } from '../interface';
@@ -26,7 +26,7 @@ export async function randomuser(this: Parser, message: IMessage, _settings: ISe
         case 'twitch':
             res = await httpRequest(request, `https://tmi.twitch.tv/group/user/${message.channel.name}/chatters`);
             if (res == null) {
-                return '[API Error]';
+                return '[Error: API Error]';
             }
             chatters = res.chatters as ITwitchChatters;
 
@@ -39,7 +39,10 @@ export async function randomuser(this: Parser, message: IMessage, _settings: ISe
                 return '[No Users]';
             }
 
-            return _(users).shuffle().shuffle().shuffle().sample();
+            return chain(users)
+                .shuffle().shuffle().shuffle()
+                .sample()
+                .valueOf();
         case 'trovo':
             headers = {
                 Accept: 'application/json',
@@ -48,7 +51,7 @@ export async function randomuser(this: Parser, message: IMessage, _settings: ISe
             const body = { limit: 0, cursor: 0 };
             res = await httpRequest(request, `https://open-api.trovo.live/openplatform/channels/${message.channel.id}/viewers`, { headers, method: 'POST', body: JSON.stringify(body) });
             if (res == null) {
-                return '[API Error]';
+                return '[Error: API Error]';
             }
             chatters = res.chatters as ITrovoChatters;
 
@@ -61,10 +64,13 @@ export async function randomuser(this: Parser, message: IMessage, _settings: ISe
             // Remove dupes as Trovo list the user in all the groups they are in.
             users = [ ...new Set(users) ];
 
-            return _(users).shuffle().shuffle().shuffle().sample();
+            return chain(users)
+                .shuffle().shuffle().shuffle()
+                .sample()
+                .valueOf();
         case 'discord':
             return '<randomuser>';
         default:
-            return '[Not Supported]';
+            return '[Error: Invalid Provider]';
     }
 }

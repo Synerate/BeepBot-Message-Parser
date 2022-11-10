@@ -21,7 +21,7 @@ export function streamer(message: IMessage) {
 
 export function stream(message: IMessage, _settings: ISetting, _cache: typeof fetch, channel: string = message.channel.name) {
     if (config.has(`providers.${message.provider.toLowerCase()}.base`) === false) {
-        return '[Invalid Provider]';
+        return '[Error: Invalid Provider]';
     }
 
     return `${config.get<string>(`providers.${message.provider.toLowerCase()}.base`)}${removeTag(channel)}`;
@@ -36,7 +36,7 @@ export function link(message: IMessage, _settings: ISetting, _cache: typeof fetc
  */
 export async function title(this: Parser, message: IMessage, settings: ISetting, cache: typeof fetch, channel = message.channel.id) {
     if (providers[message.provider.toLowerCase()] === undefined) {
-        return '[Invalid Provider]';
+        return '[Error: Invalid Provider]';
     }
 
     return providers[message.provider.toLowerCase()].call(this, message, settings, cache, 'title', channel);
@@ -47,7 +47,7 @@ export async function title(this: Parser, message: IMessage, settings: ISetting,
  */
 export async function game(this: Parser, message: IMessage, settings: ISetting, cache: typeof fetch, channel = message.channel.id) {
     if (providers[message.provider.toLowerCase()] === undefined) {
-        return '[Invalid Provider]';
+        return '[Error: Invalid Provider]';
     }
 
     return providers[message.provider.toLowerCase()].call(this, message, settings, cache, 'game', channel);

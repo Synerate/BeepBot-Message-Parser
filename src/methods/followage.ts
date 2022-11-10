@@ -2,7 +2,7 @@ import * as config from 'config';
 import * as countdown from 'countdown';
 import * as moment from 'moment';
 
-import { Parser } from '..';
+import { Parser } from '../';
 import { IMessage } from '../interface';
 import { httpRequest } from '../lib/helpers';
 import { IGlimeshRes } from './glimesh';
@@ -23,7 +23,7 @@ export const methods = {
 
         const req: IGlimeshRes = await httpRequest(request, config.get('providers.glimesh.api'), { headers: reqHeaders, method: 'POST', body: reqBody });
         if (req == null) {
-            return '[API Error]';
+            return '[Error: API Error]';
         }
         if (req?.data?.followers === null) {
             return '[User Not Following]';
@@ -39,7 +39,7 @@ export const methods = {
                 serviceId,
             });
         if (res == null) {
-            return '[API Error]';
+            return '[Error: API Error]';
         }
 
         if (res.total === 0 || res.data.length === 0) {
@@ -52,7 +52,7 @@ export const methods = {
 
 export async function followage(this: Parser, message: IMessage, _settings: never, request: typeof fetch) {
     if (methods[message.provider.toLowerCase()] == null) {
-        return '[Not Supported]';
+        return '[Error: Invalid Provider]';
     }
 
     if (message.provider === 'glimesh') {

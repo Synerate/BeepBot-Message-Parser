@@ -6,7 +6,7 @@ const supportedProviders = [
 
 export async function costream(message: IMessage, _settings: any, _request: never, withLinks: string = 'true') {
     if (!supportedProviders.includes(message.provider.toLowerCase())) {
-        return '[Non-Supported Provider]';
+        return '[Error: Invalid Provider]';
     }
 
     let showLinks: boolean = true;
@@ -33,6 +33,6 @@ export async function costream(message: IMessage, _settings: any, _request: neve
 async function getData(provider: string): Promise<string> {
     switch (provider) {
         default:
-            return '[Non-Supported Provider]';
+            return '[Error: Invalid Provider]';
     }
 }
