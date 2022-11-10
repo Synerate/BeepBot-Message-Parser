@@ -1,5 +1,4 @@
-import * as _ from 'lodash';
-import { random } from 'lodash';
+import { chain, random } from 'lodash';
 
 import { IMessage, ISetting } from '../interface';
 
@@ -23,13 +22,20 @@ export function randomnum(_message: IMessage, _settings: ISetting, _request: typ
         .toString();
 }
 
-export function incr(_message: IMessage, _settings: ISetting, _request: typeof fetch, base: string, val: string) {
-    if (isNaN(Number(base)) || isNaN(Number(val))) {
-        return '[Base or Val needs to be a number]';
+export function add(_message: IMessage, _settings: ISetting, _request: typeof fetch, ...numbers: string[]) {
+    if (numbers == null || numbers.length > 10) {
+        return '[Invalid number of arguments]';
     }
 
-    return `${Number(base) + Number(val)}`;
+    return numbers
+        .map(n => n.split(','))
+        .flat()
+        .map(Number)
+        .filter((n) => !isNaN(n))
+        .reduce((a, b) => a + b);
 }
+
+export const incr = add;
 
 export function arg(message: IMessage, _settings: ISetting, _request: typeof fetch, index: string) {
     if (isNaN(Number(index))) {
@@ -48,6 +54,10 @@ export function urlencode(_message: IMessage, _settings: ISetting, _request: typ
     return encodeURIComponent(str);
 }
 
+export function urldecode(_message: IMessage, _settings: ISetting, _request: typeof fetch, str: string) {
+    return decodeURIComponent(str);
+}
+
 export function randlist(_message: IMessage, _settings: ISetting, _request: typeof fetch, ...str: string[]) {
     if (str == null || str.length < 1) {
         return;
@@ -58,6 +68,10 @@ export function randlist(_message: IMessage, _settings: ISetting, _request: type
         return '';
     }
 
-    return _(list).shuffle().shuffle().sampleSize(1);
+    return chain(list)
+        .shuffle()
+        .shuffle()
+        .sampleSize(1);
 }
+
 export const listpick = randlist;
