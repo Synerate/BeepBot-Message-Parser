@@ -1,5 +1,4 @@
 import * as config from 'config';
-import { upperFirst } from 'lodash';
 import { stringify } from 'querystring';
 
 import { IMessage, ISetting } from '../interface';
@@ -59,25 +58,28 @@ interface IWeather {
     cod: number;
 }
 
-const directions = ['N', 'NNE', 'NE', 'ENE', 'E', 'ESE', 'SE', 'SSE', 'S', 'SSW', 'SW', 'WSW', 'W', 'WNW', 'NW', 'NNW'];
+const directions = [
+    'North',
+    'North (North-East)',
+    'North East',
+    'East (North-East)',
+    'East',
+    'East (South-East)',
+    'South East',
+    'South (South-East)',
+    'South',
+    'South (South-West)',
+    'South West',
+    'West (South-West)',
+    'West',
+    'West (North-West)',
+    'North West',
+    'North (North-West)',
+];
 
-function getDirection(deg: number) {
-    // tslint:disable-next-line:binary-expression-operand-order
-    const value = Math.floor(0.5 + (deg / 22.5));
+const getDirection = (deg: number) => directions[(Math.floor(0.5 + (deg / 22.5)) % 16)];
 
-    return directions[(value % 16)];
-}
-
-function getTemp(temp: number) {
-    return `${temp.toFixed(2)} C (${Number(temp * 9 / 5 + 32).toFixed(2)} F)`;
-}
-
-function getSpeed(mps: number) {
-    const mph = mps * 2.24;
-    const kph = mph * 1.609344;
-
-    return `${mph.toFixed(2)} mph (${kph.toFixed(2)} kph)`;
-}
+const getTemp = (temp: number) => `${temp.toFixed(2)} °C (${Number(temp * 9 / 5 + 32).toFixed(2)} °F)`;
 
 export async function weather(_message: IMessage, _settings: ISetting, request: typeof fetch, region: string) {
     const reqOpts = {
@@ -91,7 +93,6 @@ export async function weather(_message: IMessage, _settings: ISetting, request: 
     }
 
     const { main, sys, wind } = req;
-    const currWeather = req.weather[0];
 
-    return `Weather for ${req.name}, ${sys.country}: ${upperFirst(currWeather.description)} with a temperature of ${getTemp(main.temp)}. Wind is blowing from the ${getDirection(wind.deg)} at ${getSpeed(wind.speed)}. Humidity is ${main.humidity}%`;
+    return `${req.name}, ${sys.country}: ${getTemp(main.temp)}. Feels like ${getTemp(main.feels_like)}. Wind is blowing from the ${getDirection(wind.deg)}. ${main.humidity}% humidity. Air pressure: ~${main.pressure} hPa.`;
 }
