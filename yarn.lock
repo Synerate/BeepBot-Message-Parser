@@ -2,6 +2,13 @@
 # yarn lockfile v1
 
 
+"@babel/runtime@^7.20.1":
+  version "7.20.1"
+  resolved "https://registry.synerate.com/@babel%2fruntime/-/runtime-7.20.1.tgz#1148bb33ab252b165a06698fde7576092a78b4a9"
+  integrity sha512-mrzLkl6U9YLF8qpqI7TB82PESyEGjm/0Ly91jG575eVxMMlb8fYfOXFZIJ8XfLrJZQbm7dlKry2bJmXBUEkdFg==
+  dependencies:
+    regenerator-runtime "^0.13.10"
+
 "@types/config@3.3.0":
   version "3.3.0"
   resolved "https://registry.synerate.com/@types%2fconfig/-/config-3.3.0.tgz#2b632cb37c639bf8d57054561f5a77d31dcebc1e"
@@ -17,10 +24,10 @@
   resolved "https://registry.synerate.com/@types%2fisomorphic-fetch/-/isomorphic-fetch-0.0.36.tgz#3a6d8f63974baf26b10fd1314db910633108a769"
   integrity sha512-ulw4d+vW1HKn4oErSmNN2HYEcHGq0N1C5exlrMM0CRqX1UUpFhGb5lwiom5j9KN3LBJJDLRmYIZz1ghm7FIzZw==
 
-"@types/lodash@^4.14.188":
-  version "4.14.188"
-  resolved "https://registry.synerate.com/@types%2flodash/-/lodash-4.14.188.tgz#e4990c4c81f7c9b00c5ff8eae389c10f27980da5"
-  integrity sha512-zmEmF5OIM3rb7SbLCFYoQhO4dGt2FRM9AMkxvA3LaADOF1n8in/zGJlWji9fmafLoNyz+FoL6FE0SLtGIArD7w==
+"@types/lodash@^4.14.190":
+  version "4.14.190"
+  resolved "https://registry.synerate.com/@types%2flodash/-/lodash-4.14.190.tgz#d8e99647af141c63902d0ca53cf2b34d2df33545"
+  integrity sha512-5iJ3FBJBvQHQ8sFhEhJfjUP+G+LalhavTkYyrAYqz5MEJG+erSv0k9KJLb6q7++17Lafk1scaTIFXcMJlwK8Mw==
 
 "@types/node@^18.11.9":
   version "18.11.9"
@@ -44,6 +51,11 @@ buffer-from@^1.0.0:
   resolved "https://registry.synerate.com/buffer-from/-/buffer-from-1.1.1.tgz#32713bc028f75c02fdb710d7c7bcec1f2c6070ef"
   integrity sha512-MQcXEUbCKtEo7bhqEs6560Hyd4XaovZlO/k9V3hjVUF/zwW7KBVdSK4gIt/bzwS9MbR5qob+F5jusZsb0YQK2A==
 
+complex.js@^2.1.1:
+  version "2.1.1"
+  resolved "https://registry.synerate.com/complex.js/-/complex.js-2.1.1.tgz#0675dac8e464ec431fb2ab7d30f41d889fb25c31"
+  integrity sha512-8njCHOTtFFLtegk6zQo0kkVX1rngygb/KQI6z1qZxlFI3scluC+LVTCFbrkWjBv4vvLlbQ9t88IPMC6k95VTTg==
+
 config@^3.3.8:
   version "3.3.8"
   resolved "https://registry.synerate.com/config/-/config-3.3.8.tgz#14ef7aef22af25877fdaee696ec64d761feb7be0"
@@ -56,6 +68,21 @@ countdown@^2.6.0:
   resolved "https://registry.synerate.com/countdown/-/countdown-2.6.0.tgz#677fb8e3a9d4cc4e76415901ba253b518af34177"
   integrity sha1-Z3+446nUzE52QVkBuiU7UYrzQXc=
 
+decimal.js@^10.4.2:
+  version "10.4.2"
+  resolved "https://registry.synerate.com/decimal.js/-/decimal.js-10.4.2.tgz#0341651d1d997d86065a2ce3a441fbd0d8e8b98e"
+  integrity sha512-ic1yEvwT6GuvaYwBLLY6/aFFgjZdySKTE8en/fkU3QICTmRtgtSlFn0u0BXN06InZwtfCelR7j8LRiDI/02iGA==
+
+escape-latex@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.synerate.com/escape-latex/-/escape-latex-1.2.0.tgz#07c03818cf7dac250cce517f4fda1b001ef2bca1"
+  integrity sha512-nV5aVWW1K0wEiUIEdZ4erkGGH8mDxGyxSeqPzRNtWP7ataw+/olFObw7hujFWlVjNsaDFw5VZ5NzVSIqRgfTiw==
+
+fraction.js@^4.2.0:
+  version "4.2.0"
+  resolved "https://registry.synerate.com/fraction.js/-/fraction.js-4.2.0.tgz#448e5109a313a3527f5a3ab2119ec4cf0e0e2950"
+  integrity sha512-MhLuK+2gUcnZe8ZHlaaINnQLl0xRIGRfcGk2yl8xoQAfHrSsL3rYu6FCmBdkdbhc9EPlwyGHewaRsvwRMJtAlA==
+
 isomorphic-fetch@^3.0.0:
   version "3.0.0"
   resolved "https://registry.synerate.com/isomorphic-fetch/-/isomorphic-fetch-3.0.0.tgz#0267b005049046d2421207215d45d6a262b8b8b4"
@@ -63,6 +90,11 @@ isomorphic-fetch@^3.0.0:
   dependencies:
     node-fetch "^2.6.1"
     whatwg-fetch "^3.4.1"
+
+javascript-natural-sort@^0.7.1:
+  version "0.7.1"
+  resolved "https://registry.synerate.com/javascript-natural-sort/-/javascript-natural-sort-0.7.1.tgz#f9e2303d4507f6d74355a73664d1440fb5a0ef59"
+  integrity sha512-nO6jcEfZWQXDhOiBtG2KvKyEptz7RVbpGP4vTD2hLBdmNQSsCiicO2Ioinv6UI4y9ukqnBpy+XZ9H6uLNgJTlw==
 
 js-yaml@^4.1.0:
   version "4.1.0"
@@ -88,15 +120,30 @@ magic-string@^0.26.7:
   dependencies:
     sourcemap-codec "^1.4.8"
 
-memoize-lit@^1.5.0:
-  version "1.5.0"
-  resolved "https://registry.synerate.com/memoize-lit/-/memoize-lit-1.5.0.tgz#720e54ed7b0330b19589288217947ce5350a3fed"
-  integrity sha512-pkkIcuBeD2feBtrztSESfsX3NcSE5vPeJi/14rikvTMpOjwG6JpsYwGL5IMhovQgYSPKddVma/8bL725PLAtsg==
+mathjs@^11.4.0:
+  version "11.4.0"
+  resolved "https://registry.synerate.com/mathjs/-/mathjs-11.4.0.tgz#9dadfac3470ffcbeeff4abf53a0c7b93bb3a7a02"
+  integrity sha512-SGhKmXnwsPWrLHvhzm849RJPMjFTgLgVwKtv2L+IY7XHB4nuzyZLfV2eHT1HtBZ4yzsLHgcqak47zMmxuEIIUg==
+  dependencies:
+    "@babel/runtime" "^7.20.1"
+    complex.js "^2.1.1"
+    decimal.js "^10.4.2"
+    escape-latex "^1.2.0"
+    fraction.js "^4.2.0"
+    javascript-natural-sort "^0.7.1"
+    seedrandom "^3.0.5"
+    tiny-emitter "^2.1.0"
+    typed-function "^4.1.0"
 
-moment-timezone@^0.5.38:
-  version "0.5.38"
-  resolved "https://registry.synerate.com/moment-timezone/-/moment-timezone-0.5.38.tgz#9674a5397b8be7c13de820fd387d8afa0f725aad"
-  integrity sha512-nMIrzGah4+oYZPflDvLZUgoVUO4fvAqHstvG3xAUnMolWncuAiLDWNnJZj6EwJGMGfb1ZcuTFE6GI3hNOVWI/Q==
+memoize-lit@^1.6.0:
+  version "1.6.0"
+  resolved "https://registry.synerate.com/memoize-lit/-/memoize-lit-1.6.0.tgz#b189c2b24a049114ec2aef39f5786137d9ca1dfc"
+  integrity sha512-T+9X7fAdS0u97AWnxGujZXYyCWWNX6AB2KfBmdYS+4abUdjUdyXKRBmO92a3Cpwv8x9RXW8kFKrd/EF0bwl5Dw==
+
+moment-timezone@^0.5.39:
+  version "0.5.39"
+  resolved "https://registry.synerate.com/moment-timezone/-/moment-timezone-0.5.39.tgz#342625a3b98810f04c8f4ea917e448d3525e600b"
+  integrity sha512-hoB6suq4ISDj7BDgctiOy6zljBsdYT0++0ZzZm9rtxIvJhIbQ3nmbgSWe7dNFGurl6/7b1OUkHlmN9JWgXVz7w==
   dependencies:
     moment ">= 2.9.0"
 
@@ -111,6 +158,16 @@ node-fetch@^2.6.1:
   integrity sha512-ZjMPFEfVx5j+y2yF35Kzx5sF7kDzxuDj6ziH4FFbOp87zKDZNx8yExJIb05OGF4Nlt9IHFIMBkRl41VdvcNdbQ==
   dependencies:
     whatwg-url "^5.0.0"
+
+regenerator-runtime@^0.13.10:
+  version "0.13.11"
+  resolved "https://registry.synerate.com/regenerator-runtime/-/regenerator-runtime-0.13.11.tgz#f6dca3e7ceec20590d07ada785636a90cdca17f9"
+  integrity sha512-kY1AZVr2Ra+t+piVaJ4gxaFaReZVH40AKNo7UCX6W+dEwBo/2oZJzqfuN1qLq1oL45o56cPaTXELwrTh8Fpggg==
+
+seedrandom@^3.0.5:
+  version "3.0.5"
+  resolved "https://registry.synerate.com/seedrandom/-/seedrandom-3.0.5.tgz#54edc85c95222525b0c7a6f6b3543d8e0b3aa0a7"
+  integrity sha512-8OwmbklUNzwezjGInmZ+2clQmExQPvomqjL7LFqOYqtmuxRgQYqOD3mHaU+MvZn5FLUeVxVfQjwLZW/n/JFuqg==
 
 source-map-support@^0.5.21:
   version "0.5.21"
@@ -130,15 +187,25 @@ sourcemap-codec@^1.4.8:
   resolved "https://registry.synerate.com/sourcemap-codec/-/sourcemap-codec-1.4.8.tgz#ea804bd94857402e6992d05a38ef1ae35a9ab4c4"
   integrity sha512-9NykojV5Uih4lgo5So5dtw+f0JgJX30KCNI8gwhz2J9A15wD0Ml6tjHKwf6fTSa6fAdVBdZeNOs9eJ71qCk8vA==
 
+tiny-emitter@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.synerate.com/tiny-emitter/-/tiny-emitter-2.1.0.tgz#1d1a56edfc51c43e863cbb5382a72330e3555423"
+  integrity sha512-NB6Dk1A9xgQPMoGqC5CVXn123gWyte215ONT5Pp5a0yt4nlEoO1ZWeCwpncaekPHXO60i47ihFnZPiRPjRMq4Q==
+
 tr46@~0.0.3:
   version "0.0.3"
   resolved "https://registry.yarnpkg.com/tr46/-/tr46-0.0.3.tgz#8184fd347dac9cdc185992f3a6622e14b9d9ab6a"
   integrity sha1-gYT9NH2snNwYWZLzpmIuFLnZq2o=
 
-typescript@^4.8.4:
-  version "4.8.4"
-  resolved "https://registry.synerate.com/typescript/-/typescript-4.8.4.tgz#c464abca159669597be5f96b8943500b238e60e6"
-  integrity sha512-QCh+85mCy+h0IGff8r5XWzOVSbBO+KfeYrMQh7NJ58QujwcE22u+NUSmUxqF+un70P9GXKxa2HCNiTTMJknyjQ==
+typed-function@^4.1.0:
+  version "4.1.0"
+  resolved "https://registry.synerate.com/typed-function/-/typed-function-4.1.0.tgz#da4bdd8a6d19a89e22732f75e4a410860aaf9712"
+  integrity sha512-DGwUl6cioBW5gw2L+6SMupGwH/kZOqivy17E4nsh1JI9fKF87orMmlQx3KISQPmg3sfnOUGlwVkroosvgddrlg==
+
+typescript@^4.9.3:
+  version "4.9.3"
+  resolved "https://registry.synerate.com/typescript/-/typescript-4.9.3.tgz#3aea307c1746b8c384435d8ac36b8a2e580d85db"
+  integrity sha512-CIfGzTelbKNEnLpLdGFgdyKhG23CKdKgQPOBc+OUNrkJ2vr+KSzsSV5kq5iWhEQbok+quxgGzrAtGWCyU7tHnA==
 
 webidl-conversions@^3.0.0:
   version "3.0.1"
