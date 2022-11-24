@@ -10,6 +10,7 @@ import { randomuser } from './randomuser';
 import * as str from './string';
 import { time } from './time';
 import { trovo } from './trovo';
+import { tweet } from './tweet';
 import { twitch } from './twitch';
 import { uptime } from './uptime';
 import { urlfetch } from './urlfetch';
@@ -31,6 +32,7 @@ export const methods = {
     time,
     trovo,
     twitch,
+    tweet,
     uptime,
     urlfetch,
     ...users,

@@ -12,6 +12,8 @@ providers:
         base: 'https://trovo.live/'
         api: 'https://open-api.trovo.live'
         clientId: ''
+    picarto:
+        base: 'https://picarto.tv/'
 # API Configs.
 api:
     exozone:
@@ -24,3 +26,6 @@ api:
         key: ''
     pretzel:
         base: 'https://api.pretzel.tv/'
+    twitter:
+        base: 'https://api.twitter.com/'
+        key: ''

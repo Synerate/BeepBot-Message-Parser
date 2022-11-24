@@ -1,11 +1,10 @@
 import { chain, random } from 'lodash';
+import { evaluate } from 'mathjs';
 
 import { IMessage, ISetting } from '../interface';
 
-export function query(message: IMessage) {
-    return message.message.args.slice(1)
-        .join(' ');
-}
+export const query = (message: IMessage) => message.message.args.slice(1).join(' ');
+export const echo = query;
 
 export function randomnum(_message: IMessage, _settings: ISetting, _request: typeof fetch, min: string, max: string) {
     if (isNaN(Number(min)) || isNaN(Number(max))) {
@@ -21,6 +20,7 @@ export function randomnum(_message: IMessage, _settings: ISetting, _request: typ
     return random(Number(min), Number(max))
         .toString();
 }
+export const randint = randomnum;
 
 export function add(_message: IMessage, _settings: ISetting, _request: typeof fetch, ...numbers: string[]) {
     if (numbers == null || numbers.length > 10) {
@@ -50,13 +50,8 @@ export function arg(message: IMessage, _settings: ISetting, _request: typeof fet
     return hasArg;
 }
 
-export function urlencode(_message: IMessage, _settings: ISetting, _request: typeof fetch, str: string) {
-    return encodeURIComponent(str);
-}
-
-export function urldecode(_message: IMessage, _settings: ISetting, _request: typeof fetch, str: string) {
-    return decodeURIComponent(str);
-}
+export const urlencode = (_message: IMessage, _settings: ISetting, _request: typeof fetch, str: string) => encodeURIComponent(str);
+export const urldecode = (_message: IMessage, _settings: ISetting, _request: typeof fetch, str: string) => decodeURIComponent(str);
 
 export function randlist(_message: IMessage, _settings: ISetting, _request: typeof fetch, ...str: string[]) {
     if (str == null || str.length < 1) {
@@ -75,3 +70,17 @@ export function randlist(_message: IMessage, _settings: ISetting, _request: type
 }
 
 export const listpick = randlist;
+export const rngphrase = randlist;
+
+export function math(_message: IMessage, _settings: ISetting, _request: typeof fetch, ...str: string[]) {
+    if (str == null || str.length < 1) {
+        return;
+    }
+
+    const expression = str.join(' ');
+    try {
+        return evaluate(expression);
+    } catch (e) {
+        return '[Error: Invalid Expression]';
+    }
+}

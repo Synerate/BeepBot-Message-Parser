@@ -29,7 +29,9 @@ async function test() {
     // const INPUT = '{repeat {randomnum 1 10} 2} ; {repeat {randomnum 1 10} 2} ; {repeat {randomnum 1 10} 2}; {repeat {randomnum 1 10} 2}';
     // const INPUT = '{incr {repeat {randomnum 15 20} 5} {repeat {randomnum 15 20} 2}}';
     // const INPUT = '{repeat {repeat {randomnum 15 20} 5} 4}';
-    const INPUT = '{lastfm spslive_}'
+    // const INPUT = '{weather York,UK}'
+    // const INPUT = 'Beep can MATH?! {math 10c to f}';
+    const INPUT = `{tweet SPSinBOS}`
 
     console.log('Input:', INPUT);
     const res = await instance.parse(message, setting, INPUT);
