@@ -29,3 +29,6 @@ api:
     twitter:
         base: 'https://api.twitter.com/'
         key: ''
+    mastodon:
+        base: ''
+        key: ''

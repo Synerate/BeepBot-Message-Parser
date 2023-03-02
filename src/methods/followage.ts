@@ -32,7 +32,7 @@ export const methods = {
         return countdown(new Date(), moment(req.data.followers[0].insertedAt).toDate()).toString();
     },
     twitch: async (parser: Parser, _request: never, channelId: string, userId: string, coreId: string, serviceId: string): Promise<string> => {
-        const res = await parser.opts.reqCallback(
+        const res = await parser.middleware.onServiceAPI(
             `${config.get<string>('providers.twitch.api')}helix/users/follows?from_id=${userId}&to_id=${channelId}`, {
                 coreId,
                 method: 'GET',

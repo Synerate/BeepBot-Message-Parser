@@ -9,32 +9,8 @@ import { tokenizer } from './compiler/tokenizer';
 import { IExpression, transformer } from './compiler/transformer';
 import { IMessage, ISetting } from './interface';
 import { methods } from './methods';
-import { VarType } from './methods/variable';
+import { Middleware } from './middleware';
 
-interface IReqOpts {
-    coreId?: string;
-    method: string;
-    serviceId?: string;
-}
-
-export interface IOpts {
-    /**
-     * Request callback to ask the provider to send a request and send the data back for the parser to use.
-     *
-     * @returns Object/String data which is sent back from the relevant API service called. The method should then translate the data.
-     */
-    reqCallback?(uri: string, opts: IReqOpts): Promise<any>;
-    /**
-     * Request callback for a customapi parser. Which allows users to hit external data-suppliers to get information back.
-     *
-     * @returns Object/String data which is sent back from the relevant API service called. The method should then translate the data.
-     */
-    reqCustomAPI?(uri: string, message: IMessage, pickOpts: string): Promise<any>;
-    /**
-     * Variable callback to process any change(s).
-     */
-    varCallback?(coreId: string, varName: string, type: VarType, val: string, reset: boolean): Promise<number>;
-}
 export { VarType } from './methods/variable';
 
 /**
@@ -57,7 +33,11 @@ const REPEAT_WHITELIST = [
 ];
 
 export class Parser {
-    constructor(public opts: IOpts = {}) {}
+    constructor(public middleware: Middleware = {}) {
+        if (middleware?.onServiceAPI) {
+            this.middleware.onServiceAPI = memoize(middleware.onServiceAPI, { maxAge: 60000 }); // 1 minute memoize
+        }
+    }
 
     /**
      * Parse the text given to return the parsed generated outputs.

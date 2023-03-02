@@ -1,9 +1,11 @@
 import * as channel from './channel';
+import { charity } from './charity';
 import { costream } from './costream';
 import { extralife } from './extralife';
 import { followage } from './followage';
 import { glimesh } from './glimesh';
 import { lastfm } from './lastfm';
+import { mastodon } from './mastodon';
 import { picarto } from './picarto';
 import { pretzel } from './pretzel';
 import { randomuser } from './randomuser';
@@ -20,11 +22,13 @@ import { weather } from './weather';
 
 export const methods = {
     ...channel,
+    charity,
     costream,
     extralife,
     followage,
     glimesh,
     lastfm,
+    mastodon,
     picarto,
     pretzel,
     randomuser,

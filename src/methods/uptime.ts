@@ -53,7 +53,7 @@ const providers = {
         return countdown(new Date(), moment(new Date(Number(res['started_at']) * 1000)).toDate());
     },
     twitch: async (parser: Parser, _request: typeof fetch, channelId: string | number, coreId: string, serviceId: string): Promise<any> => {
-        const res = await parser.opts.reqCallback(`${config.get<string>('providers.twitch.api')}helix/streams?user_id=${channelId}`, {
+        const res = await parser.middleware.onServiceAPI(`${config.get<string>('providers.twitch.api')}helix/streams?user_id=${channelId}`, {
             coreId,
             method: 'GET',
             serviceId,

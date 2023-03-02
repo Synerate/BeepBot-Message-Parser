@@ -2,7 +2,7 @@ import { Parser } from '../';
 import { IMessage } from '../interface';
 
 export async function urlfetch(this: Parser, message: IMessage, _settings: any, _request: typeof fetch, ...uriArgs: string[]) {
-    if (this.opts.reqCustomAPI == null) {
+    if (this?.middleware?.onExternalAPI == null) {
         return '[Error: Custom API Not Supported]';
     }
 
@@ -24,7 +24,7 @@ export async function urlfetch(this: Parser, message: IMessage, _settings: any, 
         return '[Error: URI Missing]';
     }
 
-    return this.opts.reqCustomAPI(uri, message, pickOpts)
+    return this.middleware.onExternalAPI(uri, message, pickOpts)
         .then(res => {
             if (res == null) {
                 return '[Error: API Error]';
