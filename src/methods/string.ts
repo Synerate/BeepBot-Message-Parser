@@ -66,7 +66,8 @@ export function randlist(_message: IMessage, _settings: ISetting, _request: type
     return chain(list)
         .shuffle()
         .shuffle()
-        .sampleSize(1);
+        .sampleSize(1)
+        .valueOf();
 }
 
 export const listpick = randlist;
