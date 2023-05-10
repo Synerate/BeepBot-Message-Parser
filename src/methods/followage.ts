@@ -53,7 +53,7 @@ export const methods = {
             'Content-Type': 'application/json',
             'Accept': 'application/json',
         };
-        const res: any = await httpRequest(request, `${config.get<string>('providers.kickProxy.api')}v1/channels/${channelId}/users/${userName}`, { headers });
+        const res: any = await httpRequest(request, `${config.get<string>('providers.kickProxy.api')}v1/channels/${String(channelId).toLowerCase()}/users/${String(userName).toLowerCase()}`, { headers });
         if (res == null) {
             return '[Error: API Error]';
         }

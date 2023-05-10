@@ -84,7 +84,7 @@ const providers = {
             'Content-Type': 'application/json',
             'Accept': 'application/json',
         };
-        const res: any = await httpRequest(request, `${config.get<string>('providers.kickProxy.api')}v1/channels/${channelId}`, { headers });
+        const res: any = await httpRequest(request, `${config.get<string>('providers.kickProxy.api')}v1/channels/${String(channelId).toUpperCase()}`, { headers });
         if (res == null || res.livestream == null) {
             return '[Channel Offline]';
         }
