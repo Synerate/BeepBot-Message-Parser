@@ -18,12 +18,18 @@ export async function httpRequest<T>(request: typeof fetch, uri: string, init: R
         return undefined;
     }
 
+    const reqClone = { ...req };
+
     try {
-        return await req.clone()
-            .json();
+        return req.json();
     } catch (err) {
-        return req.clone()
-            .text();
+        return reqClone.text();
+    }
+}
+
+interface MappingData {
+    [ provider: string ]: {
+        [ key: string ]: string | string[];
     }
 }
 
@@ -34,7 +40,7 @@ export async function httpRequest<T>(request: typeof fetch, uri: string, init: R
  * does not need to understand how to read an API or learn to use a provider
  * API to get the response in the first place.
  */
-const providerMapping = {
+const providerMapping: MappingData = {
     glimesh: {
         game: 'data.channel.category.name',
         name: 'data.channel.streamer.username',
@@ -55,6 +61,17 @@ const providerMapping = {
         name: 'name',
         title: 'title',
     },
+    kick: {
+        game: [
+            'livestream.categories[0].name',
+            'recent_categories[0].name',
+        ],
+        title: [
+            'livestream.session_title',
+            'previous_livestreams[0].session_title',
+        ],
+        name: 'user.username',
+    },
 };
 
 /**
@@ -63,7 +80,7 @@ const providerMapping = {
  *
  * This way the users don't have to remember or look at the APIs to get the correct naming.
  */
-export function getFromSimple(provider: string, toPick: string): string {
+export function getFromSimple(provider: string, toPick: string) {
     if (providerMapping[provider.toLowerCase()] === undefined) {
         throw TypeError('Invalid Provider.');
     }

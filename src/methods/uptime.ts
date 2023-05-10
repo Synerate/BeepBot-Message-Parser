@@ -79,6 +79,18 @@ const providers = {
 
         return countdown(new Date(), moment(new Date(res['last_live'])).toDate());
     },
+    kick: async (_parser: Parser, request: typeof fetch, channelId: string | number, coreId: string, serviceId: string): Promise<any> => {
+        const headers = {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+        };
+        const res: any = await httpRequest(request, `${config.get<string>('providers.kickProxy.api')}v1/channels/${channelId}`, { headers });
+        if (res == null || res.livestream == null) {
+            return '[Channel Offline]';
+        }
+
+        return countdown(new Date(), moment(res.livestream.created_at).toDate());
+    },
 };
 
 /**

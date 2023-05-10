@@ -4,6 +4,7 @@ import { costream } from './costream';
 import { extralife } from './extralife';
 import { followage } from './followage';
 import { glimesh } from './glimesh';
+import { kick } from './kick';
 import { lastfm } from './lastfm';
 import { mastodon } from './mastodon';
 import { picarto } from './picarto';
@@ -27,6 +28,7 @@ export const methods = {
     extralife,
     followage,
     glimesh,
+    kick,
     lastfm,
     mastodon,
     picarto,

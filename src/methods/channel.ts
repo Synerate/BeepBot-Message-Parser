@@ -4,12 +4,14 @@ import { Parser } from '../';
 import { IMessage, ISetting } from '../interface';
 import { removeTag } from '../lib/helpers';
 import { glimesh } from './glimesh';
+import { kick } from './kick';
 import { picarto } from './picarto';
 import { trovo } from './trovo';
 import { twitch } from './twitch';
 
 const providers: { [provider: string]: (...args: any[]) => Promise<string> } = {
     glimesh,
+    kick,
     trovo,
     twitch,
     picarto,

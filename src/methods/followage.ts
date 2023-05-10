@@ -48,6 +48,22 @@ export const methods = {
 
         return countdown(new Date(), moment(res.data[0].followed_at).toDate()).toString();
     },
+    kick: async (_parser: Parser, request: typeof fetch, channelId: string, userName: string, _coreId: string, _serviceId: string): Promise<string> => {
+        const headers = {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+        };
+        const res: any = await httpRequest(request, `${config.get<string>('providers.kickProxy.api')}v1/channels/${channelId}/users/${userName}`, { headers });
+        if (res == null) {
+            return '[Error: API Error]';
+        }
+
+        if (res.following_since == null) {
+            return '[User Not Following]';
+        }
+
+        return countdown(new Date(), moment(res.following_since).toDate()).toString();
+    },
 };
 
 export async function followage(this: Parser, message: IMessage, _settings: never, request: typeof fetch) {
@@ -55,7 +71,7 @@ export async function followage(this: Parser, message: IMessage, _settings: neve
         return '[Error: Invalid Provider]';
     }
 
-    if (message.provider === 'glimesh') {
+    if ([ 'glimesh', 'kick' ].includes(message.provider.toLowerCase())) {
         return methods[message.provider.toLowerCase()](this, request, message.channel.name, message.user.name, message.channel.coreId, message.channel.serviceId);
     }
 
