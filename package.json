@@ -12,7 +12,7 @@
     "js-yaml": "^4.1.0",
     "lodash": "^4.17.21",
     "magic-string": "^0.30.0",
-    "mathjs": "^11.4.0",
+    "mathjs": "^11.8.1",
     "memoize-lit": "^1.6.0",
     "moment": "^2.29.4",
     "moment-timezone": "^0.5.43"
