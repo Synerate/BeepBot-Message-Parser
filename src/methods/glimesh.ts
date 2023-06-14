@@ -1,5 +1,5 @@
 import * as config from 'config';
-import { get } from 'lodash';
+import { get, isString } from 'lodash';
 
 import { Parser } from '../';
 import { IMessage, ISetting } from '../interface';
@@ -57,8 +57,8 @@ export async function glimesh(this: Parser, message: IMessage, _settings: ISetti
         }
     `;
 
-    const req: IGlimeshRes = await httpRequest(request, config.get('providers.glimesh.api'), { headers: reqHeaders, method: 'POST', body: reqBody });
-    if (req == null) {
+    const req = await httpRequest<IGlimeshRes>(request, config.get('providers.glimesh.api'), { headers: reqHeaders, method: 'POST', body: reqBody });
+    if (req == null || isString(req)) {
         return '[Error: API Error]';
     }
     if (req?.data?.channel === null) {

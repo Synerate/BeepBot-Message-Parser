@@ -1,4 +1,5 @@
 import * as config from 'config';
+import { isString } from 'lodash';
 import { stringify } from 'querystring';
 
 import { IMessage, ISetting } from '../interface';
@@ -87,8 +88,8 @@ export async function weather(_message: IMessage, _settings: ISetting, request: 
         q: region,
         units: 'metric',
     };
-    const req: IWeather = await httpRequest(request, `${config.get<string>('api.weather.base')}?${stringify(reqOpts)}`);
-    if (req === undefined) {
+    const req = await httpRequest<IWeather>(request, `${config.get<string>('api.weather.base')}?${stringify(reqOpts)}`);
+    if (req === undefined || isString(req)) {
         return '[Error: API Error]';
     }
 

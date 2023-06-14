@@ -1,6 +1,6 @@
 import * as config from 'config';
 import * as countdown from 'countdown';
-import { truncate, unescape } from 'lodash';
+import { isString, truncate, unescape } from 'lodash';
 import * as moment from 'moment';
 import { format } from 'util';
 
@@ -35,8 +35,8 @@ export async function mastodon(this: Parser, _message: IMessage, _settings: ISet
     };
 
     const SEARCH_URL = format(BASE_SEARCH_URL, config.get('api.mastodon.base'), account);
-    const userAccount: ISearch = await httpRequest<ISearch>(request, SEARCH_URL, { headers });
-    if (userAccount == null) {
+    const userAccount = await httpRequest<ISearch>(request, SEARCH_URL, { headers });
+    if (userAccount == null || isString(userAccount)) {
         return '[Error: API Error]';
     }
     if (userAccount.accounts.length === 0) {
@@ -44,8 +44,8 @@ export async function mastodon(this: Parser, _message: IMessage, _settings: ISet
     }
 
     const STATUSES_URL = format(BASE_STATUSES_URL, config.get('api.mastodon.base'), userAccount.accounts[0].id);
-    const statuses: IStatus[] = await httpRequest<IStatus[]>(request, STATUSES_URL);
-    if (statuses == null) {
+    const statuses = await httpRequest<IStatus[]>(request, STATUSES_URL);
+    if (statuses == null || isString(statuses)) {
         return '[Error: API Error]';
     }
     if (statuses.length === 0) {

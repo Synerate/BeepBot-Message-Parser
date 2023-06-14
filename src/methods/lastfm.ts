@@ -1,4 +1,5 @@
 import * as config from 'config';
+import { isString } from 'lodash';
 import { stringify } from 'querystring';
 
 import { IMessage, ISetting } from '../interface';
@@ -62,12 +63,12 @@ export async function lastfm(_message: IMessage, _settings: ISetting, request: t
         user,
     };
 
-    const res: IRecentTracks = await httpRequest(request, `${config.get<string>('api.lastfm.base')}?${stringify(reqOpts)}`);
-    if (res == null || res.error != null) {
+    const req = await httpRequest<IRecentTracks>(request, `${config.get<string>('api.lastfm.base')}?${stringify(reqOpts)}`);
+    if (req == null || isString(req) || req?.error != null) {
         return '[Error: Invalid User]';
     }
 
-    const { name, artist, url } = getTrack(res.recenttracks.track, when);
+    const { name, artist, url } = getTrack(req.recenttracks.track, when);
     switch (type) {
         case 'song':
             return name;

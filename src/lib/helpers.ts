@@ -12,7 +12,7 @@ import { isArray, isObject } from 'lodash';
   * Make a http(s) request to a json api.
   */
 // tslint:disable-next-line: max-line-length
-export async function httpRequest<T>(request: typeof fetch, uri: string, init: RequestInit = {}): Promise<T | any> {
+export async function httpRequest<T>(request: typeof fetch, uri: string, init: RequestInit = {}): Promise<T | string> {
     const req = await request(uri, init);
     if (req.status !== 200) {
         return undefined;

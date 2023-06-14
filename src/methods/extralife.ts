@@ -1,3 +1,5 @@
+import { isString } from 'lodash';
+
 import { IMessage } from '../interface';
 import { httpRequest } from '../lib/helpers';
 
@@ -17,8 +19,8 @@ interface IAPIData {
 }
 
 export async function extralife(_message: IMessage, _settings: any, request: typeof fetch, id: string, type: ExtraLifeType = 'all') {
-    const req: IAPIData = await httpRequest(request, `https://www.extra-life.org/api/participants/${id}`);
-    if (req === undefined || (<any>req).length === 0) {
+    const req = await httpRequest<IAPIData>(request, `https://www.extra-life.org/api/participants/${id}`);
+    if (req === undefined || (<any>req).length === 0 || isString(req)) {
         return '[Error: API Error]';
     }
 

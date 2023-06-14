@@ -1,5 +1,6 @@
 import * as config from 'config';
 import * as countdown from 'countdown';
+import { isString } from 'lodash';
 import * as moment from 'moment';
 
 import { Parser } from '../';
@@ -22,8 +23,8 @@ const providers = {
             }
         `;
 
-        const req: IGlimeshRes = await httpRequest(request, config.get('providers.glimesh.api'), { headers: reqHeaders, method: 'POST', body: reqBody });
-        if (req == null) {
+        const req = await httpRequest<IGlimeshRes>(request, config.get('providers.glimesh.api'), { headers: reqHeaders, method: 'POST', body: reqBody });
+        if (req == null || isString(req)) {
             return '[Error: API Error]';
         }
         if (req?.data?.channel?.stream === null) {

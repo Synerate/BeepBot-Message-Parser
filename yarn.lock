@@ -29,15 +29,15 @@
   resolved "https://registry.synerate.com/@types%2fisomorphic-fetch/-/isomorphic-fetch-0.0.36.tgz#3a6d8f63974baf26b10fd1314db910633108a769"
   integrity sha512-ulw4d+vW1HKn4oErSmNN2HYEcHGq0N1C5exlrMM0CRqX1UUpFhGb5lwiom5j9KN3LBJJDLRmYIZz1ghm7FIzZw==
 
-"@types/lodash@^4.14.191":
-  version "4.14.191"
-  resolved "https://registry.synerate.com/@types%2flodash/-/lodash-4.14.191.tgz#09511e7f7cba275acd8b419ddac8da9a6a79e2fa"
-  integrity sha512-BdZ5BCCvho3EIXw6wUCXHe7rS53AIDPLE+JzwgT+OsJk53oBfbSmZZ7CX4VaRoN78N+TJpFi9QPlfIVNmJYWxQ==
+"@types/lodash@^4.14.195":
+  version "4.14.195"
+  resolved "https://registry.synerate.com/@types%2flodash/-/lodash-4.14.195.tgz#bafc975b252eb6cea78882ce8a7b6bf22a6de632"
+  integrity sha512-Hwx9EUgdwf2GLarOjQp5ZH8ZmblzcbTBC2wtQWNKARBSxM9ezRIAUpeDTgoQRAFB0+8CNWXVA9+MaSOzOF3nPg==
 
-"@types/node@^18.14.4":
-  version "18.14.4"
-  resolved "https://registry.synerate.com/@types%2fnode/-/node-18.14.4.tgz#0e64ec0b35a772e1e3d849f9a0ff61782d0cb647"
-  integrity sha512-VhCw7I7qO2X49+jaKcAUwi3rR+hbxT5VcYF493+Z5kMLI0DL568b7JI4IDJaxWFH0D/xwmGJNoXisyX+w7GH/g==
+"@types/node@^20.3.1":
+  version "20.3.1"
+  resolved "https://registry.synerate.com/@types%2fnode/-/node-20.3.1.tgz#e8a83f1aa8b649377bb1fb5d7bac5cb90e784dfe"
+  integrity sha512-EhcH/wvidPy1WeML3TtYFGR83UzjxeWRen9V402T8aUGYsCHOmfoisV3ZSg03gAFIbLq8TnWOJ0f4cALtnSEUg==
 
 "@types/source-map-support@^0.5.6":
   version "0.5.6"
@@ -145,10 +145,10 @@ memoize-lit@^1.6.0:
   resolved "https://registry.synerate.com/memoize-lit/-/memoize-lit-1.6.0.tgz#b189c2b24a049114ec2aef39f5786137d9ca1dfc"
   integrity sha512-T+9X7fAdS0u97AWnxGujZXYyCWWNX6AB2KfBmdYS+4abUdjUdyXKRBmO92a3Cpwv8x9RXW8kFKrd/EF0bwl5Dw==
 
-moment-timezone@^0.5.41:
-  version "0.5.41"
-  resolved "https://registry.synerate.com/moment-timezone/-/moment-timezone-0.5.41.tgz#a7ad3285fd24aaf5f93b8119a9d749c8039c64c5"
-  integrity sha512-e0jGNZDOHfBXJGz8vR/sIMXvBIGJJcqFjmlg9lmE+5KX1U7/RZNMswfD8nKnNCnQdKTIj50IaRKwl1fvMLyyRg==
+moment-timezone@^0.5.43:
+  version "0.5.43"
+  resolved "https://registry.synerate.com/moment-timezone/-/moment-timezone-0.5.43.tgz#3dd7f3d0c67f78c23cd1906b9b2137a09b3c4790"
+  integrity sha512-72j3aNyuIsDxdF1i7CEgV2FfxM1r6aaqJyLB2vwb33mXYyoyLly+F1zbWqhA3/bVIoJ4szlUoMbUnVdid32NUQ==
   dependencies:
     moment "^2.29.4"
 
@@ -202,10 +202,10 @@ typed-function@^4.1.0:
   resolved "https://registry.synerate.com/typed-function/-/typed-function-4.1.0.tgz#da4bdd8a6d19a89e22732f75e4a410860aaf9712"
   integrity sha512-DGwUl6cioBW5gw2L+6SMupGwH/kZOqivy17E4nsh1JI9fKF87orMmlQx3KISQPmg3sfnOUGlwVkroosvgddrlg==
 
-typescript@^4.9.5:
-  version "4.9.5"
-  resolved "https://registry.synerate.com/typescript/-/typescript-4.9.5.tgz#095979f9bcc0d09da324d58d03ce8f8374cbe65a"
-  integrity sha512-1FXk9E2Hm+QzZQ7z+McJiHL4NW1F2EzMu9Nq9i3zAaGqibafqYwCVU6WyWAuyQRRzOlxou8xZSyXLEN8oKj24g==
+typescript@^5.1.3:
+  version "5.1.3"
+  resolved "https://registry.synerate.com/typescript/-/typescript-5.1.3.tgz#8d84219244a6b40b6fb2b33cc1c062f715b9e826"
+  integrity sha512-XH627E9vkeqhlZFQuL+UsyAXEnibT0kWR2FWONlr4sTjvxyJYnyefgrkyECLzM5NenmKzRAy2rR/OlYLA1HkZw==
 
 webidl-conversions@^3.0.0:
   version "3.0.1"
