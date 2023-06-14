@@ -11,6 +11,7 @@ import { picarto } from './picarto';
 import { pretzel } from './pretzel';
 import { randomuser } from './randomuser';
 import * as str from './string';
+import { tiktok } from './tiktok';
 import { time } from './time';
 import { trovo } from './trovo';
 import { tweet } from './tweet';
@@ -34,6 +35,7 @@ export const methods = {
     picarto,
     pretzel,
     randomuser,
+    tiktok,
     ...str,
     time,
     trovo,

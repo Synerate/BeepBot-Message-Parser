@@ -5,6 +5,14 @@ interface IReqOpts {
     coreId?: string;
     method: string;
     serviceId?: string;
+    /**
+     * Override the provider to use when attaining auth tokens.
+     */
+    provider?: string;
+    /**
+     * Optional body to send with the request. This is only used for POST requests.
+     */
+    body?: Object;
 }
 
 type MethodType = '';
