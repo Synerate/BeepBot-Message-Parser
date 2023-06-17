@@ -27,12 +27,16 @@ export function add(_message: IMessage, _settings: ISetting, _request: typeof fe
         return '[Invalid number of arguments]';
     }
 
-    return numbers
+    const toHandle = numbers
         .map(n => n.split(','))
         .flat()
         .map(Number)
-        .filter((n) => !isNaN(n))
-        .reduce((a, b) => a + b);
+        .filter((n) => !isNaN(n));
+    if (toHandle == null || toHandle.length < 1) {
+        return '[No valid numbers to process]';
+    }
+
+    return toHandle.reduce((a, b) => a + b);
 }
 
 export const incr = add;
