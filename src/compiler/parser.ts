@@ -61,7 +61,9 @@ export function parser(tokens: ITokens[]) {
         type: 'Program',
     };
     while (current < tokens.length) {
-        ast.body.push(walk());
+        try {
+            ast.body.push(walk());
+        } catch {}
     }
 
     return ast;
