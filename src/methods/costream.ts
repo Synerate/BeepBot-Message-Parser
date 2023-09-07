@@ -1,10 +1,11 @@
+import { ParserContext } from '../';
 import { IMessage } from '../interface';
 
 const supportedProviders = [
     'twitch',
 ];
 
-export async function costream(message: IMessage, _settings: any, _request: never, withLinks: string = 'true') {
+export async function costream(message: IMessage, _settings: any, _context: ParserContext, withLinks: string = 'true') {
     if (!supportedProviders.includes(message.provider.toLowerCase())) {
         return '[Error: Invalid Provider]';
     }

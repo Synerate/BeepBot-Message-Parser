@@ -1,38 +1,12 @@
 import * as config from 'config';
 import * as countdown from 'countdown';
-import { isString } from 'lodash';
 import * as moment from 'moment';
 
-import { Parser } from '../';
+import { Parser, ParserContext } from '../';
 import { IMessage, ISetting } from '../interface';
 import { httpRequest } from '../lib/helpers';
-import { IGlimeshRes } from './glimesh';
 
 const providers = {
-    glimesh: async (_parser: Parser, request: typeof fetch, channelId: string | number): Promise<string> => {
-        const reqHeaders = {
-            Authorization: `Client-ID ${config.get('providers.glimesh.clientId')}`,
-        };
-        const reqBody = `
-            query {
-                channel(id: ${channelId}) {
-                    stream {
-                        startedAt
-                    }
-                }
-            }
-        `;
-
-        const req = await httpRequest<IGlimeshRes>(request, config.get('providers.glimesh.api'), { headers: reqHeaders, method: 'POST', body: reqBody });
-        if (req == null || isString(req)) {
-            return '[Error: API Error]';
-        }
-        if (req?.data?.channel?.stream === null) {
-            return '[Channel Offline]';
-        }
-
-        return countdown(new Date(), moment(req.data.channel.stream.startedAt).toDate()).toString();
-    },
     trovo: async (_parser: Parser, request: typeof fetch, channelId: string | number, _coreId: string, _serviceId: string): Promise<any> => {
         const reqHeaders = {
             Accept: 'application/json',
@@ -99,7 +73,7 @@ const providers = {
  *
  * @Optional: Accepts a channel Id to check. Needs to match the ID for the provider which the command is ran from.
  */
-export function uptime(this: Parser, message: IMessage, _settings: ISetting, request: typeof fetch, channelId: string | number = message.channel.id) {
+export function uptime(this: Parser, message: IMessage, _settings: ISetting, { request }: ParserContext, channelId: string | number = message.channel.id) {
     if (providers[message.provider.toLowerCase()] == null) {
         return '[Invalid Provider]';
     }

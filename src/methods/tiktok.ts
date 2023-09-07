@@ -1,4 +1,4 @@
-import { Parser } from '../';
+import { Parser, ParserContext } from '../';
 import { IMessage, ISetting } from '../interface';
 
 interface VideoResponse {
@@ -19,7 +19,7 @@ interface VideoResponse {
     };
 }
 
-export async function tiktok(this: Parser, message: IMessage, _settings: ISetting, _request: typeof fetch) {
+export async function tiktok(this: Parser, message: IMessage, _settings: ISetting, _context: ParserContext) {
     const res: VideoResponse = await this.middleware.onServiceAPI(
         'https://open.tiktokapis.com/v2/video/list/?fields=id,title,create_time,share_url',
         {

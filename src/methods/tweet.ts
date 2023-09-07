@@ -2,6 +2,7 @@ import * as config from 'config';
 import * as countdown from 'countdown';
 import * as moment from 'moment';
 
+import { ParserContext } from '../';
 import { IMessage, ISetting } from '../interface';
 import { httpRequest } from '../lib/helpers';
 
@@ -18,7 +19,7 @@ interface IResult {
 
 const buildQuery = (account: string) => `from:${account} -is:retweet -is:reply`;
 
-export function tweet(_message: IMessage, _settings: ISetting, request: typeof fetch, account: string) {
+export function tweet(_message: IMessage, _settings: ISetting, { request }: ParserContext, account: string) {
     if (account == null) {
         return '[Error: Account is required]';
     }

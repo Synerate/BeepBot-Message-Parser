@@ -14,15 +14,15 @@
   resolved "https://registry.synerate.com/@jridgewell%2fsourcemap-codec/-/sourcemap-codec-1.4.14.tgz#add4c98d341472a289190b424efbdb096991bb24"
   integrity sha512-XPSJHWmi394fuUuzDnGz1wiKqWfo1yXecHQMRf2l6hztTO+nPru658AyDngaBe7isIxEkRsPR3FZh+s7iVa4Uw==
 
-"@types/config@3.3.0":
-  version "3.3.0"
-  resolved "https://registry.synerate.com/@types%2fconfig/-/config-3.3.0.tgz#2b632cb37c639bf8d57054561f5a77d31dcebc1e"
-  integrity sha512-9kZSbl3/X3TVNowLCu5HFQdQmD+4287Om55avknEYkuo6R2dDrsp/EXEHUFvfYeG7m1eJ0WYGj+cbcUIhARJAQ==
+"@types/config@3.3.1":
+  version "3.3.1"
+  resolved "https://registry.synerate.com/@types%2fconfig/-/config-3.3.1.tgz#eb385f254cd08381db4dda7b9bef4cc2fd400e5d"
+  integrity sha512-ZhBk8IVIbc3cuES10j2I+xa3L68rpl1X35FdsNce/AiE7yJnhQaA7tvO5MRZblqpBny4OIddJ+WQL04I1933Zg==
 
-"@types/countdown@^0.0.8":
-  version "0.0.8"
-  resolved "https://registry.synerate.com/@types%2fcountdown/-/countdown-0.0.8.tgz#130f9c6654e64b8d8c361378c517bb63ecca13a2"
-  integrity sha512-kpWa+wlrYcvgymkaOIF3i40MnSMRNdv91piNVmJ22Pnd4A3QJXu21ngTzHHnLqKVtCjGWfO0FZKSXb3XiGiTdA==
+"@types/countdown@^0.0.9":
+  version "0.0.9"
+  resolved "https://registry.synerate.com/@types%2fcountdown/-/countdown-0.0.9.tgz#b994d807500f197bb46f04b9ba09b5450f0f4e24"
+  integrity sha512-jpZJ1h/63/crXJu4nUNWjE+F1Bvj5xZTBLwg8uprgpmLk6lhqHCijknVhV8mP+318R++qUjNarpLDGLxJfC9zQ==
 
 "@types/isomorphic-fetch@0.0.36":
   version "0.0.36"
@@ -39,12 +39,27 @@
   resolved "https://registry.synerate.com/@types%2fnode/-/node-20.3.1.tgz#e8a83f1aa8b649377bb1fb5d7bac5cb90e784dfe"
   integrity sha512-EhcH/wvidPy1WeML3TtYFGR83UzjxeWRen9V402T8aUGYsCHOmfoisV3ZSg03gAFIbLq8TnWOJ0f4cALtnSEUg==
 
+"@types/pluralize@^0.0.30":
+  version "0.0.30"
+  resolved "https://registry.synerate.com/@types%2fpluralize/-/pluralize-0.0.30.tgz#cddb9923240c20d15e6d5f98fd576ec856b9b3db"
+  integrity sha512-kVww6xZrW/db5BR9OqiT71J9huRdQ+z/r+LbDuT7/EK50mCmj5FoaIARnVv0rvjUS/YpDox0cDU9lpQT011VBA==
+
 "@types/source-map-support@^0.5.6":
   version "0.5.6"
   resolved "https://registry.synerate.com/@types%2fsource-map-support/-/source-map-support-0.5.6.tgz#aa4a8c98ec73a1f1f30a813573a9b2154a6eb39a"
   integrity sha512-b2nJ9YyXmkhGaa2b8VLM0kJ04xxwNyijcq12/kDoomCt43qbHBeK2SLNJ9iJmETaAj+bKUT05PQUu3Q66GvLhQ==
   dependencies:
     source-map "^0.6.0"
+
+acorn-walk@^8.2.0:
+  version "8.2.0"
+  resolved "https://registry.synerate.com/acorn-walk/-/acorn-walk-8.2.0.tgz#741210f2e2426454508853a2f44d0ab83b7f69c1"
+  integrity sha512-k+iyHEuPgSw6SbuDpGQM+06HQUa04DZ3o+F6CSzXMvvI5KMvnaEqXe+YVe555R9nn6GPt404fos4wcgpw12SDA==
+
+acorn@^8.7.0:
+  version "8.9.0"
+  resolved "https://registry.synerate.com/acorn/-/acorn-8.9.0.tgz#78a16e3b2bcc198c10822786fa6679e245db5b59"
+  integrity sha512-jaVNAFBHNLXspO543WnNNPZFRtavh3skAkITqD0/2aeMkKZTN+254PyhwxFYrk3vQ1xfY+2wbesJMs/JC8/PwQ==
 
 argparse@^2.0.1:
   version "2.0.1"
@@ -164,6 +179,11 @@ node-fetch@^2.6.1:
   dependencies:
     whatwg-url "^5.0.0"
 
+pluralize@^8.0.0:
+  version "8.0.0"
+  resolved "https://registry.synerate.com/pluralize/-/pluralize-8.0.0.tgz#1a6fa16a38d12a1901e0320fa017051c539ce3b1"
+  integrity sha512-Nc3IT5yHzflTfbjgqWcCPpo7DaKy4FnpB0l/zCAW0Tc7jxAiuqSxHasntB3D7887LSrA93kDJ9IXovxJYxyLCA==
+
 regenerator-runtime@^0.13.11:
   version "0.13.11"
   resolved "https://registry.synerate.com/regenerator-runtime/-/regenerator-runtime-0.13.11.tgz#f6dca3e7ceec20590d07ada785636a90cdca17f9"
@@ -206,6 +226,14 @@ typescript@^5.1.3:
   version "5.1.3"
   resolved "https://registry.synerate.com/typescript/-/typescript-5.1.3.tgz#8d84219244a6b40b6fb2b33cc1c062f715b9e826"
   integrity sha512-XH627E9vkeqhlZFQuL+UsyAXEnibT0kWR2FWONlr4sTjvxyJYnyefgrkyECLzM5NenmKzRAy2rR/OlYLA1HkZw==
+
+vm2@^3.9.19:
+  version "3.9.19"
+  resolved "https://registry.synerate.com/vm2/-/vm2-3.9.19.tgz#be1e1d7a106122c6c492b4d51c2e8b93d3ed6a4a"
+  integrity sha512-J637XF0DHDMV57R6JyVsTak7nIL8gy5KH4r1HiwWLf/4GBbb5MKL5y7LpmF4A8E2nR6XmzpmMFQ7V7ppPTmUQg==
+  dependencies:
+    acorn "^8.7.0"
+    acorn-walk "^8.2.0"
 
 webidl-conversions@^3.0.0:
   version "3.0.1"

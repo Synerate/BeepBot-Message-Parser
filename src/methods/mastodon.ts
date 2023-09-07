@@ -4,7 +4,7 @@ import { isString, truncate, unescape } from 'lodash';
 import * as moment from 'moment';
 import { format } from 'util';
 
-import { Parser } from '../';
+import { Parser, ParserContext } from '../';
 import { IMessage, ISetting } from '../interface';
 import { httpRequest } from '../lib/helpers';
 
@@ -29,7 +29,7 @@ interface IStatus {
 
 type IType = 'link' | 'text';
 
-export async function mastodon(this: Parser, _message: IMessage, _settings: ISetting, request: typeof fetch, account: string, type: IType = 'text') {
+export async function mastodon(this: Parser, _message: IMessage, _settings: ISetting, { request }: ParserContext, account: string, type: IType = 'text') {
     const headers = {
         Authorization: `Bearer ${config.get('api.mastodon.key')}`,
     };

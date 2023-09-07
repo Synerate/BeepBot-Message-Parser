@@ -1,12 +1,13 @@
+# UrlFetch Config
+urlfetch:
+    workerUri: ''
+    timeout: 10
+
 # Provider Configs.
 providers:
     twitch:
         base: 'https://twitch.tv/'
         api: 'https://api.twitch.tv/'
-        clientId: ''
-    glimesh:
-        base: 'https://glimesh.tv/'
-        api: 'https://glimesh.tv/api'
         clientId: ''
     trovo:
         base: 'https://trovo.live/'

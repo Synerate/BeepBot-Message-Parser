@@ -1,10 +1,10 @@
 import { get } from 'lodash';
 
-import { Parser } from '../';
+import { Parser, ParserContext } from '../';
 import { IMessage, ISetting } from '../interface';
 import { getFromSimple, httpRequest, isValueValid } from '../lib/helpers';
 
-export async function picarto(this: Parser, message: IMessage, _settings: ISetting, request: typeof fetch, type: string, channel = message.channel.id) {
+export async function picarto(this: Parser, message: IMessage, _settings: ISetting, { request }: ParserContext, type: string, channel = message.channel.id) {
     let uri: string | null = null;
 
     if (isNaN(Number(channel))) {

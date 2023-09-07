@@ -15,7 +15,7 @@ interface IReqOpts {
     body?: Object;
 }
 
-type MethodType = '';
+type MethodType = string;
 
 export interface Middleware {
     /**
@@ -40,5 +40,10 @@ export interface Middleware {
     /**
      * Handle a method call which may need to access other API services or database access. This is generic and can be used for any supported method.
      */
-    onHandleMethod?(type: MethodType, message: IMessage, args: string): Promise<string>;
+    onHandleMethod?(type: MethodType, message: IMessage, args?: object): Promise<any>;
+
+    /**
+     * Get headers to use for an URL fetch request.
+     */
+    onGetHeaders?(message: IMessage): Promise<any>;
 }

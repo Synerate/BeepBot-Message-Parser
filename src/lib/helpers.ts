@@ -41,11 +41,6 @@ interface MappingData {
  * API to get the response in the first place.
  */
 const providerMapping: MappingData = {
-    glimesh: {
-        game: 'data.channel.category.name',
-        name: 'data.channel.streamer.username',
-        title: 'data.channel.title',
-    },
     trovo: {
         game: 'category_name',
         name: 'username',

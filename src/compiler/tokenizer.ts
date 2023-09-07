@@ -32,7 +32,8 @@ export function tokenizer(input: string) {
             }
 
             char = input[++current];
-            tokens.push({ type: 'string', value, position: current });
+            tokens.push(...tokenizer(value));
+            // tokens.push({ type: 'string', value, position: current });
             continue;
         }
         // Ignore white spaces.

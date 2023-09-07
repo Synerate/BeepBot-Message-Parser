@@ -1,6 +1,7 @@
 import 'source-map-support/register';
 
 import * as fetch from 'isomorphic-fetch';
+import { trim } from 'lodash';
 import MagicString from 'magic-string';
 import { memoize } from 'memoize-lit';
 
@@ -13,6 +14,10 @@ import { Middleware } from './middleware';
 
 export { VarType } from './methods/variable';
 
+export interface ParserContext {
+    cache: Array<string | number | boolean | string[] | number[] | object>;
+    request: typeof fetch;
+}
 /**
  * Allowed methods which can be used with repeatables.
  *
@@ -37,6 +42,9 @@ export class Parser {
         if (middleware?.onServiceAPI) {
             this.middleware.onServiceAPI = memoize(middleware.onServiceAPI, { maxAge: 60000 }); // 1 minute memoize
         }
+        if (middleware?.onHandleMethod) {
+            this.middleware.onHandleMethod = memoize(middleware.onHandleMethod, { maxAge: 60000 }); // 1 minute memoize
+        }
     }
 
     /**
@@ -50,15 +58,26 @@ export class Parser {
         const parsed = parser(token);
         const transform = transformer(parsed);
         const original = new MagicString(text);
-        let request = memoize(fetch);
+
+        /**
+         * Create a context for the parser to use.
+         */
+        let context: ParserContext = {
+            cache: [],
+            request: memoize(fetch),
+        };
 
         for (let i = 0, length = transform.body.length; i < length; i++) {
             const part = transform.body[i];
 
             // Handle repeat.
             if (part.type === 'ExpressionStatement' && String(part.expression.callee.name).toLowerCase() === 'repeat' && part.expression.callee.type === 'Identifier') {
-                const res = await this.handleRepeat(request, message, settings, part.expression);
-                original.overwrite(part.start, part.end, res.toString());
+                const res = await this.handleRepeat(context, message, settings, part.expression);
+                if (res == null) {
+                    continue;
+                }
+
+                original.overwrite(part.start, part.end, trim(res.toString()));
 
                 continue;
             }
@@ -67,14 +86,18 @@ export class Parser {
                 continue;
             }
 
-            const res = await this.run(request, message, settings, part.expression);
-            original.overwrite(part.start, part.end, res.toString());
+            const res = await this.run(context, message, settings, part.expression, false);
+            if (res == null) {
+                continue;
+            }
+
+            original.overwrite(part.start, part.end, trim(res.toString()));
         }
 
         // GC
-        request = undefined;
+        context = undefined;
 
-        return original.toString();
+        return trim(original.toString());
     }
 
     /**
@@ -82,29 +105,29 @@ export class Parser {
      *
      * Not all expressions need to be ran to a method so return the expression value.
      */
-    private async run(cache: typeof fetch, message: IMessage, settings: ISetting, expr: IExpression, isRepeat: boolean = false): Promise<string> {
+    private async run(context: ParserContext, message: IMessage, settings: ISetting, expr: IExpression, isRepeat: boolean = false): Promise<string> {
         if (expr.type === 'String') {
             return expr.value;
         }
         if (expr.arguments.length === 0) {
-            return this.handle(cache, message, settings, expr.callee.name, [], isRepeat);
+            return this.handle(context, message, settings, expr.callee.name, [], isRepeat);
         }
 
         const args = await Promise.all(expr.arguments.map(arg => {
             if (arg?.callee?.name?.toLowerCase() === 'repeat') {
-                return this.handleRepeat(cache, message, settings, arg);
+                return this.handleRepeat(context, message, settings, arg);
             }
 
-            return this.run(cache, message, settings, arg, isRepeat);
+            return this.run(context, message, settings, arg, isRepeat);
         }));
 
-        return this.handle(cache, message, settings, expr.callee.name, args, isRepeat);
+        return this.handle(context, message, settings, expr.callee.name, args, isRepeat);
     }
 
     /**
      * Handle an expression and return the generated value to be replaced.
      */
-    private async handle(cache: typeof fetch, message: IMessage, settings: ISetting, text: string, args: string[] = [], isRepeat: boolean): Promise<string> {
+    private async handle(context: ParserContext, message: IMessage, settings: ISetting, text: string, args: string[] = [], isRepeat: boolean): Promise<string> {
         if (methods[text.toLowerCase()] == null) {
             return;
         }
@@ -113,10 +136,10 @@ export class Parser {
             return;
         }
 
-        return methods[text.toLowerCase()].call(this, message, settings, cache, ...args);
+        return methods[text.toLowerCase()].call(this, message, settings, context, ...args);
     }
 
-    private async handleRepeat(cache: typeof fetch, message: IMessage, settings: ISetting, expr: IExpression): Promise<string> {
+    private async handleRepeat(context: ParserContext, message: IMessage, settings: ISetting, expr: IExpression): Promise<string> {
         const MAX_REPEATS = 5;
         let TO_REPEAT = MAX_REPEATS;
 
@@ -127,7 +150,7 @@ export class Parser {
                 TO_REPEAT = userValue;
             }
         } else if (repeatArgs.type === 'CallExpression') {
-            const res = await this.run(cache, message, settings, repeatArgs, true);
+            const res = await this.run(context, message, settings, repeatArgs, true);
 
             const userValue = Number(res);
             if (!isNaN(userValue) && userValue <= MAX_REPEATS) {
@@ -138,7 +161,7 @@ export class Parser {
         const results: string[] = [];
 
         for (let i = 0; i < TO_REPEAT; i++) {
-            const res = await this.run(cache, message, settings, expr.arguments[0], true);
+            const res = await this.run(context, message, settings, expr.arguments[0], true);
             if (res != null) {
                 results.push(res);
             }

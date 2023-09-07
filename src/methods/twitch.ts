@@ -1,10 +1,10 @@
 import { get } from 'lodash';
 
-import { Parser } from '../';
+import { Parser, ParserContext } from '../';
 import { IMessage, ISetting } from '../interface';
 import { getFromSimple, isValueValid } from '../lib/helpers';
 
-export async function twitch(this: Parser, message: IMessage, _settings: ISetting, _request: never, type: string, channel = message.channel.id) {
+export async function twitch(this: Parser, message: IMessage, _settings: ISetting, _context: ParserContext, type: string, channel = message.channel.id) {
     let channelId: string = channel.toString();
 
     if (isNaN(Number(channel))) {

@@ -1,11 +1,11 @@
 import * as config from 'config';
 import { get } from 'lodash';
 
-import { Parser } from '../';
+import { Parser, ParserContext } from '../';
 import { IMessage, ISetting } from '../interface';
 import { getFromSimple, httpRequest, isValueValid } from '../lib/helpers';
 
-export async function trovo(this: Parser, message: IMessage, _settings: ISetting, request: typeof fetch, type: string, channel = message.channel.id) {
+export async function trovo(this: Parser, message: IMessage, _settings: ISetting, { request }: ParserContext, type: string, channel = message.channel.id) {
     const reqHeaders = {
         Accept: 'application/json',
         'Client-ID': config.get<string>('providers.trovo.clientId'),

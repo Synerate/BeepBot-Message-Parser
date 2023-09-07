@@ -1,6 +1,6 @@
 import * as config from 'config';
 
-import { Parser } from '../';
+import { Parser, ParserContext } from '../';
 import { IMessage, ISetting } from '../interface';
 
 type SupportedFields = 'raised' | 'description' | 'name' | 'progress' | 'remaining' | 'target' | 'website';
@@ -17,7 +17,7 @@ function getCurrency(currency: string): string {
 }
 
 export const methods = {
-    twitch: async (parser: Parser, _request: never, channelId: string, coreId: string, serviceId: string, field: SupportedFields): Promise<string> => {
+    twitch: async (parser: Parser, _request: typeof fetch, channelId: string, coreId: string, serviceId: string, field: SupportedFields): Promise<string> => {
         if (parser?.middleware?.onServiceAPI == null) {
             return '[Error: API Error]';
         }
@@ -67,10 +67,10 @@ export const methods = {
     },
 };
 
-export function charity(this: Parser, message: IMessage, _settings: ISetting, cache: typeof fetch, field: SupportedFields = null) {
+export function charity(this: Parser, message: IMessage, _settings: ISetting, { request }: ParserContext, field: SupportedFields = null) {
     if (methods[message.provider.toLowerCase()] == null) {
         return '[Error: Invalid Provider]';
     }
 
-    return methods[message.provider.toLowerCase()](this, cache, message.channel.id, message.channel.coreId, message.channel.serviceId, field);
+    return methods[message.provider.toLowerCase()](this, request, message.channel.id, message.channel.coreId, message.channel.serviceId, field);
 }

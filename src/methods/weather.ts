@@ -2,6 +2,7 @@ import * as config from 'config';
 import { isString } from 'lodash';
 import { stringify } from 'querystring';
 
+import { ParserContext } from '../';
 import { IMessage, ISetting } from '../interface';
 import { httpRequest } from '../lib/helpers';
 
@@ -82,7 +83,7 @@ const getDirection = (deg: number) => directions[(Math.floor(0.5 + (deg / 22.5))
 
 const getTemp = (temp: number) => `${temp.toFixed(2)} °C (${Number(temp * 9 / 5 + 32).toFixed(2)} °F)`;
 
-export async function weather(_message: IMessage, _settings: ISetting, request: typeof fetch, region: string) {
+export async function weather(_message: IMessage, _settings: ISetting, { request }: ParserContext, region: string) {
     const reqOpts = {
         appid: config.get<string>('api.weather.key'),
         q: region,

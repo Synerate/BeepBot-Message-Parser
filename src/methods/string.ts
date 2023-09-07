@@ -1,12 +1,14 @@
 import { chain, random } from 'lodash';
 import { evaluate } from 'mathjs';
 
+import { Parser, ParserContext } from '../';
 import { IMessage, ISetting } from '../interface';
 
+export const compile = (_message: IMessage, _settings: ISetting, _context: ParserContext, ...str: string[]) => str.join('');
 export const query = (message: IMessage) => message.message.args.slice(1).join(' ');
 export const echo = query;
 
-export function randomnum(_message: IMessage, _settings: ISetting, _request: typeof fetch, min: string, max: string) {
+export function randomnum(_message: IMessage, _settings: ISetting, { cache }: ParserContext, min: string, max: string) {
     if (isNaN(Number(min)) || isNaN(Number(max))) {
         return '[Min or Max needs to be a number]';
     }
@@ -17,12 +19,14 @@ export function randomnum(_message: IMessage, _settings: ISetting, _request: typ
         return '[Min should not be more than the Max]';
     }
 
-    return random(Number(min), Number(max))
-        .toString();
+    const result = random(Number(min), Number(max));
+    cache.push(result);
+
+    return result.toString();
 }
 export const randint = randomnum;
 
-export function add(_message: IMessage, _settings: ISetting, _request: typeof fetch, ...numbers: string[]) {
+export function add(_message: IMessage, _settings: ISetting, _context: ParserContext, ...numbers: string[]) {
     if (numbers == null || numbers.length > 10) {
         return '[Invalid number of arguments]';
     }
@@ -41,7 +45,7 @@ export function add(_message: IMessage, _settings: ISetting, _request: typeof fe
 
 export const incr = add;
 
-export function arg(message: IMessage, _settings: ISetting, _request: typeof fetch, index: string) {
+export function arg(message: IMessage, _settings: ISetting, _context: ParserContext, index: string) {
     if (isNaN(Number(index))) {
         return '[Index is not a number]';
     }
@@ -54,10 +58,10 @@ export function arg(message: IMessage, _settings: ISetting, _request: typeof fet
     return hasArg;
 }
 
-export const urlencode = (_message: IMessage, _settings: ISetting, _request: typeof fetch, str: string) => encodeURIComponent(str);
-export const urldecode = (_message: IMessage, _settings: ISetting, _request: typeof fetch, str: string) => decodeURIComponent(str);
+export const urlencode = (_message: IMessage, _settings: ISetting, _context: ParserContext, str: string) => encodeURIComponent(str);
+export const urldecode = (_message: IMessage, _settings: ISetting, _context: ParserContext, str: string) => decodeURIComponent(str);
 
-export function randlist(_message: IMessage, _settings: ISetting, _request: typeof fetch, ...str: string[]) {
+export async function randlist(this: Parser, _message: IMessage, _settings: ISetting, { cache }: ParserContext, ...str: string[]) {
     if (str == null || str.length < 1) {
         return;
     }
@@ -67,17 +71,21 @@ export function randlist(_message: IMessage, _settings: ISetting, _request: type
         return '';
     }
 
-    return chain(list)
+    const [ result ] = chain(list)
         .shuffle()
         .shuffle()
         .sampleSize(1)
         .valueOf();
+
+    cache.push(result);
+
+    return result;
 }
 
 export const listpick = randlist;
 export const rngphrase = randlist;
 
-export function math(_message: IMessage, _settings: ISetting, _request: typeof fetch, ...str: string[]) {
+export function math(_message: IMessage, _settings: ISetting, _context: ParserContext, ...str: string[]) {
     if (str == null || str.length < 1) {
         return;
     }
