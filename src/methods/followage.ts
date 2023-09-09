@@ -138,10 +138,10 @@ export async function followage(this: Parser, message: IMessage, _settings: neve
         }
 
         if (!userFollowing.following) {
-            return `${message.user.name}, you are not following the channel.`;
+            return `@${message.user.name}, you are not following the channel.`;
         }
 
-        return `${message.user.name}, you have been following for ${userFollowing.following_since}.`;
+        return `@${message.user.name}, you have been following for ${userFollowing.following_since}.`;
     } catch (err) {
         return '[Error: API Error]';
     }
