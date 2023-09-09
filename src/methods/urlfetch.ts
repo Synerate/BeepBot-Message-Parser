@@ -9,6 +9,8 @@ const providerLengthLimit: { [ provider: string ]: number } = {
     discord: 2000,
 };
 
+const FETCH_TIMEOUT = 1000 * 15; // 15 seconds
+
 export async function urlfetch(this: Parser, message: IMessage, _settings: any, { cache, request }: ParserContext, ...args: string[]) {
     const workerUri: string = config.get('urlfetch.workerUri');
     if (workerUri == null) {
@@ -38,8 +40,16 @@ export async function urlfetch(this: Parser, message: IMessage, _settings: any, 
         url: customUrl,
     };
 
-    return request(workerUri, { body: JSON.stringify(payload), method: 'POST', headers })
+    /**
+     * Create the abort controller and timeout.
+     */
+    const controller = new AbortController();
+    const abortTimeout = setTimeout(() => controller.abort(), FETCH_TIMEOUT);
+
+    return request(workerUri, { body: JSON.stringify(payload), method: 'POST', headers, signal: controller.signal })
         .then(async res => {
+            clearTimeout(abortTimeout);
+
             const cloned = res.clone();
             const textData = await cloned.text();
 
@@ -86,7 +96,11 @@ export async function urlfetch(this: Parser, message: IMessage, _settings: any, 
                 return textLines[0];
             }
         })
-        .catch(() => null);
+        .catch(() => {
+            clearTimeout(abortTimeout);
+
+            return null;
+        });
 }
 
 export function urlfetchctx(this: Parser, message: IMessage, _settings: any, { request, cache }: ParserContext, ...args: string[]) {

@@ -11,20 +11,33 @@ import { isArray, isObject } from 'lodash';
   * Rejects when a network error occurred.
   * Make a http(s) request to a json api.
   */
-// tslint:disable-next-line: max-line-length
 export async function httpRequest<T>(request: typeof fetch, uri: string, init: RequestInit = {}): Promise<T | string> {
-    const req = await request(uri, init);
-    if (req.status !== 200) {
-        return undefined;
-    }
+    /**
+     * Create the abort controller and timeout.
+     */
+    const controller = new AbortController();
+    const abortTimeout = setTimeout(() => controller.abort(), 1000 * 15);
 
-    const reqClone = { ...req };
+    return request(uri, { ...init, signal: controller.signal })
+        .then(res => {
+            clearTimeout(abortTimeout);
 
-    try {
-        return req.json();
-    } catch (err) {
-        return reqClone.text();
-    }
+            const reqClone = res.clone();
+            if (res.status !== 200) {
+                return undefined;
+            }
+
+            try {
+                return res.json();
+            } catch (err) {
+                return reqClone.text();
+            }
+        })
+        .catch(() => {
+            clearTimeout(abortTimeout);
+
+            return undefined;
+        });
 }
 
 interface MappingData {
