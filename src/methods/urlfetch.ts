@@ -2,7 +2,7 @@ import * as config from 'config';
 import { get, isObject, sample, truncate } from 'lodash';
 
 import { Parser, ParserContext } from '../';
-import { IMessage } from '../interface';
+import { IMessage, ISetting } from '../interface';
 
 const providerLengthLimit: { [ provider: string ]: number } = {
     default: 300,
@@ -11,7 +11,7 @@ const providerLengthLimit: { [ provider: string ]: number } = {
 
 const FETCH_TIMEOUT = 1000 * 15; // 15 seconds
 
-export async function urlfetch(this: Parser, message: IMessage, _settings: any, { cache, request }: ParserContext, ...args: string[]) {
+export async function urlfetch(this: Parser, message: IMessage, settings: ISetting, { cache, request }: ParserContext, ...args: string[]) {
     const workerUri: string = config.get('urlfetch.workerUri');
     if (workerUri == null) {
         return '[Error: Custom API Not Supported]';
@@ -74,7 +74,7 @@ export async function urlfetch(this: Parser, message: IMessage, _settings: any, 
                     return '[Error: Object Returns Disallowed]';
                 }
 
-                return truncate(String(jsonResult), { length: providerLengthLimit[message.provider] || providerLengthLimit.default });
+                return String(jsonResult);
             } catch {
                 const textLines = textData.split('\n');
                 if (onlyContext) {
@@ -96,6 +96,18 @@ export async function urlfetch(this: Parser, message: IMessage, _settings: any, 
                 return textLines[0];
             }
         })
+        .then(res => {
+            if (res == null) {
+                return '[Error: Failed to Parse Response]';
+            }
+
+            if (res.includes('urlfetch') || res.includes('urlfetchctx')) {
+                return res;
+            }
+
+            return this.parse.call(this, message, settings, res);
+        })
+        .then(res => truncate(String(res), { length: providerLengthLimit[message.provider] || providerLengthLimit.default }))
         .catch(() => {
             clearTimeout(abortTimeout);
 
