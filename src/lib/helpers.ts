@@ -19,19 +19,15 @@ export async function httpRequest<T>(request: typeof fetch, uri: string, init: R
     const abortTimeout = setTimeout(() => controller.abort(), 1000 * 15);
 
     return request(uri, { ...init, signal: controller.signal })
-        .then(res => {
-            clearTimeout(abortTimeout);
+        .then(async res => {
+            const res1 = res.clone();
+            const results = await Promise.all([ res.json(), res1.text() ]);
 
-            const reqClone = res.clone();
-            if (res.status !== 200) {
-                return undefined;
+            if (results[0] != null) {
+                return results[0];
             }
 
-            try {
-                return res.json();
-            } catch (err) {
-                return reqClone.text();
-            }
+            return results[1] || undefined;
         })
         .catch(() => {
             clearTimeout(abortTimeout);
