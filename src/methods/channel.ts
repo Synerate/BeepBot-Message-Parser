@@ -20,11 +20,11 @@ export function streamer(message: IMessage) {
 }
 
 export function stream(message: IMessage, _settings: ISetting, _context: ParserContext, channel: string = message.channel.name) {
-    if (config.has(`providers.${message.provider.toLowerCase()}.base`) === false) {
+    if (config.has(`providers.${message.provider.toLowerCase()}.urls.base`) === false) {
         return '[Error: Invalid Provider]';
     }
 
-    return `${config.get<string>(`providers.${message.provider.toLowerCase()}.base`)}${removeTag(channel)}`;
+    return `${config.get<string>(`providers.${message.provider.toLowerCase()}.urls.base`)}/${removeTag(channel)}`;
 }
 
 export function link(message: IMessage, _settings: ISetting, _context: ParserContext, channel: string = message.channel.name) {

@@ -20,7 +20,7 @@ const providers = {
             reqBody['channel_id'] = channelId;
         }
 
-        const res: any = await httpRequest(request, `${config.get('providers.trovo.api')}/openplatform/channels/id`, { headers: reqHeaders, method: 'POST', body: JSON.stringify(reqBody) });
+        const res: any = await httpRequest(request, `${config.get('providers.trovo.urls.api')}/openplatform/channels/id`, { headers: reqHeaders, method: 'POST', body: JSON.stringify(reqBody) });
         if (res == null || res['is_live'] === false || Number(res['started_at']) < 1) {
             return '[Channel Offline]';
         }
@@ -28,7 +28,7 @@ const providers = {
         return countdown(new Date(), moment(new Date(Number(res['started_at']) * 1000)).toDate());
     },
     twitch: async (parser: Parser, _request: typeof fetch, channelId: string | number, coreId: string, serviceId: string): Promise<any> => {
-        const res = await parser.middleware.onServiceAPI(`${config.get<string>('providers.twitch.api')}helix/streams?user_id=${channelId}`, {
+        const res = await parser.middleware.onServiceAPI(`${config.get<string>('providers.twitch.urls.api')}/helix/streams?user_id=${channelId}`, {
             coreId,
             method: 'GET',
             serviceId,
@@ -42,9 +42,9 @@ const providers = {
     picarto: async (_parser: Parser, request: typeof fetch, channelId: string | number, coreId: string, serviceId: string): Promise<any> => {
         let uri: string | null = null;
         if (isNaN(Number(channelId))) {
-            uri = `https://api.picarto.tv/api/v1/channel/name/${channelId}`;
+            uri = `${config.get<string>('providers.picarto.urls.api')}/api/v1/channel/name/${channelId}`;
         } else {
-            uri = `https://api.picarto.tv/api/v1/channel/id/${channelId}`;
+            uri = `${config.get<string>('providers.picarto.urls.api')}/api/v1/channel/id/${channelId}`;
         }
 
         const res: any = await httpRequest(request, uri);
@@ -59,7 +59,7 @@ const providers = {
             'Content-Type': 'application/json',
             'Accept': 'application/json',
         };
-        const res: any = await httpRequest(request, `${config.get<string>('providers.kickProxy.api')}v1/channels/${String(channelId).toUpperCase()}`, { headers });
+        const res: any = await httpRequest(request, `${config.get<string>('providers.kick.urls.api')}/v1/channels/${String(channelId).toUpperCase()}`, { headers });
         if (res == null || res.livestream == null) {
             return '[Channel Offline]';
         }

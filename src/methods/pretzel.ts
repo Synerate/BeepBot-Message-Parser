@@ -8,7 +8,7 @@ import { SongType } from './lastfm';
 const nowPlaying = /Now Playing: (.*) by (.*) -> (.*)/i;
 
 export async function pretzel(message: IMessage, _settings: ISetting, { request }: ParserContext, type: SongType = 'all', channelId: string | number = message.channel.id, provider: string = message.provider) {
-    const req: string = await httpRequest(request, `${config.get<string>('api.pretzel.base')}playing/${provider}/${channelId}`);
+    const req: string = await httpRequest(request, `${config.get<string>('parser.pretzel.base')}playing/${provider}/${channelId}`);
     if (req === undefined) {
         return '[No Song Playing or Channel Not Found]';
     }

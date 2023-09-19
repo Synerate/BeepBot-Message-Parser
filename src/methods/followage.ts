@@ -28,7 +28,7 @@ interface TrovoFollowers {
 export const methods = {
     twitch: async (parser: Parser, _request: never, channelId: string, userId: string, coreId: string, serviceId: string): Promise<FollowResponse> => {
         const res = await parser.middleware.onServiceAPI(
-            `${config.get<string>('providers.twitch.api')}helix/channels/followers?user_id=${userId}&broadcaster_id=${channelId}`, {
+            `${config.get<string>('providers.twitch.urls.api')}/helix/channels/followers?user_id=${userId}&broadcaster_id=${channelId}`, {
                 coreId,
                 method: 'GET',
                 serviceId,
@@ -58,7 +58,7 @@ export const methods = {
             'Content-Type': 'application/json',
             'Accept': 'application/json',
         };
-        const res: any = await httpRequest(request, `${config.get<string>('providers.kickProxy.api')}v1/channels/${String(channelId).toLowerCase()}/users/${String(userName).toLowerCase()}`, { headers });
+        const res: any = await httpRequest(request, `${config.get<string>('providers.kick.urls.api')}/v1/channels/${String(channelId).toLowerCase()}/users/${String(userName).toLowerCase()}`, { headers });
         if (res == null) {
             return {
                 error: '[Error: API Error]',
@@ -90,7 +90,7 @@ export const methods = {
         };
 
         while (!foundFollower) {
-            const res = await httpRequest<TrovoFollowers>(request, `${config.get<string>('providers.trovo.api')}/openplatform/channels/${channelId}/followers`, { headers, method: 'POST', body: JSON.stringify(payload) });
+            const res = await httpRequest<TrovoFollowers>(request, `${config.get<string>('providers.trovo.urls.api')}/openplatform/channels/${channelId}/followers`, { headers, method: 'POST', body: JSON.stringify(payload) });
             if (res == null || isString(res)) {
                 break;
             }

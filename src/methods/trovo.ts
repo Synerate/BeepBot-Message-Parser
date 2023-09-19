@@ -18,7 +18,7 @@ export async function trovo(this: Parser, message: IMessage, _settings: ISetting
         reqBody['channel_id'] = channel;
     }
 
-    const req: any = await httpRequest(request, `${config.get('providers.trovo.api')}/openplatform/channels/id`, { headers: reqHeaders, method: 'POST', body: JSON.stringify(reqBody) });
+    const req: any = await httpRequest(request, `${config.get('providers.trovo.urls.api')}/openplatform/channels/id`, { headers: reqHeaders, method: 'POST', body: JSON.stringify(reqBody) });
     if (req == null) {
         return '[Error: API Error]';
     }

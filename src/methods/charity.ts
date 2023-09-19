@@ -23,7 +23,7 @@ export const methods = {
         }
 
         const res = await parser.middleware.onServiceAPI(
-            `${config.get<string>('providers.twitch.api')}helix/charity/campaigns?broadcaster_id=${channelId}`, {
+            `${config.get<string>('providers.twitch.urls.api')}/helix/charity/campaigns?broadcaster_id=${channelId}`, {
                 coreId,
                 method: 'GET',
                 serviceId,

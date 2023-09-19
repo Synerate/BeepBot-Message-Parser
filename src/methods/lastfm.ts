@@ -57,14 +57,14 @@ export function getTrack(tracks: ITrack[], when: string): ITrack {
  */
 export async function lastfm(_message: IMessage, _settings: ISetting, { request }: ParserContext, user: string, type?: SongType, when: string = '0') {
     const reqOpts = {
-        api_key: config.get<string>('api.lastfm.key'),
+        api_key: config.get<string>('parser.lastfm.key'),
         format: 'json',
         limit: 10,
         method: 'user.getrecenttracks',
         user,
     };
 
-    const req = await httpRequest<IRecentTracks>(request, `${config.get<string>('api.lastfm.base')}?${stringify(reqOpts)}`);
+    const req = await httpRequest<IRecentTracks>(request, `${config.get<string>('parser.lastfm.base')}?${stringify(reqOpts)}`);
     if (req == null || isString(req) || req?.error != null) {
         return '[Error: Invalid User]';
     }

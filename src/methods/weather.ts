@@ -85,11 +85,11 @@ const getTemp = (temp: number) => `${temp.toFixed(2)} °C (${Number(temp * 9 / 5
 
 export async function weather(_message: IMessage, _settings: ISetting, { request }: ParserContext, region: string) {
     const reqOpts = {
-        appid: config.get<string>('api.weather.key'),
+        appid: config.get<string>('parser.weather.key'),
         q: region,
         units: 'metric',
     };
-    const req = await httpRequest<IWeather>(request, `${config.get<string>('api.weather.base')}?${stringify(reqOpts)}`);
+    const req = await httpRequest<IWeather>(request, `${config.get<string>('parser.weather.base')}?${stringify(reqOpts)}`);
     if (req === undefined || isString(req)) {
         return '[Error: API Error]';
     }

@@ -17,7 +17,6 @@ import * as str from './string';
 import { tiktok } from './tiktok';
 import { time } from './time';
 import { trovo } from './trovo';
-import { tweet } from './tweet';
 import { twitch } from './twitch';
 import { uptime } from './uptime';
 import { urlfetch, urlfetchctx } from './urlfetch';
@@ -43,7 +42,6 @@ export const methods = {
     time,
     trovo,
     twitch,
-    tweet,
     uptime,
     urlfetch,
     urlfetchctx,

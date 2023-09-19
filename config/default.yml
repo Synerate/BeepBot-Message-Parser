@@ -3,22 +3,29 @@ urlfetch:
     workerUri: ''
     timeout: 10
 
-# Provider Configs.
+# Provider Configuration
+# ------------------------------------------------------------------------------
 providers:
     twitch:
-        base: 'https://twitch.tv/'
-        api: 'https://api.twitch.tv/'
-        clientId: ''
+        urls:
+            api: 'https://api.twitch.tv'
+            base: 'https://twitch.tv'
+    kick:
+        urls:
+            api: 'http://127.0.0.1:9085'
+            base: 'https://kick.com'
+            clipUrl: 'https://kick.com/{channelId}?clip={clipId}'
     trovo:
-        base: 'https://trovo.live/'
-        api: 'https://open-api.trovo.live'
-        clientId: ''
+        urls:
+            api: 'https://open-api.trovo.live'
+            base: 'https://trovo.live'
     picarto:
-        base: 'https://picarto.tv/'
-# API Configs.
-api:
-    exozone:
-        base: 'https://api.exozone.net/'
+        urls:
+            base: 'https://picarto.tv'
+
+# Parser Configuration
+# ------------------------------------------------------------------------------
+parser:
     lastfm:
         base: 'https://ws.audioscrobbler.com/2.0/'
         key: ''

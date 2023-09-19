@@ -11,7 +11,7 @@ export async function kick(this: Parser, message: IMessage, _settings: ISetting,
         'Content-Type': 'application/json',
     };
 
-    const res: any = await httpRequest(request, `${config.get<string>('providers.kickProxy.api')}v1/channels/${String(channelId).toLowerCase()}`, { headers });
+    const res: any = await httpRequest(request, `${config.get<string>('providers.kick.urls.api')}/v1/channels/${String(channelId).toLowerCase()}`, { headers });
     if (res == null) {
         return '[Error: API Error]';
     }

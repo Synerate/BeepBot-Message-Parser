@@ -31,10 +31,10 @@ type IType = 'link' | 'text';
 
 export async function mastodon(this: Parser, _message: IMessage, _settings: ISetting, { request }: ParserContext, account: string, type: IType = 'text') {
     const headers = {
-        Authorization: `Bearer ${config.get('api.mastodon.key')}`,
+        Authorization: `Bearer ${config.get('parser.mastodon.key')}`,
     };
 
-    const SEARCH_URL = format(BASE_SEARCH_URL, config.get('api.mastodon.base'), account);
+    const SEARCH_URL = format(BASE_SEARCH_URL, config.get('parser.mastodon.base'), account);
     const userAccount = await httpRequest<ISearch>(request, SEARCH_URL, { headers });
     if (userAccount == null || isString(userAccount)) {
         return '[Error: API Error]';
@@ -43,7 +43,7 @@ export async function mastodon(this: Parser, _message: IMessage, _settings: ISet
         return '[Error: Invalid Account]';
     }
 
-    const STATUSES_URL = format(BASE_STATUSES_URL, config.get('api.mastodon.base'), userAccount.accounts[0].id);
+    const STATUSES_URL = format(BASE_STATUSES_URL, config.get('parser.mastodon.base'), userAccount.accounts[0].id);
     const statuses = await httpRequest<IStatus[]>(request, STATUSES_URL);
     if (statuses == null || isString(statuses)) {
         return '[Error: API Error]';
