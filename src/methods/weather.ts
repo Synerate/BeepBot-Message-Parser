@@ -95,6 +95,9 @@ export async function weather(_message: IMessage, _settings: ISetting, { request
     }
 
     const { main, sys, wind } = req;
+    if (sys.country == null) {
+        return '[Error: Invalid Region]';
+    }
 
     return `${req.name}, ${sys.country}: ${getTemp(main.temp)}. Feels like ${getTemp(main.feels_like)}. Wind is blowing from the ${getDirection(wind.deg)}. ${main.humidity}% humidity. Air pressure: ~${main.pressure} hPa.`;
 }
