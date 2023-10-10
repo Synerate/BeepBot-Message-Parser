@@ -58,8 +58,8 @@ export function arg(message: IMessage, _settings: ISetting, _context: ParserCont
     return hasArg;
 }
 
-export const urlencode = (_message: IMessage, _settings: ISetting, _context: ParserContext, str: string) => encodeURIComponent(str);
-export const urldecode = (_message: IMessage, _settings: ISetting, _context: ParserContext, str: string) => decodeURIComponent(str);
+export const urlencode = (_message: IMessage, _settings: ISetting, _context: ParserContext, ...str: string[]) => encodeURIComponent(str.join(' '));
+export const urldecode = (_message: IMessage, _settings: ISetting, _context: ParserContext, ...str: string[]) => decodeURIComponent(str.join(' '));
 
 export async function randlist(this: Parser, _message: IMessage, _settings: ISetting, { cache }: ParserContext, ...str: string[]) {
     if (str == null || str.length < 1) {
