@@ -30,7 +30,7 @@ async function test() {
     // const INPUT = '{incr {repeat {randomnum 15 20} 5} {repeat {randomnum 15 20} 2}}';
     // const INPUT = '{repeat {repeat {randomnum 15 20} 5} 4}';
     // const INPUT = '{weather York,UK}'
-    // const INPUT = 'Beep can MATH?! {math 10c to f}';
+    // const INPUT = 'Beep can MATH?! {math 10 degC to degF}';
     const INPUT = `{tweet SPSinBOS}`
 
     console.log('Input:', INPUT);

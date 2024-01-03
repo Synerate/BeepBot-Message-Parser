@@ -1,6 +1,7 @@
 import * as channel from './channel';
 import { charity } from './charity';
 import { costream } from './costream';
+import { diceroll } from './diceroll';
 import { extralife } from './extralife';
 import { followage } from './followage';
 import { glimesh } from './glimesh';
@@ -24,6 +25,7 @@ export const methods = {
     ...channel,
     charity,
     costream,
+    diceroll,
     extralife,
     followage,
     glimesh,
