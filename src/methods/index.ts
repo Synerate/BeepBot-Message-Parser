@@ -5,6 +5,7 @@ import { ctx } from './ctx';
 import { currency } from './currency/currency';
 import { currencyadjust } from './currency/currencyadjust';
 import { currencyname } from './currency/currencyname';
+import { diceroll } from './diceroll';
 import { extralife } from './extralife';
 import { followage } from './followage';
 import { kick } from './kick';
@@ -28,6 +29,7 @@ export const methods = {
     ...channel,
     charity,
     costream,
+    diceroll,
     extralife,
     followage,
     ctx,
