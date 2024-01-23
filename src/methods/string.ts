@@ -5,7 +5,7 @@ import { Parser, ParserContext } from '../';
 import { IMessage, ISetting } from '../interface';
 
 export const compile = (_message: IMessage, _settings: ISetting, _context: ParserContext, ...str: string[]) => str.join('');
-export const query = (message: IMessage) => message.message.args.slice(1).join(' ');
+export const query = (message: IMessage, _settings: ISetting, _ctx: ParserContext, skipIndex: number = 1) => message.message.args.slice(skipIndex).join(' ');
 export const echo = query;
 
 export function randomnum(_message: IMessage, _settings: ISetting, { cache }: ParserContext, min: string, max: string) {
