@@ -13,6 +13,7 @@ import { lastfm } from './lastfm';
 import { mastodon } from './mastodon';
 import { picarto } from './picarto';
 import { pretzel } from './pretzel';
+import { rainwave } from './rainwave';
 import { randomuser } from './randomuser';
 import * as str from './string';
 import { tiktok } from './tiktok';
@@ -38,6 +39,7 @@ export const methods = {
     mastodon,
     picarto,
     pretzel,
+    rainwave,
     randomuser,
     tiktok,
     ...str,
